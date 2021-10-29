@@ -116,10 +116,6 @@ class Player {
 
   move(){
     // set up sensor positions
-    this.sensorLeft = this.x-2;
-    this.sensorRight = this.x+tileSize+2;
-    this.sensorTop = this.y-2;
-    this.sensorBottom = this.y;
     this.middleX = this.x+tileSize/2;
     this.middleY = this.y+tileSize/2;
 
@@ -130,7 +126,6 @@ class Player {
       else {
         if (this.pKeyPress != this.currKeyCode){
           this.pKeyPress = this.currKeyCode;
-          console.log("Changing direction");
           let roundx = this.x%20
 
           if (roundx !=0){
@@ -172,41 +167,25 @@ class Player {
     }
 
     if (this.currKeyCode == 68 && this.x < width){
-      // this.x  += (20 - this.x%20)
       this.x  += 400/60;
-      let id = getTile(this.sensorRight,this.middleY);
-      if (id == 0){
-        modifyTile(this.sensorRight,this.middleY)
-      }
     }
 
     if (this.currKeyCode == 65 && this.x > 0){
       this.x  -= 400/60;
-      // this.x  -= (20 - this.x%20)
-      let id = getTile(this.sensorLeft,this.middleY);
-      if (id == 0){
-        modifyTile(this.sensorLeft,this.middleY)
-      }
     }
 
     if (this.currKeyCode == 87 && this.y > 0){
-      // this.y  -= (20 - this.y%20)
       this.y  -= 400/60;
-      let id = getTile(this.middleX, this.sensorTop);
-      if (id == 0){
-        modifyTile(this.middleX, this.sensorTop)
-      }
     }
 
     if (this.currKeyCode == 83 && this.y < height){
-      // this.y  += (20 - this.y%20)
       this.y += 400/60;
-      let id = getTile(this.middleX, this.sensorBottom);
-      if (id == 0){
-        modifyTile(this.middleX, this.sensorBottom)
-      }
     }
 
+    let id = getTile(this.middleX, this.middleY);
+    if (id == 0){
+      modifyTile(this.middleX, this.middleY)
+    }
     this.x = constrain(this.x, 0, width-20);
     this.y = constrain(this.y, 0, height-20);
 
