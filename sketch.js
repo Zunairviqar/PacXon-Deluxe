@@ -51,10 +51,11 @@ function draw(){
 
   background(0);
   drawLevel();
-
+  // frameRate(30);
   player.display();
   player.move();
-  ghost.display();
+  // ghost.display();
+
 
 }
 
@@ -75,14 +76,12 @@ function drawLevel() {
 function getTile(x,y) {
   x = int(x/tileSize);
   y = int(y/tileSize);
-  // console.log("tile at ", x, y, "is", level[y][x]);
   return level[y][x];
 }
 
 function modifyTile(x,y) {
   x = int(x/tileSize);
   y = int(y/tileSize);
-  // console.log("tile at ", x, y, "is", level[y][x]);
   level[y][x] = -1;
 }
 
@@ -93,10 +92,26 @@ class Player {
     this.y = 0;
     this.startMovingRight = false;
     this.startMovingDown = false;
+    this.pKeyPress = 'None';
   }
 
   display(){
     image(pacXonImg, this.x, this.y, 20,20)
+  }
+
+  roundBlock(z) {
+    // round = z%20
+
+    if (this.x%20 != 0){
+      this.x  += (20 - this.x%20)
+      // if (round > 10){
+      //   z = z + (20 - round);
+      // }
+      // else if(round <= 10){
+      //   z = z- round;
+      // }
+    }
+    return z
   }
 
   move(){
@@ -104,102 +119,101 @@ class Player {
     this.sensorLeft = this.x-2;
     this.sensorRight = this.x+tileSize+2;
     this.sensorTop = this.y-2;
-    this.sensorBottom = this.y+tileSize+2;
+    this.sensorBottom = this.y;
     this.middleX = this.x+tileSize/2;
     this.middleY = this.y+tileSize/2;
 
-    if (keyIsPressed == true && keyCode == 68){
-      // while(this.x != width && keyCode != 68){
-        this.currKeyCode = 68;
+    if (keyIsPressed==true){
+      if (this.pKeyPress == 'None'){
+        this.pKeyPress = keyCode;
+      }
+      else {
+        if (this.pKeyPress != this.currKeyCode){
+          this.pKeyPress = this.currKeyCode;
+          console.log("Changing direction");
+          let roundx = this.x%20
 
-        console.log(this.currKeyCode == 68)
-        // while (this.currKeyCode == 68 || this.x >= width) {
-        //   this.x +=3;
-        // }
-    }
+          if (roundx !=0){
 
-    if (keyIsPressed == true && keyCode == 65){
-      // while(this.x != width && keyCode != 68){
-        this.currKeyCode = 65;
+            if (roundx > 10){
+              this.x = this.x + (20 - roundx);
+            }
+            else if(roundx <= 10){
+              this.x = this.x - roundx;
+            }
+          }
 
-        if (this.currKeyCode == 65) {
-          this.x -=3;
+          let roundy = this.y%20
+
+          if (roundy !=0){
+
+            if (roundy > 10){
+              this.y = this.y + (20 - roundy);
+            }
+            else if(roundy <= 10){
+              this.y = this.y - roundy;
+            }
+          }
         }
-    }
-      // }
-      // ellipse(this.sensorRight, this.middleY,5,5)
-      // let id = getTile(this.sensorRight,this.middleY);
-      // if (id == 0){
-      //   // modifyTile(this.sensorRight,this.middleY)
-      //   this.startMovingDown = false;
-      //   this.startMovingRight = true;
-      // }
-      // else if(id ==1){
-      //     this.x +=3;
-      // }
-      this.x = constrain(this.x, 0, width-20);
-      this.y = constrain(this.y, 0, height-20);
-
-  // }
+        if (keyCode ==68) {
+          this.currKeyCode = 68;
+        }
+        if (keyCode ==65) {
+          this.currKeyCode = 65;
+        }
+        if (keyCode ==87) {
+          this.currKeyCode = 87;
+        }
+        if (keyCode ==83) {
+          this.currKeyCode = 83;
+        }
+      }
 
     }
+
+    if (this.currKeyCode == 68 && this.x < width){
+      // this.x  += (20 - this.x%20)
+      this.x  += 400/60;
+      let id = getTile(this.sensorRight,this.middleY);
+      if (id == 0){
+        modifyTile(this.sensorRight,this.middleY)
+      }
+    }
+
+    if (this.currKeyCode == 65 && this.x > 0){
+      this.x  -= 400/60;
+      // this.x  -= (20 - this.x%20)
+      let id = getTile(this.sensorLeft,this.middleY);
+      if (id == 0){
+        modifyTile(this.sensorLeft,this.middleY)
+      }
+    }
+
+    if (this.currKeyCode == 87 && this.y > 0){
+      // this.y  -= (20 - this.y%20)
+      this.y  -= 400/60;
+      let id = getTile(this.middleX, this.sensorTop);
+      if (id == 0){
+        modifyTile(this.middleX, this.sensorTop)
+      }
+    }
+
+    if (this.currKeyCode == 83 && this.y < height){
+      // this.y  += (20 - this.y%20)
+      this.y += 400/60;
+      let id = getTile(this.middleX, this.sensorBottom);
+      if (id == 0){
+        modifyTile(this.middleX, this.sensorBottom)
+      }
+    }
+
+    this.x = constrain(this.x, 0, width-20);
+    this.y = constrain(this.y, 0, height-20);
+
+    }
+
   }
 
-    // if (keyIsDown(65)){
-    //   ellipse(this.sensorLeft, this.middleY,5,5);
-    //   let id = getTile(this.sensorLeft,this.middleY);
-    //   if (id == 0){
-    //     modifyTile(this.sensorLeft,this.middleY)
-    //   }
-    //   else if(id ==1){
-    //       this.x -=3;
-    //   }
-    // }
-
-    // else if (keyIsDown(87)){
-    //   ellipse(this.middleX, this.sensorTop,5,5);
-    //   let id = getTile(this.middleX, this.sensorTop);
-    //   if (id == 0){
-    //     modifyTile(this.middleX, this.sensorTop)
-    //   }
-    //   else if(id ==1){
-    //       this.y -=3;
-    //   }
-    // }
-
-    // else if (keyIsDown(83)){
-    //   ellipse(this.middleX, this.sensorBottom,5,5);
-    //   let id = getTile(this.middleX, this.sensorBottom);
-    //   if (id == 0){
-    //     modifyTile(this.middleX, this.sensorBottom);
-    //     this.startMovingRight = false;
-    //     this.startMovingDown = true;
-    //   }
-    //   else if(id ==1){
-    //       this.y +=3;
-    //   }
-    // }
-    // // Continously Move Right
-    // if (this.startMovingRight == true){
-    //   this.x+=3;
-    //   ellipse(this.sensorRight, this.middleY,5,5)
-    //   let id = getTile(this.sensorRight,this.middleY);
-    //   if (id == 0){
-    //     modifyTile(this.sensorRight,this.middleY)
-    //   }
-    // }
-    
-    // // Continously Move Down
-    // if (this.startMovingDown == true){
-    //   this.y+=3;
-    //   ellipse(this.middleX, this.sensorBottom,5,5)
-    //   let id = getTile(this.middleX, this.sensorBottom);
-    //   if (id == 0){
-    //     modifyTile(this.middleX, this.sensorBottom)
-    //   }
-    // }
-
-// }
 
 class Ghost {
   constructor(){
