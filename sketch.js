@@ -64,13 +64,13 @@ function drawLevel() {
 function getTile(x,y) {
   x = int(x/tileSize);
   y = int(y/tileSize);
-  console.log("tile at ", x, y, "is", level[y][x]);
+  // console.log("tile at ", x, y, "is", level[y][x]);
   return level[y][x];
 }
 function modifyTile(x,y) {
   x = int(x/tileSize);
   y = int(y/tileSize);
-  console.log("tile at ", x, y, "is", level[y][x]);
+  // console.log("tile at ", x, y, "is", level[y][x]);
   level[y][x] = -1;
 }
 
@@ -79,6 +79,8 @@ class Player {
   constructor(){
     this.x = 0;
     this.y = 0;
+    this.startMovingRight = false;
+    this.startMovingDown = false;
   }
   display(){
     image(pacXonImg, this.x, this.y, 20,20)
@@ -96,9 +98,13 @@ class Player {
       ellipse(this.sensorRight, this.middleY,5,5)
       let id = getTile(this.sensorRight,this.middleY);
       if (id == 0){
-        modifyTile(this.sensorRight,this.middleY)
+        // modifyTile(this.sensorRight,this.middleY)
+        this.startMovingDown = false;
+        this.startMovingRight = true;
       }
-      this.startMoving = true;
+      else if(id ==1){
+          this.x +=3;
+      }
     }
 
     else if (keyIsDown(65)){
@@ -107,7 +113,9 @@ class Player {
       if (id == 0){
         modifyTile(this.sensorLeft,this.middleY)
       }
-      this.startMoving = true;
+      else if(id ==1){
+          this.x -=3;
+      }
     }
 
     else if (keyIsDown(87)){
@@ -116,26 +124,45 @@ class Player {
       if (id == 0){
         modifyTile(this.middleX, this.sensorTop)
       }
-      this.startMoving = true;
+      else if(id ==1){
+          this.y -=3;
+      }
     }
 
     else if (keyIsDown(83)){
       ellipse(this.middleX, this.sensorBottom,5,5);
       let id = getTile(this.middleX, this.sensorBottom);
       if (id == 0){
+        modifyTile(this.middleX, this.sensorBottom);
+        this.startMovingRight = false;
+        this.startMovingDown = true;
+      }
+      else if(id ==1){
+          this.y +=3;
+      }
+    }
+    // Continously Move Right
+    if (this.startMovingRight == true){
+      this.x+=3;
+      ellipse(this.sensorRight, this.middleY,5,5)
+      let id = getTile(this.sensorRight,this.middleY);
+      if (id == 0){
+        modifyTile(this.sensorRight,this.middleY)
+      }
+    }
+    
+    // Continously Move Down
+    if (this.startMovingDown == true){
+      this.y+=3;
+      ellipse(this.middleX, this.sensorBottom,5,5)
+      let id = getTile(this.middleX, this.sensorBottom);
+      if (id == 0){
         modifyTile(this.middleX, this.sensorBottom)
       }
-      this.startMoving = true;
-    }
-
-    if (this.startMoving = true){
-      this.x +=3;
     }
 
     this.x = constrain(this.x, 0, width-20)
     this.y = constrain(this.y, 0, height-20)
 
-
   }
-
 }
