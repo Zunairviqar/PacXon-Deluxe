@@ -85,6 +85,16 @@ function modifyTile(x,y) {
   level[y][x] = -1;
 }
 
+function solidTiles(){
+  for (let r = 0; r < level.length; r++) {
+    for (let c = 0; c < level[r].length; c++) {
+      if(level[r][c] == -1){
+        level[r][c] = 1;
+      }
+    }
+  }
+}
+
 //class to draw player
 class Player {
   constructor(){
@@ -185,6 +195,10 @@ class Player {
     let id = getTile(this.middleX, this.middleY);
     if (id == 0){
       modifyTile(this.middleX, this.middleY)
+    }
+
+    else if (id == 1) {
+      solidTiles();
     }
     this.x = constrain(this.x, 0, width-20);
     this.y = constrain(this.y, 0, height-20);
