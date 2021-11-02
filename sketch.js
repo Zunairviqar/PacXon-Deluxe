@@ -253,6 +253,7 @@ class Ghost {
   constructor(){
     this.x = random(20, width-20);
     this.y = random(20, height-20);
+    this.graphic = random([redGhost, blueGhost, yellowGhost, pinkGhost]);
   }
 
   display(){
