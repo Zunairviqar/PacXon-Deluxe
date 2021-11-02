@@ -4,6 +4,10 @@ let level = [];
 let tile, movingTile, player, redGhost, blueGhost, yellowGhost, pinkGhost;
 
 let tileSize;
+let count = 0;
+
+let c1 = 0;
+let c2 = 0;
 
 function preload() {
   tile = loadImage('assets/Tiles/tile.png');
@@ -78,6 +82,11 @@ function getTile(x,y) {
   y = int(y/tileSize);
   return level[y][x];
 }
+function getCoord(x,y) {
+  x = int(x/tileSize);
+  y = int(y/tileSize);
+  return x,y;
+}
 
 function modifyTile(x,y) {
   x = int(x/tileSize);
@@ -90,6 +99,7 @@ function solidTiles(){
   for (let r = 0; r < level.length; r++) {
     for (let c = 0; c < level[r].length; c++) {
       if(level[r][c] == -1){
+        player.moving = 'stopped'
         maxRow = max(maxRow, r);
         maxCol = max(maxCol, c);
         level[r][c] = 1;
@@ -106,6 +116,12 @@ class Player {
     this.startMovingRight = false;
     this.startMovingDown = false;
     this.pKeyPress = 'None';
+    this.moving = 'not moving';
+
+    this.tile_beforeX1 = 0;
+    this.tile_beforeY1 = 0;
+    this.tile_beforeX2 = 0;
+    this.tile_beforeY2 = 0;
   }
 
   display(){
@@ -150,15 +166,19 @@ class Player {
         }
         if (keyCode ==68) {
           this.currKeyCode = 68;
+          this.moving = 'moving';
         }
         if (keyCode ==65) {
           this.currKeyCode = 65;
+          this.moving = 'moving';
         }
         if (keyCode ==87) {
           this.currKeyCode = 87;
+          this.moving = 'moving';
         }
         if (keyCode ==83) {
           this.currKeyCode = 83;
+          this.moving = 'moving';
         }
       }
 
@@ -187,6 +207,39 @@ class Player {
 
     else if (id == 1) {
       solidTiles();
+      if (this.moving == 'stopped'){
+        this.moving = 'not moving';
+
+        if(this.y >= height-20){
+          this.tile_beforeY1 = int(this.y/tileSize) - 1;
+          this.tile_beforeX1 = int(this.x/tileSize) - 1;
+          count_array(level, this.tile_beforeY1, this.tile_beforeX1, 3, 0);
+          c1 = count;
+          console.log(c1);
+          fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 0, 3);
+
+          count = 0;
+          this.tile_beforeY2 = int(this.y/tileSize) - 1;
+          this.tile_beforeX2 = int(this.x/tileSize) + 1;
+          console.log(this.tile_beforeY2, this.tile_beforeX2)
+          count_array(level, this.tile_beforeY2, this.tile_beforeX2, 3, 0);
+          c2 = count;
+          console.log(c2);
+          fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 0, 3);
+          console.log(level)
+
+          // fill_array(level, 23, 13, 1, 0);
+          if(c1<c2){
+            fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 1, 0);
+          }
+          else{
+            fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 1, 0);
+          }
+
+        }
+
+        // fill_array(level, 20, 4, 1, 3);
+      }
     }
     this.x = constrain(this.x, 0, width-20);
     this.y = constrain(this.y, 0, height-20);
@@ -209,4 +262,102 @@ class Ghost {
     image(pinkGhost, 32, 304, 20,20);
 
   }
+}
+function helloworld(x){
+  console.log(x)
+}
+function fill_array(level, r, c, newColor, current){
+    //If row is less than 0
+    if(r < 0){
+        return;
+    }
+
+    //If column is less than 0
+    if(c < 0){
+        return;
+    }
+
+    //If row is greater than image length
+    if(r > level.length){
+        return;
+    }
+
+    //If column is greater than image length
+    if(c > level[r].length){
+        return;
+    }
+
+    //If the current pixel is not which needs to be replaced
+    if(level[r][c] !== current){
+        return;
+    }
+
+     //Update the new color
+     level[r][c] = newColor;
+     // count = count + 1;
+     // console.log(count);
+
+
+     //Fill in all four directions
+     //Fill Prev row
+     fill_array(level, r - 1, c, newColor, current);
+
+     //Fill Next row
+     fill_array(level, r + 1, c, newColor, current);
+
+     //Fill Prev col
+     fill_array(level, r, c - 1, newColor, current);
+
+     //Fill next col
+     fill_array(level, r, c + 1, newColor, current);
+
+     return level
+}
+
+function count_array(level, r, c, newColor, current){
+    //If row is less than 0
+    if(r < 0){
+        return;
+    }
+
+    //If column is less than 0
+    if(c < 0){
+        return;
+    }
+
+    //If row is greater than image length
+    if(r > level.length - 1){
+        return;
+    }
+
+    //If column is greater than image length
+    if(c > level[r].length - 1){
+        return;
+    }
+
+    //If the current pixel is not which needs to be replaced
+    if(level[r][c] !== current){
+        return;
+    }
+
+     //Update the new color
+     level[r][c] = newColor;
+     count = count + 1;
+     // console.log(count);
+
+
+     //Fill in all four directions
+     //Fill Prev row
+     count_array(level, r - 1, c, newColor, current);
+
+     //Fill Next row
+     count_array(level, r + 1, c, newColor, current);
+
+     //Fill Prev col
+     count_array(level, r, c - 1, newColor, current);
+
+     //Fill next col
+     count_array(level, r, c + 1, newColor, current);
+
+     return level
 }
