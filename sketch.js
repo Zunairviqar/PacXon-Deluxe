@@ -359,12 +359,11 @@ class Ghost {
     this.sensorLeft = this.x-2;
     this.sensorRight = this.x+tileSize+2;
     this.sensorTop = this.y-2;
-    this.sensorBottom = this.y+1;
+    this.sensorBottom = this.y+tileSize+2;
     this.middleX = this.x+tileSize/2;
     this.middleY = this.y+tileSize/2;
 
     // check tile to the left
-    ellipse(this.sensorLeft, this.middleY,5,5);
     let lid = getTile(this.sensorLeft,this.middleY);
     let rid = getTile(this.sensorRight,this.middleY);
     let uid = getTile(this.middleX, this.sensorTop);
