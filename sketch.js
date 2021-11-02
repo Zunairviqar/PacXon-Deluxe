@@ -86,9 +86,12 @@ function modifyTile(x,y) {
 }
 
 function solidTiles(){
+  let maxRow = 0, maxCol=0;
   for (let r = 0; r < level.length; r++) {
     for (let c = 0; c < level[r].length; c++) {
       if(level[r][c] == -1){
+        maxRow = max(maxRow, r);
+        maxCol = max(maxCol, c);
         level[r][c] = 1;
       }
     }
@@ -107,21 +110,6 @@ class Player {
 
   display(){
     image(pacXonImg, this.x, this.y, 20,20)
-  }
-
-  roundBlock(z) {
-    // round = z%20
-
-    if (this.x%20 != 0){
-      this.x  += (20 - this.x%20)
-      // if (round > 10){
-      //   z = z + (20 - round);
-      // }
-      // else if(round <= 10){
-      //   z = z- round;
-      // }
-    }
-    return z
   }
 
   move(){
