@@ -209,18 +209,17 @@ class Player {
       solidTiles();
       if (this.moving == 'stopped'){
         this.moving = 'not moving';
-        console.log("KEY")
 
         if(this.y >= height-20 || this.currKeyCode == 83){
 
-          this.tile_beforeY1 = int(this.y/tileSize) - 1;
+          this.tile_beforeY1 = int(this.y/tileSize) - 2;
           this.tile_beforeX1 = int(this.x/tileSize) - 1;
           fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 3, 0);
           c1 = count;
           fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 0, 3);
           count = 0;
 
-          this.tile_beforeY2 = int(this.y/tileSize) - 1;
+          this.tile_beforeY2 = int(this.y/tileSize) - 2;
           this.tile_beforeX2 = int(this.x/tileSize) + 1;
           fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 3, 0);
           c2 = count;
@@ -236,7 +235,8 @@ class Player {
         }
 
         if(this.y<=20 || this.currKeyCode == 87){
-          this.tile_beforeY1 = int(this.y/tileSize) + 1;
+          console.log("break")
+          this.tile_beforeY1 = int(this.y/tileSize) + 2;
           this.tile_beforeX1 = int(this.x/tileSize) - 1;
           console.log(this.tile_beforeY1, this.tile_beforeX1)
           fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 3, 0);
@@ -245,7 +245,7 @@ class Player {
           fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 0, 3);
           count = 0;
 
-          this.tile_beforeY2 = int(this.y/tileSize) + 1;
+          this.tile_beforeY2 = int(this.y/tileSize) + 2;
           this.tile_beforeX2 = int(this.x/tileSize) + 1;
           console.log(this.tile_beforeY2, this.tile_beforeX2)
           fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 3, 0);
@@ -265,7 +265,7 @@ class Player {
 
         if(this.x<=20 || this.currKeyCode == 65){
           this.tile_beforeY1 = int(this.y/tileSize) - 1;
-          this.tile_beforeX1 = int(this.x/tileSize) + 1;
+          this.tile_beforeX1 = int(this.x/tileSize) + 2;
           console.log(this.tile_beforeY1, this.tile_beforeX1)
           fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 3, 0);
           c1 = count;
@@ -274,7 +274,7 @@ class Player {
           count = 0;
 
           this.tile_beforeY2 = int(this.y/tileSize) + 1;
-          this.tile_beforeX2 = int(this.x/tileSize) + 1;
+          this.tile_beforeX2 = int(this.x/tileSize) + 2;
           console.log(this.tile_beforeY2, this.tile_beforeX2)
           fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 3, 0);
           c2 = count;
@@ -294,7 +294,7 @@ class Player {
         if(this.x >= width-30 || this.currKeyCode == 68){
           console.log("LEFT")
           this.tile_beforeY1 = int(this.y/tileSize) - 1;
-          this.tile_beforeX1 = int(this.x/tileSize) - 1;
+          this.tile_beforeX1 = int(this.x/tileSize) - 2;
           console.log(this.tile_beforeY1, this.tile_beforeX1)
           fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 3, 0);
           c1 = count;
@@ -303,7 +303,7 @@ class Player {
           count = 0;
 
           this.tile_beforeY2 = int(this.y/tileSize) + 1;
-          this.tile_beforeX2 = int(this.x/tileSize) - 1;
+          this.tile_beforeX2 = int(this.x/tileSize) - 2;
           console.log(this.tile_beforeY2, this.tile_beforeX2)
           fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 3, 0);
           c2 = count;
