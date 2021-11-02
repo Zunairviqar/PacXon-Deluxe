@@ -35,14 +35,7 @@ function setup() {
     level.push(rows)
   }
 
-  // The following block populates the fixed borders of the board
-  for (let i=0; i < height/20; i++){
-    for (let j=0; j < width/20; j++){
-      if (i == 0 || i == height/20-1 || j == 0 || j == width/20-1 ){
-        level[i][j] = 1;
-      }
-    }
-  }
+  resetLevel();
 
   //declare a new player
   player = new Player();
@@ -58,9 +51,24 @@ function draw(){
   // frameRate(30);
   player.display();
   player.move();
+  ghost.display();
+  ghost.move();
+
   // ghost.display();
 
 
+}
+
+function resetLevel() {
+  // The following block populates the fixed borders of the board
+  for (let i=0; i < height/20; i++){
+    for (let j=0; j < width/20; j++){
+      level[i][j] = 0;
+      if (i == 0 || i == height/20-1 || j == 0 || j == width/20-1 ){
+        level[i][j] = 1;
+      }
+    }
+  }
 }
 
 // function to draw the tiles
@@ -334,17 +342,85 @@ class Ghost {
   constructor(){
     this.x = random(20, width-20);
     this.y = random(20, height-20);
+    this.speedX = random(1, 3);
+    this.speedY = random(1, 3)
     this.graphic = random([redGhost, blueGhost, yellowGhost, pinkGhost]);
+    // this.xNoiseOffset = random(0,1000);
+    // this.yNoiseOffset = random(1000,2000);
   }
 
   display(){
-    image(redGhost, 40, 90, 20,20);
-    image(blueGhost, 660, height-40, 20,20);
-    image(yellowGhost, 203, 200, 20,20);
-    image(pinkGhost, 32, 304, 20,20);
-
+    image(this.graphic, this.x, this.y, 20,20);
+    // console.log("loser")
   }
+  move() {
+
+    // set up sensor positions
+    this.sensorLeft = this.x-2;
+    this.sensorRight = this.x+tileSize+2;
+    this.sensorTop = this.y-2;
+    this.sensorBottom = this.y+1;
+    this.middleX = this.x+tileSize/2;
+    this.middleY = this.y+tileSize/2;
+
+    // check tile to the left
+    ellipse(this.sensorLeft, this.middleY,5,5);
+    let lid = getTile(this.sensorLeft,this.middleY);
+    let rid = getTile(this.sensorRight,this.middleY);
+    let uid = getTile(this.middleX, this.sensorTop);
+    let bid = getTile(this.middleX, this.sensorBottom);
+    console.log(lid)
+    console.log(rid)
+    console.log(uid)
+    console.log(bid)
+
+    if (uid == 1 
+      || bid == 1) {
+      this.speedY *= -1;
+
+    }
+
+
+    else if (lid == 1 
+      || rid == 1 ) {
+        this.speedX *= -1;
+    }
+
+    // //if ghost hits left or right
+    // if (this.x <= 20 || this.x >= width-40) {
+    //     this.speedX *= -1;
+    // }
+
+    // //if ghost hits top or bottom
+    // if (this.y <= 20 || this.y >= height-40) {
+    //     this.speedY *= -1;
+    // }
+
+    //detect collision
+    if (dist(this.x, this.y, player.x, player.y) < 20) {
+      player.x = 0;
+      player.y = 0;
+      resetLevel();
+    }
+
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    // // compute how much we should move
+    // let xMovement = map( noise(this.xNoiseOffset), 0, 1, -2, 2);
+    // let yMovement = map( noise(this.yNoiseOffset), 0, 1, -2, 2);
+
+    // // update our position
+    // this.x += xMovement;
+    // this.y += yMovement;
+
+    // // update our noise offset values
+    // this.xNoiseOffset += 0.01;
+    // this.yNoiseOffset += 0.01;
+  }
+
 }
+
 
 function fill_array(level, r, c, newColor, current){
     //If row is less than 0
