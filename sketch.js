@@ -239,8 +239,7 @@ class Player {
       player.y = 0;
       resetLevel();
     }
-
-    if (id == 0){
+    else if (id == 0){
       modifyTile(this.middleX, this.middleY)
     }
     else if (id == 1 || nt == 1) {
