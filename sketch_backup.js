@@ -9,9 +9,6 @@ let count = 0;
 let c1 = 0;
 let c2 = 0;
 
-let mArea;
-let sVals = [];
-
 function preload() {
   tile = loadImage('assets/Tiles/tile.png');
   movingTile = loadImage('assets/Tiles/movingTile.png');
@@ -128,6 +125,11 @@ class Player {
     this.startMovingDown = false;
     this.pKeyPress = 'None';
     this.moving = 'not moving';
+
+    this.tile_beforeX1 = 0;
+    this.tile_beforeY1 = 0;
+    this.tile_beforeX2 = 0;
+    this.tile_beforeY2 = 0;
   }
 
   display(){
@@ -216,29 +218,125 @@ class Player {
       if (this.moving == 'stopped'){
         this.moving = 'not moving';
 
-        // console.log(int(ghost.y/tileSize), int(ghost.x/tileSize))
-        var xyz = makeDeepCopy(level);
-        let ghosty = int(ghost.middleY/tileSize);
-        let ghostx = int(ghost.middleX/tileSize);
-        level[ghosty][ghostx] = 2
+        if(this.y >= height-20 || this.currKeyCode == 83){
 
-        mArea, sVals = maxAreaOfIsland(xyz);
-        console.log(sVals);
-        if(sVals.length>1){
-          let vals = smallerPair(sVals);
-          level[ghosty][ghostx] = 0
-          fill_array(level, vals[0], vals[1], 1, 0);
+          this.tile_beforeY1 = int(this.y/tileSize) - 2;
+          this.tile_beforeX1 = int(this.x/tileSize) - 1;
+          fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 3, 0);
+          c1 = count;
+          fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 0, 3);
+          count = 0;
+
+          this.tile_beforeY2 = int(this.y/tileSize) - 2;
+          this.tile_beforeX2 = int(this.x/tileSize) + 1;
+          fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 3, 0);
+          c2 = count;
+          fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 0, 3);
+          count = 0;
+
+          if(c1<c2){
+            fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 1, 0);
+          }
+          else{
+            fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 1, 0);
+          }
+          var xyz = makeDeepCopy(level);
+          console.log(maxAreaOfIsland(xyz));
         }
-        else{
-          level[ghosty][ghostx] = 0
+
+        if(this.y<=20 || this.currKeyCode == 87){
+          console.log("break")
+          this.tile_beforeY1 = int(this.y/tileSize) + 2;
+          this.tile_beforeX1 = int(this.x/tileSize) - 1;
+          console.log(this.tile_beforeY1, this.tile_beforeX1)
+          fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 3, 0);
+          c1 = count;
+          console.log(c1);
+          fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 0, 3);
+          count = 0;
+
+          this.tile_beforeY2 = int(this.y/tileSize) + 2;
+          this.tile_beforeX2 = int(this.x/tileSize) + 1;
+          console.log(this.tile_beforeY2, this.tile_beforeX2)
+          fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 3, 0);
+          c2 = count;
+          console.log(c2);
+          fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 0, 3);
+          console.log(level)
+          count = 0;
+
+          if(c1<c2){
+            fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 1, 0);
+          }
+          else{
+            fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 1, 0);
+          }
+        }
+
+        if(this.x<=20 || this.currKeyCode == 65){
+          this.tile_beforeY1 = int(this.y/tileSize) - 1;
+          this.tile_beforeX1 = int(this.x/tileSize) + 2;
+          console.log(this.tile_beforeY1, this.tile_beforeX1)
+          fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 3, 0);
+          c1 = count;
+          console.log(c1);
+          fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 0, 3);
+          count = 0;
+
+          this.tile_beforeY2 = int(this.y/tileSize) + 1;
+          this.tile_beforeX2 = int(this.x/tileSize) + 2;
+          console.log(this.tile_beforeY2, this.tile_beforeX2)
+          fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 3, 0);
+          c2 = count;
+          console.log(c2);
+          fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 0, 3);
+          console.log(level)
+          count = 0;
+
+          if(c1<c2){
+            fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 1, 0);
+          }
+          else{
+            fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 1, 0);
+          }
+        }
+
+        if(this.x >= width-30 || this.currKeyCode == 68){
+          console.log("LEFT")
+          this.tile_beforeY1 = int(this.y/tileSize) - 1;
+          this.tile_beforeX1 = int(this.x/tileSize) - 2;
+          console.log(this.tile_beforeY1, this.tile_beforeX1)
+          fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 3, 0);
+          c1 = count;
+          console.log(c1);
+          fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 0, 3);
+          count = 0;
+
+          this.tile_beforeY2 = int(this.y/tileSize) + 1;
+          this.tile_beforeX2 = int(this.x/tileSize) - 2;
+          console.log(this.tile_beforeY2, this.tile_beforeX2)
+          fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 3, 0);
+          c2 = count;
+          console.log(c2);
+          fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 0, 3);
+          console.log(level)
+          count = 0;
+
+          if(c1<c2){
+            fill_array(level, this.tile_beforeY1, this.tile_beforeX1, 1, 0);
+          }
+          else{
+            fill_array(level, this.tile_beforeY2, this.tile_beforeX2, 1, 0);
+          }
         }
 
       }
     }
-
     this.x = constrain(this.x, 0, width-20);
     this.y = constrain(this.y, 0, height-20);
+
     }
+
   }
 
 
@@ -249,6 +347,8 @@ class Ghost {
     this.speedX = random(1, 3);
     this.speedY = random(1, 3)
     this.graphic = random([redGhost, blueGhost, yellowGhost, pinkGhost]);
+    // this.xNoiseOffset = random(0,1000);
+    // this.yNoiseOffset = random(1000,2000);
   }
 
   display(){
@@ -256,6 +356,7 @@ class Ghost {
     // console.log("loser")
   }
   move() {
+
     // set up sensor positions
     this.sensorLeft = this.x-2;
     this.sensorRight = this.x+tileSize+2;
@@ -269,15 +370,32 @@ class Ghost {
     let rid = getTile(this.sensorRight,this.middleY);
     let uid = getTile(this.middleX, this.sensorTop);
     let bid = getTile(this.middleX, this.sensorBottom);
+    // console.log(lid)
+    // console.log(rid)
+    // console.log(uid)
+    // console.log(bid)
 
     if (uid == 1
       || bid == 1) {
       this.speedY *= -1;
+
     }
+
+
     else if (lid == 1
       || rid == 1 ) {
         this.speedX *= -1;
     }
+
+    // //if ghost hits left or right
+    // if (this.x <= 20 || this.x >= width-40) {
+    //     this.speedX *= -1;
+    // }
+
+    // //if ghost hits top or bottom
+    // if (this.y <= 20 || this.y >= height-40) {
+    //     this.speedY *= -1;
+    // }
 
     //detect collision
     if (dist(this.x, this.y, player.x, player.y) < 20) {
@@ -288,99 +406,84 @@ class Ghost {
 
     this.x += this.speedX;
     this.y += this.speedY;
+
+    // // compute how much we should move
+    // let xMovement = map( noise(this.xNoiseOffset), 0, 1, -2, 2);
+    // let yMovement = map( noise(this.yNoiseOffset), 0, 1, -2, 2);
+
+    // // update our position
+    // this.x += xMovement;
+    // this.y += yMovement;
+
+    // // update our noise offset values
+    // this.xNoiseOffset += 0.01;
+    // this.yNoiseOffset += 0.01;
   }
 
 }
 
 
 function fill_array(level, r, c, newColor, current){
+    //If row is less than 0
     if(r < 0){
         return;
     }
+
+    //If column is less than 0
     if(c < 0){
         return;
     }
+
+    //If row is greater than image length
     if(r > level.length){
         return;
     }
+
+    //If column is greater than image length
     if(c > level[r].length){
         return;
     }
-    if(level[r][c] === 2){
-        // console.log("FOUNDD")
-        count = 10000;
-        return;
-    }
+
+    //If the current pixel is not which needs to be replaced
     if(level[r][c] !== current){
         return;
     }
 
+     //Update the new color
      level[r][c] = newColor;
      count = count + 1;
+     // count = count + 1;
+     // console.log(count);
+
+
+     //Fill in all four directions
+     //Fill Prev row
      fill_array(level, r - 1, c, newColor, current);
+
+     //Fill Next row
      fill_array(level, r + 1, c, newColor, current);
+
+     //Fill Prev col
      fill_array(level, r, c - 1, newColor, current);
+
+     //Fill next col
      fill_array(level, r, c + 1, newColor, current);
 
      return level
 }
 
-function smallerPair(values){
-    fill_array(level,values[0][0], values[0][1], 3, 0);
-    c1 = count;
-    console.log(values[0][0], values[0][1])
-    console.log(c1)
-    fill_array(level, values[0][0], values[0][1], 0, 3);
-    count = 0;
-    fill_array(level,values[1][0], values[1][1], 3, 0);
-    c2 = count;
-    console.log(values[1][0], values[1][1])
-    console.log(c2);
-    fill_array(level, values[1][0], values[1][1], 0, 3);
-    count = 0;
-    if(c1<c2){
-      return([values[0][0], values[0][1]])
+function maxAreaOfIsland(grid){
+    let ans = 0, n = grid.length, m = grid[0].length
+    const trav = (i, j) => {
+        if (i < 0 || j < 0 || i >= n || j >= m || !grid[i][j]) return 0
+        grid[i][j] = 0
+        return 1 + trav(i-1, j) + trav(i, j-1) + trav(i+1, j) + trav(i, j+1)
     }
-    else{
-      return([values[1][0], values[1][1]])
-    }
+    for (let i = 0; i < n; i++)
+        for (let j = 0; j < m; j++)
+            if (grid[i][j]) ans = Math.max(ans, trav(i, j))
+    return ans
 }
-
-function maxAreaOfIsland(grid) {
-    let maxArea = 10000
-    let compass = [[-1, 0], [0, -1], [1, 0], [0, 1]];
-
-    let prow;
-    let pcol;
-    let smallVals = [];
-
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid[i].length; j++) {
-            if (grid[i][j] === 0) {
-                flood([[i, j]])
-            }
-        }
-    }
-    return maxArea, smallVals
-    function flood(stack) {
-        let currentArea = 0
-        while (stack.length) {
-            let [row, col] = stack.pop()
-            if (row < 0 || col < 0 || row >= grid.length || col >= grid[0].length || grid[row][col] === 1) {
-                continue
-            }
-            currentArea++
-            grid[row][col] = 1
-            prow = row;
-            pcol = col;
-            for (const direction of compass) {
-                stack.push([row + direction[0], col + direction[1]])
-            }
-        }
-        smallVals.push([prow,pcol]);
-        maxArea = Math.min(maxArea, currentArea)
-    }
-};
 
 function makeDeepCopy(g) {
   var gridCopy = [];
