@@ -139,11 +139,6 @@ class Player {
     this.middleX = this.x+tileSize/2;
     this.middleY = this.y+tileSize/2;
 
-    this.sensorLeft = this.x-2;
-    this.sensorRight = this.x+tileSize+2;
-    this.sensorTop = this.y-2;
-    this.sensorBottom = this.y+tileSize+2;
-
     if (keyIsPressed==true){
       if (this.pKeyPress == 'None'){
         this.pKeyPress = keyCode;
@@ -196,39 +191,53 @@ class Player {
     }
 
     if (this.currKeyCode == 68 && this.x < width){
-      this.x  += 400/60;
+      this.x  += 400/100;
     }
 
     if (this.currKeyCode == 65 && this.x > 0){
-      this.x  -= 400/60;
+      this.x  -= 400/100;
     }
 
     if (this.currKeyCode == 87 && this.y > 0){
-      this.y  -= 400/60;
+      this.y  -= 400/100;
     }
 
     if (this.currKeyCode == 83 && this.y < height){
-      this.y += 400/60;
+      this.y += 400/100;
     }
 
-    let id = getTile(this.middleX, this.middleY);
+    // let lid = getTile(this.sensorLeft,this.middleY);
+    // let rid = getTile(this.sensorRight,this.middleY);
+    // let uid = getTile(this.middleX, this.sensorTop);
+    // let bid = getTile(this.middleX, this.sensorBottom);
 
-    let lt;
-    let rt;
-    let tt;
-    let bt;
+    let id = getTile(this.middleX, this.middleY);
+    let nt;
 
     if((this.middleX>20 && this.middleY>20 && this.middleX<width-20 && this.middleY<height-20)){
-      lt = getTile(this.sensorLeft,this.middleY);
-      rt = getTile(this.sensorRight,this.middleY);
-      tt = getTile(this.middleX,this.sensorTop);
-      bt = getTile(this.middleX,this.sensorBottom);
+      this.sensorLeft = this.x-10;
+      this.sensorRight = this.x+tileSize+10;
+      this.sensorTop = this.y-10;
+      this.sensorBottom = this.y+tileSize+5;
+
+      if(this.currKeyCode==68){
+        nt = getTile(this.sensorRight,this.middleY);
+      }
+      else if(this.currKeyCode==65){
+        nt = getTile(this.sensorLeft,this.middleY);
+      }
+      else if(this.currKeyCode==87){
+        nt = getTile(this.middleX,this.sensorTop);
+      }
+      else if(this.currKeyCode==83){
+        nt = getTile(this.middleX,this.sensorBottom);
+      }
     }
 
     if (id == 0){
       modifyTile(this.middleX, this.middleY)
     }
-    else if (id == 1 || lt == 1 || rt ==1 || tt == 1 || bt == 1) {
+    else if (id == 1 || nt == 1) {
       solidTiles();
       if (this.moving == 'stopped'){
         this.moving = 'not moving';
@@ -240,7 +249,7 @@ class Player {
         level[ghosty][ghostx] = 2
 
         mArea, sVals = maxAreaOfIsland(xyz);
-        console.log(sVals);
+        // console.log(sVals);
         if(sVals.length>1){
           let vals = smallerPair(sVals);
           level[ghosty][ghostx] = 0
@@ -345,14 +354,14 @@ function fill_array(level, r, c, newColor, current){
 function smallerPair(values){
     fill_array(level,values[0][0], values[0][1], 3, 0);
     c1 = count;
-    console.log(values[0][0], values[0][1])
-    console.log(c1)
+    // console.log(values[0][0], values[0][1])
+    // console.log(c1)
     fill_array(level, values[0][0], values[0][1], 0, 3);
     count = 0;
     fill_array(level,values[1][0], values[1][1], 3, 0);
     c2 = count;
-    console.log(values[1][0], values[1][1])
-    console.log(c2);
+    // console.log(values[1][0], values[1][1])
+    // console.log(c2);
     fill_array(level, values[1][0], values[1][1], 0, 3);
     count = 0;
     if(c1<c2){
