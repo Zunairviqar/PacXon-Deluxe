@@ -233,6 +233,12 @@ class Player {
         nt = getTile(this.middleX,this.sensorBottom);
       }
     }
+    if(nt == -1){
+      console.log("LAG GAYE");
+      player.x = 0;
+      player.y = 0;
+      resetLevel();
+    }
 
     if (id == 0){
       modifyTile(this.middleX, this.middleY)
@@ -303,6 +309,12 @@ class Ghost {
     else if (lid == 1
       || rid == 1 ) {
         this.speedX *= -1;
+    }
+    if(lid == -1 || rid == -1 || uid == -1 || bid == -1){
+      console.log("TAKKAR");
+      player.x = 0;
+      player.y = 0;
+      resetLevel();
     }
 
     //detect collision
