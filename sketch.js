@@ -1,7 +1,8 @@
 // A 2D list to store the tiles for the game board
 let level = [];
 // Stores the images
-let tile, movingTile, player, redGhost, blueGhost, yellowGhost, pinkGhost;
+let tile, movingTile, rightPacXon, leftPacXon, upPacXon, downPacXon;
+let redGhost, blueGhost, yellowGhost, pinkGhost;
 
 let tileSize;
 let count = 0;
@@ -15,7 +16,10 @@ let sVals = [];
 function preload() {
   tile = loadImage('assets/Tiles/tile.png');
   movingTile = loadImage('assets/Tiles/movingTile.png');
-  pacXonImg = loadImage('assets/pacXon.gif');
+  rightPacXon = loadImage('assets/Paxon/right_paXon.gif');
+  leftPacXon = loadImage('assets/Paxon/left_paXon.gif');
+  upPacXon = loadImage('assets/Paxon/up_paXon.gif');
+  downPacXon = loadImage('assets/Paxon/down_paXon.gif');
   redGhost = loadImage('assets/Enemies/red-ghost.png');
   blueGhost = loadImage('assets/Enemies/blue-ghost.png');
   yellowGhost = loadImage('assets/Enemies/yellow-ghost.png');
@@ -51,6 +55,8 @@ function draw(){
 
   background(0);
   drawLevel();
+  fill(255);
+  text("Lives: " + player.lives, 20, 20);
   // frameRate(30);
   player.display();
   player.move();
@@ -60,6 +66,17 @@ function draw(){
   // ghost.display();
 
 
+}
+
+function resetDrawing() {
+  // The following block populates the fixed borders of the board
+  for (let i=0; i < height/20; i++){
+    for (let j=0; j < width/20; j++){
+      if (level[i][j] == -1){
+        level[i][j] = 0;
+      }
+    }
+  }
 }
 
 function resetLevel() {
@@ -124,14 +141,17 @@ class Player {
   constructor(){
     this.x = 0;
     this.y = 0;
+    this.angle = 0;
     this.startMovingRight = false;
     this.startMovingDown = false;
     this.pKeyPress = 'None';
     this.moving = 'not moving';
+    this.lives = 3;
+    this.graphic = rightPacXon;
   }
 
   display(){
-    image(pacXonImg, this.x, this.y, 20,20)
+    image(this.graphic, this.x, this.y, 20,20)
   }
 
   move(){
@@ -144,6 +164,7 @@ class Player {
         this.pKeyPress = keyCode;
       }
       else {
+        this.moving = 'moving';
         if (this.pKeyPress != this.currKeyCode){
           this.pKeyPress = this.currKeyCode;
           let roundx = this.x%20
@@ -172,38 +193,38 @@ class Player {
         }
         if (keyCode ==68) {
           this.currKeyCode = 68;
-          this.moving = 'moving';
+          this.graphic = rightPacXon;
         }
         if (keyCode ==65) {
           this.currKeyCode = 65;
-          this.moving = 'moving';
+          this.graphic = leftPacXon;
         }
         if (keyCode ==87) {
           this.currKeyCode = 87;
-          this.moving = 'moving';
+          this.graphic = upPacXon;
         }
         if (keyCode ==83) {
           this.currKeyCode = 83;
-          this.moving = 'moving';
+          this.graphic = downPacXon;
         }
       }
 
     }
 
     if (this.currKeyCode == 68 && this.x < width){
-      this.x  += 400/100;
+      this.x  += 3;
     }
 
     if (this.currKeyCode == 65 && this.x > 0){
-      this.x  -= 400/100;
+      this.x  -= 3;
     }
 
     if (this.currKeyCode == 87 && this.y > 0){
-      this.y  -= 400/100;
+      this.y  -= 3;
     }
 
     if (this.currKeyCode == 83 && this.y < height){
-      this.y += 400/100;
+      this.y += 3;
     }
 
     // let lid = getTile(this.sensorLeft,this.middleY);
@@ -275,8 +296,8 @@ class Player {
 
 class Ghost {
   constructor(){
-    this.x = random(20, width-20);
-    this.y = random(20, height-20);
+    this.x = random(80, width-100);
+    this.y = random(80, height-80);
     this.speedX = random(1, 3);
     this.speedY = random(1, 3)
     this.graphic = random([redGhost, blueGhost, yellowGhost, pinkGhost]);
@@ -288,18 +309,34 @@ class Ghost {
   }
   move() {
     // set up sensor positions
-    this.sensorLeft = this.x-2;
-    this.sensorRight = this.x+tileSize+2;
-    this.sensorTop = this.y-2;
-    this.sensorBottom = this.y+tileSize+2;
+    this.sensorLeft = this.x-3;
+    this.sensorRight = this.x+tileSize;
+    this.sensorTop = this.y-3;
+    this.sensorBottom = this.y+tileSize+3;
     this.middleX = this.x+tileSize/2;
     this.middleY = this.y+tileSize/2;
 
     // check tile to the left
+    let id = getTile(this.middleX,this.middleY);
     let lid = getTile(this.sensorLeft,this.middleY);
     let rid = getTile(this.sensorRight,this.middleY);
     let uid = getTile(this.middleX, this.sensorTop);
     let bid = getTile(this.middleX, this.sensorBottom);
+
+    // if (id == 1) {
+    //   if (rid == 1) {
+    //     player.x -= 20;
+    //   }
+    //   if (lid == 1) {
+    //     player.x += 20;
+    //   }
+    //   if (uid == 1) {
+    //     player.y += 20;
+    //   }
+    //   if (bid == 1) {
+    //     player.y -= 20;
+    //   }
+    // }
 
     if (uid == 1
       || bid == 1) {
@@ -309,22 +346,32 @@ class Ghost {
       || rid == 1 ) {
         this.speedX *= -1;
     }
-    if(lid == -1 || rid == -1 || uid == -1 || bid == -1){
-      console.log("TAKKAR");
-      player.x = 0;
-      player.y = 0;
-      resetLevel();
-    }
 
-    //detect collision
-    if (dist(this.x, this.y, player.x, player.y) < 20) {
-      player.x = 0;
-      player.y = 0;
-      resetLevel();
-    }
+    this.detectCollision(rid, lid, uid, bid);
 
     this.x += this.speedX;
     this.y += this.speedY;
+
+  }
+
+  detectCollision(rid, lid, uid, bid) {
+    if(lid == -1 || rid == -1 || uid == -1 || bid == -1 || dist(this.x, this.y, player.x, player.y) < 20){
+      // console.log("TAKKAR");
+      player.x = 0;
+      player.y = 0;
+      player.lives -= 1;
+
+      // this.x = random(20, width-20);
+      // this.y = random(20, height-20);
+      if (player.lives <= 0){
+          resetLevel();
+          player.lives = 3;
+      }
+
+      else {
+          resetDrawing();
+      }
+    }
   }
 
 }
