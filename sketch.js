@@ -139,6 +139,11 @@ class Player {
     this.middleX = this.x+tileSize/2;
     this.middleY = this.y+tileSize/2;
 
+    this.sensorLeft = this.x-2;
+    this.sensorRight = this.x+tileSize+2;
+    this.sensorTop = this.y-2;
+    this.sensorBottom = this.y+tileSize+2;
+
     if (keyIsPressed==true){
       if (this.pKeyPress == 'None'){
         this.pKeyPress = keyCode;
@@ -207,11 +212,23 @@ class Player {
     }
 
     let id = getTile(this.middleX, this.middleY);
+
+    let lt;
+    let rt;
+    let tt;
+    let bt;
+
+    if((this.middleX>20 && this.middleY>20 && this.middleX<width-20 && this.middleY<height-20)){
+      lt = getTile(this.sensorLeft,this.middleY);
+      rt = getTile(this.sensorRight,this.middleY);
+      tt = getTile(this.middleX,this.sensorTop);
+      bt = getTile(this.middleX,this.sensorBottom);
+    }
+
     if (id == 0){
       modifyTile(this.middleX, this.middleY)
     }
-
-    else if (id == 1) {
+    else if (id == 1 || lt == 1 || rt ==1 || tt == 1 || bt == 1) {
       solidTiles();
       if (this.moving == 'stopped'){
         this.moving = 'not moving';
