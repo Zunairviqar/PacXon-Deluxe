@@ -44,20 +44,20 @@ function smallerPair(values){
     console.log(c2);
     fill_array(level, values[1][0], values[1][1], 0, 3);
     count = 0;
-    if((c1<10000 || c2<10000)){
+    // if((c1<10000 || c2<10000)){
         if(c1<c2){
           return([values[0][0], values[0][1]])
         }
         else{
           return([values[1][0], values[1][1]])
         }
-    }
-    else{
-        c1 = 0;
-        c2 = 0;
-        console.log("NAHIII")
-        return([0,0])
-    }
+    // }
+    // else{
+    //     c1 = 0;
+    //     c2 = 0;
+    //     console.log("NAHIII")
+    //     return([0,0])
+    // }
 
 
 }

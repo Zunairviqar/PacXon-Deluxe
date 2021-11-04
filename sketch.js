@@ -57,6 +57,6 @@ function draw(){
   pghost.display();
   pghost.bounce();
   bghost.display();
-  bghost.bounce();
+  bghost.follow();
 
 }
