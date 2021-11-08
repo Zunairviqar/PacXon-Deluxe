@@ -47,7 +47,17 @@ class Ghost {
     this.y += this.speedY;
   }
 
-  follow(){
+  follow() {
+    let distX = player.x - this.x;
+    let distY = player.y - this.y;
+
+    this.x += 0.005 * distX;
+    this.y += 0.005 * distY;
+    this.move();
+
+  }
+
+  follow2(){
 
     // set up sensor positions
     this.sensorLeft = this.x-20;
@@ -64,37 +74,38 @@ class Ghost {
     let uid = getTile(this.middleX, this.sensorTop);
     let bid = getTile(this.middleX, this.sensorBottom);
 
-    if (player.moving != "moving"){
-      this.bounce();
-    }
+    // if (lid == 1 && )
+    // if (player.moving != "moving"){
+    //   this.bounce();
+    // }
 
-    else {
+    // else {
 
-      let distX = 0;
-      let distY = 0;
+    //   let distX = 0;
+    //   let distY = 0;
 
-      if ((lid != 1 || rid != 1) || (uid != 1 || bid != 1)){
+    //   if ((lid != 1 || rid != 1) || (uid != 1 || bid != 1)){
 
-        // compute the distance between the ghost and the player
-        if (lid != 1 || rid != 1){
-          distX = player.x - this.x;
-        }
+    //     // compute the distance between the ghost and the player
+    //     if (lid != 1 || rid != 1){
+    //       distX = player.x - this.x;
+    //     }
 
-        if (uid != 1 || bid != 1){
-          distY = player.y - this.y;
-        }
+    //     if (uid != 1 || bid != 1){
+    //       distY = player.y - this.y;
+    //     }
 
-        // move 1% of the way toward the desired position
-        this.x += 0.01 * distX;
-        this.y += 0.01 * distY;
+    //     // move 1% of the way toward the desired position
 
-      }
 
-      else {
-        this.bounce();
-      }
 
-    }
+    //   }
+
+    //   else {
+    //     this.bounce();
+    //   }
+
+    // }
 
     this.detectCollision(rid, lid, uid, bid);
 

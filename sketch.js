@@ -15,6 +15,8 @@ let sVals = [];
 let tc;
 let pVals = [];
 
+let levels = 1;
+
 
 function preload() {
   tile = loadImage('assets/Tiles/tile.png');
@@ -38,8 +40,11 @@ function setup() {
   tc = 0;
   //declare a new player and a ghost
   player = new Player();
-  pghost = new PinkGhost();
+  p1ghost = new PinkGhost();
+  p2ghost = new PinkGhost();
   bghost = new BlueGhost();
+  yghost = new YellowGhost();
+
 }
 
 function draw(){
@@ -54,9 +59,20 @@ function draw(){
   player.move();
 
   //ghosts
-  pghost.display();
-  pghost.bounce();
-  bghost.display();
-  bghost.follow();
+  // p1ghost.display();
+  // p1ghost.bounce();
+  // bghost.display();
+  // bghost.follow();
+  // yghost.display();
+  // yghost.follow();
+
+  
+  text("Progress: " + completeLevel() + "%", width-300, 15);
+
+  allLevels();
+
+  nextLevel();
+  text("Level: " + levels, width-60, 15);
+
 
 }

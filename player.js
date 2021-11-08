@@ -132,12 +132,12 @@ class Player {
 
         // console.log(int(ghost.y/tileSize), int(ghost.x/tileSize))
         var xyz = makeDeepCopy(level);
-        let pghosty = int(pghost.middleY/tileSize);
-        let pghostx = int(pghost.middleX/tileSize);
-        let bghosty = int(bghost.middleY/tileSize);
-        let bghostx = int(bghost.middleX/tileSize);
-        level[pghosty][pghostx] = 2
-        level[bghosty][bghostx] = 2
+        let p1ghosty = int(p1ghost.middleY/tileSize);
+        let p1ghostx = int(p1ghost.middleX/tileSize);
+        // let bghosty = int(bghost.middleY/tileSize);
+        // let bghostx = int(bghost.middleX/tileSize);
+        level[p1ghosty][p1ghostx] = 2
+        // level[bghosty][bghostx] = 2
 
         mArea, sVals = maxAreaOfIsland(xyz);
         // console.log(sVals);
@@ -145,14 +145,14 @@ class Player {
           let vals = smallerPair(sVals);
           pVals = makeDeepCopy(sVals);
           // console.log(sVals);
-          level[pghosty][pghostx] = 0
-          level[bghosty][bghostx] = 0
+          level[p1ghosty][p1ghostx] = 0
+          // level[bghosty][bghostx] = 0
 
           fill_array(level, vals[0], vals[1], 1, 0);
         }
         else{
-          level[pghosty][pghostx] = 0
-          level[bghosty][bghostx] = 0
+          level[p1ghosty][p1ghostx] = 0
+          // level[bghosty][bghostx] = 0
         }
 
       }
