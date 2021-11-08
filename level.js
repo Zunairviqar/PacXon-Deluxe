@@ -18,11 +18,11 @@ function initializeLevel() {
     for (let j =0; j < width/20; j++){
       rows.push(0);
     }
-    console.log("row len" + rows.length)
+    // console.log("row len" + rows.length)
 
     level.push(rows)
   }
-  console.log("col len" + level.length)
+  // console.log("col len" + level.length)
 }
 
 function resetLevel() {

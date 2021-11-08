@@ -33,7 +33,7 @@ function fill_array(level, r, c, newColor, current){
 function smallerPair(values){
     fill_array(level,values[0][0], values[0][1], 3, 0);
     c1 = count;
-    console.log(c1)
+    // console.log(c1)
     // console.log(values[0][0], values[0][1])
     // console.log(c1)
     fill_array(level, values[0][0], values[0][1], 0, 3);
@@ -41,7 +41,7 @@ function smallerPair(values){
     fill_array(level,values[1][0], values[1][1], 3, 0);
     c2 = count;
     // console.log(values[1][0], values[1][1])
-    console.log(c2);
+    // console.log(c2);
     fill_array(level, values[1][0], values[1][1], 0, 3);
     count = 0;
     // if((c1<10000 || c2<10000)){
@@ -93,10 +93,10 @@ function maxAreaOfIsland(grid) {
                 stack.push([row + direction[0], col + direction[1]])
             }
         }
-        console.log("PVALSSSS");
-        for (let i = 0; i< pVals.length; i++){
-            console.log(pVals)
-        }
+        // console.log("PVALSSSS");
+        // for (let i = 0; i< pVals.length; i++){
+        //     console.log(pVals)
+        // }
         smallVals.push([prow,pcol]);
         maxArea = Math.min(maxArea, currentArea)
     }

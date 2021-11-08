@@ -33,10 +33,10 @@ class Player {
 
           if (roundx !=0){
 
-            if (roundx > 10){
+            if (roundx >= 10){
               this.x = this.x + (20 - roundx);
             }
-            else if(roundx <= 10){
+            else if(roundx < 10){
               this.x = this.x - roundx;
             }
           }
@@ -45,10 +45,10 @@ class Player {
 
           if (roundy !=0){
 
-            if (roundy > 10){
+            if (roundy >= 10){
               this.y = this.y + (20 - roundy);
             }
-            else if(roundy <= 10){
+            else if(roundy < 10){
               this.y = this.y - roundy;
             }
           }
@@ -116,44 +116,49 @@ class Player {
         nt = getTile(this.middleX,this.sensorBottom);
       }
     }
-    if(nt == -1){
-      console.log("LAG GAYE");
-      player.x = 0;
-      player.y = 0;
-      resetLevel();
-    }
-    else if (id == 0){
+    // if(nt == -1){
+    //   console.log("LAG GAYE");
+    //   player.x = 0;
+    //   player.y = 0;
+    //   resetLevel();
+    // }
+    if (id == 0){
       modifyTile(this.middleX, this.middleY)
     }
-    else if (id == 1 || nt == 1) {
+    // else if (id == 1 || nt == 1) {
+    else if (id == 1) {
       solidTiles();
       if (this.moving == 'stopped'){
         this.moving = 'not moving';
 
         // console.log(int(ghost.y/tileSize), int(ghost.x/tileSize))
         var xyz = makeDeepCopy(level);
-        let p1ghosty = int(p1ghost.middleY/tileSize);
-        let p1ghostx = int(p1ghost.middleX/tileSize);
+        // let p1ghosty = int(p1ghost.middleY/tileSize);
+        // let p1ghostx = int(p1ghost.middleX/tileSize);
         // let bghosty = int(bghost.middleY/tileSize);
         // let bghostx = int(bghost.middleX/tileSize);
-        level[p1ghosty][p1ghostx] = 2
+        // level[p1ghosty][p1ghostx] = 2
         // level[bghosty][bghostx] = 2
 
         mArea, sVals = maxAreaOfIsland(xyz);
         // console.log(sVals);
-        if(sVals.length>1){
-          let vals = smallerPair(sVals);
-          pVals = makeDeepCopy(sVals);
-          // console.log(sVals);
-          level[p1ghosty][p1ghostx] = 0
-          // level[bghosty][bghostx] = 0
-
+        let vals = smallerPair(sVals);
+        console.log(vals)
+        for (let i = 0; i < vals.length; i++){
           fill_array(level, vals[0], vals[1], 1, 0);
         }
-        else{
-          level[p1ghosty][p1ghostx] = 0
-          // level[bghosty][bghostx] = 0
-        }
+        // if(sVals.length>1){
+        //   let vals = smallerPair(sVals);
+        //   // console.log(sVals);
+        //   // level[p1ghosty][p1ghostx] = 0
+        //   // level[bghosty][bghostx] = 0
+        //
+        //   fill_array(level, vals[0], vals[1], 1, 0);
+        // }
+        // else{
+        //   // level[p1ghosty][p1ghostx] = 0
+        //   // level[bghosty][bghostx] = 0
+        // }
 
       }
     }
@@ -162,4 +167,3 @@ class Player {
     this.y = constrain(this.y, 0, height-20);
     }
   }
-

@@ -40,10 +40,10 @@ function setup() {
   tc = 0;
   //declare a new player and a ghost
   player = new Player();
-  p1ghost = new PinkGhost();
-  p2ghost = new PinkGhost();
-  bghost = new BlueGhost();
-  yghost = new YellowGhost();
+  // p1ghost = new PinkGhost();
+  // p2ghost = new PinkGhost();
+  // bghost = new BlueGhost();
+  // yghost = new YellowGhost();
 
 }
 
@@ -66,12 +66,12 @@ function draw(){
   // yghost.display();
   // yghost.follow();
 
-  
+
   text("Progress: " + completeLevel() + "%", width-300, 15);
 
-  allLevels();
+  // allLevels();
 
-  nextLevel();
+  // nextLevel();
   text("Level: " + levels, width-60, 15);
 
 
