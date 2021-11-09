@@ -12,7 +12,6 @@ function fill_array(level, r, c, newColor, current){
         return;
     }
     if(level[r][c] === 2){
-        // console.log("FOUNDD")
         count = 10000;
         return;
     }
@@ -28,39 +27,35 @@ function fill_array(level, r, c, newColor, current){
      fill_array(level, r, c + 1, newColor, current);
 
      return level
-}
+};
 
 function smallerPair(values){
-    fill_array(level,values[0][0], values[0][1], 3, 0);
-    c1 = count;
-    // console.log(c1)
-    // console.log(values[0][0], values[0][1])
-    // console.log(c1)
-    fill_array(level, values[0][0], values[0][1], 0, 3);
-    count = 0;
-    fill_array(level,values[1][0], values[1][1], 3, 0);
-    c2 = count;
-    // console.log(values[1][0], values[1][1])
-    // console.log(c2);
-    fill_array(level, values[1][0], values[1][1], 0, 3);
-    count = 0;
-    // if((c1<10000 || c2<10000)){
-        if(c1<c2){
-          return([values[0][0], values[0][1]])
-        }
-        else{
-          return([values[1][0], values[1][1]])
-        }
-    // }
-    // else{
-    //     c1 = 0;
-    //     c2 = 0;
-    //     console.log("NAHIII")
-    //     return([0,0])
-    // }
-
-
-}
+    areas = [];
+    pairs = [];
+    let enemfound = false;
+    for (let i = 0; i< values.length; i ++){
+      console.log(values[i]);
+      fill_array(level,values[i][0], values[i][1], 3, 0);
+      c1 = count;
+      fill_array(level, values[i][0], values[i][1], 0, 3);
+      count = 0;
+      console.log(c1);
+      if(c1<1000){
+        areas.push(c1);
+        pairs.push(values[i]);
+        enemfound = true;
+      }
+    }
+    console.log(pairs);
+    console.log(areas);
+    if(enemfound == false){
+      maxA = max(areas)
+      maxIndex = areas.indexOf(maxA);
+      pairs.splice(maxIndex,1);
+    }
+    console.log(pairs);
+    return pairs;
+};
 
 function maxAreaOfIsland(grid) {
     let maxArea = 10000
@@ -93,10 +88,6 @@ function maxAreaOfIsland(grid) {
                 stack.push([row + direction[0], col + direction[1]])
             }
         }
-        // console.log("PVALSSSS");
-        // for (let i = 0; i< pVals.length; i++){
-        //     console.log(pVals)
-        // }
         smallVals.push([prow,pcol]);
         maxArea = Math.min(maxArea, currentArea)
     }
@@ -114,4 +105,4 @@ function makeDeepCopy(g) {
     gridCopy.push(newRow);
   }
   return gridCopy;
-}
+};

@@ -14,9 +14,12 @@ let mArea;
 let sVals = [];
 let tc;
 let pVals = [];
+let areas = [];
 
 let levels = 1;
 
+let enemy = [];
+let ghostx, ghosty;
 
 function preload() {
   tile = loadImage('assets/Tiles/tile.png');
@@ -40,6 +43,12 @@ function setup() {
   tc = 0;
   //declare a new player and a ghost
   player = new Player();
+
+  enemy.push(new PinkGhost());
+  enemy.push(new PinkGhost());
+  enemy.push(new PinkGhost());
+  // console.log(enemy);
+
   // p1ghost = new PinkGhost();
   // p2ghost = new PinkGhost();
   // bghost = new BlueGhost();
@@ -59,6 +68,9 @@ function draw(){
   player.move();
 
   //ghosts
+  for (let i = 0; i < enemy.length; i++){
+    enemy[i].display();
+  }
   // p1ghost.display();
   // p1ghost.bounce();
   // bghost.display();

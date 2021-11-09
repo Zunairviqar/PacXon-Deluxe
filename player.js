@@ -89,11 +89,6 @@ class Player {
       this.y += 3;
     }
 
-    // let lid = getTile(this.sensorLeft,this.middleY);
-    // let rid = getTile(this.sensorRight,this.middleY);
-    // let uid = getTile(this.middleX, this.sensorTop);
-    // let bid = getTile(this.middleX, this.sensorBottom);
-
     let id = getTile(this.middleX, this.middleY);
     let nt;
 
@@ -116,50 +111,39 @@ class Player {
         nt = getTile(this.middleX,this.sensorBottom);
       }
     }
-    // if(nt == -1){
-    //   console.log("LAG GAYE");
-    //   player.x = 0;
-    //   player.y = 0;
-    //   resetLevel();
-    // }
+    if(nt == -1){
+      console.log("LAG GAYE");
+      player.x = 0;
+      player.y = 0;
+      resetLevel();
+    }
     if (id == 0){
       modifyTile(this.middleX, this.middleY)
     }
-    // else if (id == 1 || nt == 1) {
     else if (id == 1) {
       solidTiles();
       if (this.moving == 'stopped'){
         this.moving = 'not moving';
 
-        // console.log(int(ghost.y/tileSize), int(ghost.x/tileSize))
         var xyz = makeDeepCopy(level);
-        // let p1ghosty = int(p1ghost.middleY/tileSize);
-        // let p1ghostx = int(p1ghost.middleX/tileSize);
-        // let bghosty = int(bghost.middleY/tileSize);
-        // let bghostx = int(bghost.middleX/tileSize);
-        // level[p1ghosty][p1ghostx] = 2
-        // level[bghosty][bghostx] = 2
+        for (let i = 0; i < enemy.length; i++){
+          ghostx = int(enemy[i].x/tileSize);
+          ghosty = int(enemy[i].y/tileSize)
+          level[ghosty][ghostx] = 2;
+        }
 
         mArea, sVals = maxAreaOfIsland(xyz);
-        // console.log(sVals);
         let vals = smallerPair(sVals);
-        console.log(vals)
-        for (let i = 0; i < vals.length; i++){
-          fill_array(level, vals[0], vals[1], 1, 0);
-        }
-        // if(sVals.length>1){
-        //   let vals = smallerPair(sVals);
-        //   // console.log(sVals);
-        //   // level[p1ghosty][p1ghostx] = 0
-        //   // level[bghosty][bghostx] = 0
-        //
-        //   fill_array(level, vals[0], vals[1], 1, 0);
-        // }
-        // else{
-        //   // level[p1ghosty][p1ghostx] = 0
-        //   // level[bghosty][bghostx] = 0
-        // }
 
+        for (let i = 0; i < enemy.length; i++){
+          ghostx = int(enemy[i].x/tileSize);
+          ghosty = int(enemy[i].y/tileSize)
+          level[ghosty][ghostx] = 0;
+        }
+
+        for (let i = 0; i < vals.length; i++){
+          fill_array(level, vals[i][0], vals[i][1], 1, 0);
+        }
       }
     }
 
