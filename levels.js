@@ -1,68 +1,107 @@
 function completeLevel() {
 	let count = 0
 	let totalcount = 0;
-	for (let i=0; i < height/20; i++){
-	    for (let j=0; j < width/20; j++){
+	for (let i=1; i < (height/20) - 1; i++){
+	    for (let j=1; j < (width/20) - 1; j++){
 	      if (level[i][j] == 1){
 	        count += 1;
 	      }
 	    }
 	}
-	count -= 122
-	totalcount = ((count/950)* 100)
-	return int(totalcount);
+	// count -= 122
+	totalcount = ((count/828)* 100);
+	// console.log(totalcount);
+	// totalcount = count/
+	return round(totalcount * 100) / 100;
+	// console.log(count)
+	// return totalcount;
 }
 
 function nextLevel() {
-	if (completeLevel() >= 2) {
+	// completeLevel();
+	// levelOne();
+	if (completeLevel() >= 5) {
+		// console.log(completeLevel())
 		levels +=1;
+		console.log("level up")
 		resetLevel();
 		player.x = 0;
 		player.y = 0;
 		player.lives = 3;
+		allLevels();
 	}
+
+
 }
 
 function allLevels() {
 
-	if (levels == 1) {
-		levelOne();
-	}
-
-	else if (levels == 2) {
+	if (levels == 2) {
 		levelTwo();
-		level = 1;
 	}
 
-	else if (levels == 3) {
-		levelThree();
-	}
+	// else if (levels == 3) {
+	// 	levelThree();
+	// }
 
-	else if (levels == 4) {
-		levelFour();
-	}
+	// else if (levels == 4) {
+	// 	levelFour();
+	// }
 
-	else if (levels == 5) {
-		levelFive();
-	}
+	// else if (levels == 5) {
+	// 	levelFive();
+	// }
 
-	else if (levels == 6) {
-		levelSix();
-	}
+	// else if (levels == 6) {
+	// 	levelSix();
+	// }
 }
 
 function levelOne() {
-	p1ghost.display();
-  	p1ghost.bounce();
-  	p2ghost.display();
-  	p2ghost.bounce();
+	enemy = [];
+
+	enemy.push(new PinkGhost());
+	enemy.push(new PinkGhost());
+
 }
 
 function levelTwo() {
-	p1ghost.display();
-  	p1ghost.bounce();
-  	p2ghost.display();
-  	p2ghost.bounce();
-  	yghost.display();
-  	yghost.follow();
+	enemy = [];
+
+	enemy.push(new PinkGhost());
+	enemy.push(new PinkGhost());
+	enemy.push(new YellowGhost());
 }
+
+function levelThree() {
+	enemy = [];
+
+	enemy.push(new PinkGhost());
+	enemy.push(new PinkGhost());
+	enemy.push(new YellowGhost());
+}
+
+function levelFour() {
+	enemy = [];
+
+	enemy.push(new PinkGhost());
+	enemy.push(new PinkGhost());
+	enemy.push(new YellowGhost());
+}
+
+function levelFive() {
+	enemy = [];
+
+	enemy.push(new PinkGhost());
+	enemy.push(new PinkGhost());
+	enemy.push(new YellowGhost());
+}
+
+function levelSix() {
+	enemy = [];
+
+	enemy.push(new PinkGhost());
+	enemy.push(new PinkGhost());
+	enemy.push(new YellowGhost());
+}
+
