@@ -11,10 +11,10 @@ class Ghost {
     image(this.graphic, this.x, this.y, 20,20);
   }
 
-  move () {
+  collision () {
     // set up sensor positions
     this.sensorLeft = this.x-3;
-    this.sensorRight = this.x+tileSize;
+    this.sensorRight = this.x+tileSize+3;
     this.sensorTop = this.y-3;
     this.sensorBottom = this.y+tileSize+3;
     this.middleX = this.x+tileSize/2;
@@ -36,25 +36,59 @@ class Ghost {
       this.speedX *= -1;
     }
 
-    this.detectCollision(rid, lid, uid, bid);
+    this.enemyCollision(rid, lid, uid, bid);
+    if (this.type == "eat"){
+      this.eat(rid, lid, uid, bid)
+    }
 
   }
 
-  bounce() {
+  eat(rid, lid, uid, bid) {
+    if (rid == 1 && this.x < width-tileSize-30){
+      deleteTile(this.sensorRight, this.middleY);
+      // getTile(rid, this.middleY) = 0;
+      // console.log(getTile(rid, this.middleY))
+    }
 
-    this.move();
-    this.x += this.speedX;
-    this.y += this.speedY;
+    else if (lid == 1 && this.x > 30){
+      // getTile(lid, this.middleY) = 0;
+      deleteTile(this.sensorLeft, this.middleY);
+      // console.log(getTile(lid, this.middleY))
+    }
+
+    else if (uid == 1 && this.y > 30){
+      // getTile(this.middleX, uid) = 0;
+      deleteTile(this.middleX, this.sensorTop);
+      console.log("uppppp")
+    }
+
+    else if (bid == 1 && this.y < height-tileSize-30){
+      // getTile(this.middleX, bid) = 0;
+      deleteTile(this.middleX, this.sensorBottom);
+      console.log("downnnn")
+    }
   }
 
-  follow() {
-    let distX = player.x - this.x;
-    let distY = player.y - this.y;
+  move() {
+    this.collision();
 
-    this.x += 0.005 * distX;
-    this.y += 0.005 * distY;
-    this.move();
+    if (this.type == "bounce"){
+      this.x += this.speedX;
+      this.y += this.speedY;
+    }
 
+    else if (this.type == "follow"){
+      let distX = player.x - this.x;
+      let distY = player.y - this.y;
+
+      this.x += 0.005 * distX;
+      this.y += 0.005 * distY;
+    }
+
+    else if (this.type == "eat"){
+      this.x += this.speedX;
+      this.y += this.speedY;
+    }
   }
 
   follow2(){
@@ -107,7 +141,7 @@ class Ghost {
 
     // }
 
-    this.detectCollision(rid, lid, uid, bid);
+    this.enemyCollision(rid, lid, uid, bid);
 
     // // the player position is always the desired position
     // let xDesired = player.x;
@@ -115,7 +149,7 @@ class Ghost {
 
   }
 
-  detectCollision(rid, lid, uid, bid) {
+  enemyCollision(rid, lid, uid, bid) {
     if(lid == -1 || rid == -1 || uid == -1 || bid == -1 || dist(this.x, this.y, player.x, player.y) < 20){
       player.x = 0;
       player.y = 0;
@@ -149,9 +183,10 @@ class Ghost {
 class PinkGhost extends Ghost{
   constructor(){
     super();
-    this.speedX = 3;
-    this.speedY = 3;
+    this.speedX = random(1.5, 3);
+    this.speedY = random(1.5, 3);
     this.graphic = pinkGhost;
+    this.type = "bounce";
   }
 }
 
@@ -168,6 +203,7 @@ class RedGhost extends Ghost{
   constructor(){
     super();
     this.graphic = redGhost;
+    this.type = "eat";
   }
 }
 
@@ -175,6 +211,7 @@ class YellowGhost extends Ghost{
   constructor(){
     super();
     this.graphic = yellowGhost;
+    this.type = "follow";
   }
 }
 

@@ -17,7 +17,7 @@ let tc;
 let pVals = [];
 let areas = [];
 
-let levels = 1;
+let levels = 3;
 
 let enemy = [];
 let ghostx, ghosty;
@@ -49,7 +49,7 @@ function setup() {
   //declare a new player and a ghost
   player = new Player();
 
-  levelOne();
+  levelThree();
 
   // enemy.push(new PinkGhost());
   // enemy.push(new PinkGhost());
@@ -80,6 +80,7 @@ function draw(){
   //ghosts
   for (let i = 0; i < enemy.length; i++){
     enemy[i].display();
+    enemy[i].move();
   }
   // p1ghost.display();
   // p1ghost.bounce();

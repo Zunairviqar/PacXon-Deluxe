@@ -20,7 +20,7 @@ function completeLevel() {
 function nextLevel() {
 	// completeLevel();
 	// levelOne();
-	if (completeLevel() >= 5) {
+	if (completeLevel() >= 15) {
 		// console.log(completeLevel())
 		levels +=1;
 		console.log("level up")
@@ -30,8 +30,6 @@ function nextLevel() {
 		player.lives = 3;
 		allLevels();
 	}
-
-
 }
 
 function allLevels() {
@@ -40,9 +38,9 @@ function allLevels() {
 		levelTwo();
 	}
 
-	// else if (levels == 3) {
-	// 	levelThree();
-	// }
+	else if (levels == 3) {
+		levelThree();
+	}
 
 	// else if (levels == 4) {
 	// 	levelFour();
@@ -77,7 +75,7 @@ function levelThree() {
 	enemy = [];
 
 	enemy.push(new PinkGhost());
-	enemy.push(new PinkGhost());
+	enemy.push(new RedGhost());
 	enemy.push(new YellowGhost());
 }
 

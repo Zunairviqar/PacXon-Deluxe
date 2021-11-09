@@ -68,6 +68,12 @@ function modifyTile(x,y) {
   level[y][x] = -1;
 }
 
+function deleteTile(x,y) {
+  x = int(x/tileSize);
+  y = int(y/tileSize);
+  level[y][x] = 0;
+}
+
 function solidTiles(){
   let maxRow = 0, maxCol=0;
   for (let r = 0; r < level.length; r++) {
