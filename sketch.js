@@ -20,6 +20,7 @@ let tc;
 let pVals = [];
 let areas = [];
 
+let timer = 90;
 
 let levels = 1;
 
