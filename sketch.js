@@ -56,6 +56,13 @@ let levelup;
 let endimg;
 let finish;
 
+let gameoversound;
+let movingsound;
+let clickedsound;
+let collectionsound;
+let collisionsound;
+let levelupsound;
+
 
 function preload() {
   tile = loadImage('assets/Tiles/tile.png');
@@ -91,6 +98,13 @@ function preload() {
   ice = loadImage('assets/Extras/ice.png');
   bolt = loadImage('assets/Extras/lightning-bolt.png');
   slow = loadImage('assets/Extras/snail.png');
+
+  gameoversound = loadSound('assets/Sounds/gameover.mp3');
+  movingsound = loadSound('assets/Sounds/movingsound.wav');
+  clickedsound = loadSound('assets/Sounds/clicked.wav');
+  collectionsound = loadSound('assets/Sounds/collection.wav');
+  collisionsound = loadSound('assets/Sounds/collision.wav');
+  levelupsound = loadSound('assets/Sounds/levelup.wav');
 
 }
 
@@ -215,7 +229,7 @@ function draw(){
             text("Timer: " + timer + 's', width-300, 15);
             // console.log("timer");
 
-            if (frameCount % 60 == 0 && timer > 0) { 
+            if (frameCount % 60 == 0 && timer > 0) {
               timer --;
             }
 
@@ -246,19 +260,23 @@ function mousePressed(){
   if(checkfornextLevel == true){
     if(mouseX>400 && mouseX <495 && mouseY>325&& mouseY<363){
       levelupscreen = false;
+      clickedsound.play();
     }
     else if(mouseX>250 && mouseX <345 && mouseY>325&& mouseY<363){
       gamestart = false;
       levelupscreen = false;
+      clickedsound.play();
     }
   }
   if(checkforretry == true){
     if(mouseX>400 && mouseX <495 && mouseY>325&& mouseY<363){
       endscreen = false;
+      clickedsound.play();
     }
     else if(mouseX>250 && mouseX <345 && mouseY>325&& mouseY<363){
       gamestart = false;
       endscreen = false;
+      clickedsound.play();
     }
   }
   if(checkforfinish == true){
@@ -266,6 +284,7 @@ function mousePressed(){
     if(mouseX>279 && mouseX <469 && mouseY>318&& mouseY<363){
       gamestart = false;
       gamecomplete = false;
+      clickedsound.play();
     }
   }
 }
