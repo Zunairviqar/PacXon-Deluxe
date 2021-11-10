@@ -4,6 +4,9 @@ let level = [];
 let tile, movingTile, rightPacXon, leftPacXon, upPacXon, downPacXon;
 let redGhost, blueGhost, yellowGhost, pinkGhost;
 let home;
+let bomb, ice, bolt, slow;
+
+let powerups = [];
 
 let tileSize;
 let count = 0;
@@ -16,6 +19,7 @@ let sVals = [];
 let tc;
 let pVals = [];
 let areas = [];
+
 
 let levels = 1;
 
@@ -55,14 +59,17 @@ let finish;
 function preload() {
   tile = loadImage('assets/Tiles/tile.png');
   movingTile = loadImage('assets/Tiles/movingTile.png');
+
   rightPacXon = loadImage('assets/Paxon/right_paXon.gif');
   leftPacXon = loadImage('assets/Paxon/left_paXon.gif');
   upPacXon = loadImage('assets/Paxon/up_paXon.gif');
   downPacXon = loadImage('assets/Paxon/down_paXon.gif');
+
   redGhost = loadImage('assets/Enemies/red-ghost.png');
   blueGhost = loadImage('assets/Enemies/blue-ghost.png');
   yellowGhost = loadImage('assets/Enemies/yellow-ghost.png');
   pinkGhost = loadImage('assets/Enemies/pink-ghost.png');
+
   home = loadImage('assets/Screens/home.png');
   main_image = loadImage('assets/Screens/home-screen.png');
   main_image2 = loadImage('assets/Screens/home.png');
@@ -78,6 +85,11 @@ function preload() {
   levelup = loadImage('assets/Screens/levelcompleted.png');
   endimg = loadImage('assets/Screens/gameover.png');
   finish = loadImage('assets/Screens/congrats.png');
+
+  bomb = loadImage('assets/Extras/redbomb.png');
+  ice = loadImage('assets/Extras/ice.png');
+  bolt = loadImage('assets/Extras/lightning-bolt.png');
+  slow = loadImage('assets/Extras/snail.png');
 
 }
 
@@ -105,9 +117,14 @@ function setup() {
 
   tileSize = 20;
   initializeLevel();
+
   resetLevel();
   tc = 0;
   player = new Player();
+  // powerup = new Powerup();
+
+  noiseDetail(24);
+
 }
 
 function draw(){
@@ -150,23 +167,38 @@ function draw(){
           }
 
           if(gamebegin == true){
-              fill(255);
-              text("Lives: " + player.lives, 10, 15);
+            stroke(0);
+            fill(255);
+            text("Lives: " + player.lives, 10, 15);
 
-              //player
-              player.display();
-              player.move();
+            //player
+            player.display();
+            player.move();
 
-              //ghosts
-              for (let i = 0; i < enemy.length; i++){
-                enemy[i].display();
-                enemy[i].move();
-              }
+            if (powerups.length > 0) {
+              powerups[0].display();
+              powerups[0].effect();
+            }
 
-              text("Progress: " + completeLevel() + "%", width-300, 15);
+            //ghosts
+            for (let i = 0; i < enemy.length; i++){
+              enemy[i].display();
+              enemy[i].move();
+            }
 
-              nextLevel();
-              text("Level: " + levels, width-60, 15);
+            stroke(0);
+            fill(255);
+            text("Progress: " + completeLevel() + "%", width-300, 15);
+
+            nextLevel();
+            text("Level: " + levels, width-60, 15);
+
+
+
+            if (frameCount % 120 == 0 && powerups.length == 0) {
+              powerups.push(new Powerup())
+            } 
+
           }
         }
       }

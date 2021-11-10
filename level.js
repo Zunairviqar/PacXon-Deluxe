@@ -74,6 +74,18 @@ function deleteTile(x,y) {
   level[y][x] = 0;
 }
 
+function deleteTiles(x,y){
+  deleteTile(x,y);
+  deleteTile(x-20,y);
+  deleteTile(x+20,y);
+  deleteTile(x,y-20);
+  deleteTile(x,y+20);
+  deleteTile(x+20,y+20);
+  deleteTile(x-20,y+20);
+  deleteTile(x,y+40);
+
+}
+
 function solidTiles(){
   let maxRow = 0, maxCol=0;
   for (let r = 0; r < level.length; r++) {
@@ -87,3 +99,4 @@ function solidTiles(){
     }
   }
 }
+
