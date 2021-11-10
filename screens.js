@@ -1,5 +1,8 @@
 function StartScreen(){
   image(main_image, 0, 0);
+  if (frameCount == 180){
+    main_image.pause();
+  }
   if(mouseIsPressed){
     if(mouseX>285 && mouseX <475 && mouseY>230&& mouseY<275){
       load_level = true;

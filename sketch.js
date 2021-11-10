@@ -20,7 +20,7 @@ let tc;
 let pVals = [];
 let areas = [];
 
-let timer = 5;
+let timer = 90;
 
 let levels = 1;
 
@@ -71,10 +71,10 @@ function preload() {
   yellowGhost = loadImage('assets/Enemies/yellow-ghost.png');
   pinkGhost = loadImage('assets/Enemies/pink-ghost.png');
 
-  home = loadImage('assets/Screens/home.png');
-  main_image = loadImage('assets/Screens/home-screen.png');
-  main_image2 = loadImage('assets/Screens/home.png');
-  main_image3 = loadImage('assets/Screens/home-screen.gif');
+  // home = loadImage('assets/Screens/home.gif');
+  main_image = loadImage('assets/Screens/home.gif');
+  // main_image2 = loadImage('assets/Screens/home.png');
+  // main_image3 = loadImage('assets/Screens/home-screen.gif');
   level1 = loadImage('assets/Screens/level1.png');
   level2 = loadImage('assets/Screens/level2.png');
   level3 = loadImage('assets/Screens/level3.png');
@@ -206,7 +206,7 @@ function draw(){
 
 
 
-            if (frameCount % 120 == 0 && powerups.length == 0) {
+            if (frameCount % 420 == 0 && powerups.length == 0) {
               powerups.push(new Powerup())
             }
 
@@ -224,7 +224,7 @@ function draw(){
               endscreen = true;
               resetLevel();
               player.lives = 3;
-              timer = 5;
+              timer = 90;
 
             }
 
