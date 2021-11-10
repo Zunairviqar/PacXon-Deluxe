@@ -28,7 +28,7 @@ function nextLevel() {
 		}
 		else{
 			mylevel +=1;
-			window.localStorage.setItem('levelsCompleted', mylevel);
+			window.localStorage.setItem('levelsCompleted', levels);
 		}
 		console.log("level up")
 		resetLevel();

@@ -43,7 +43,7 @@ function LevelScreen(){
   else if (mylevel == 6){
     image(level6, 0 ,0);
   }
-  LevelScreenClick();
+  // LevelScreenClick();
 }
 
 function LevelScreenClick(){
