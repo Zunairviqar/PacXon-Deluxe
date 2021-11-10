@@ -52,6 +52,7 @@ function LevelScreenClick(){
       if(mouseX>118 && mouseX <193 && mouseY>215&& mouseY<293){
         console.log("LEVEL 1");
         gamestart = true;
+        load_level =  false;
         levelOne();
       }
     }
@@ -59,6 +60,7 @@ function LevelScreenClick(){
       if(mouseX>205 && mouseX <283 && mouseY>215&& mouseY<293){
         console.log("LEVEL 2");
         gamestart = true;
+        load_level =  false;
         levels = 2;
         levelTwo();
 
@@ -68,6 +70,7 @@ function LevelScreenClick(){
       if(mouseX>290 && mouseX <368 && mouseY>215&& mouseY<293){
         console.log("LEVEL 3");
         gamestart = true;
+        load_level =  false;
         levels = 3;
         levelThree();
       }
@@ -76,6 +79,7 @@ function LevelScreenClick(){
       if(mouseX>375 && mouseX <453 && mouseY>215&& mouseY<293){
         console.log("LEVEL 4");
         gamestart = true;
+        load_level =  false;
         levels = 4;
         levelFour();
       }
@@ -84,6 +88,7 @@ function LevelScreenClick(){
       if(mouseX>460 && mouseX <538 && mouseY>215&& mouseY<293){
         console.log("LEVEL 5");
         gamestart = true;
+        load_level =  false;
         levels = 5;
         levelFive();
       }
@@ -92,6 +97,7 @@ function LevelScreenClick(){
       if(mouseX>545 && mouseX <623 && mouseY>215&& mouseY<293){
         console.log("LEVEL 6");
         gamestart = true;
+        load_level =  false;
         levels = 6;
         levelSix();
       }

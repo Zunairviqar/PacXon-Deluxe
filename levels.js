@@ -29,6 +29,10 @@ function nextLevel() {
 		player.y = 0;
 		player.lives = 3;
 		allLevels();
+		checkfornextLevel = false;
+		levelupscreen = true;
+		gamebegin=false;
+		checkforStart = false;
 	}
 }
 
@@ -102,4 +106,3 @@ function levelSix() {
 	enemy.push(new PinkGhost());
 	enemy.push(new YellowGhost());
 }
-
