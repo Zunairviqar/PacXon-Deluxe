@@ -17,12 +17,24 @@ let tc;
 let pVals = [];
 let areas = [];
 
-let levels = 3;
+let levels = 1;
 
 let enemy = [];
 let ghostx, ghosty;
 
 let level_up = false;
+
+let gamestart;
+let load_level;
+let mylevel;
+let level1;
+let level2;
+let level3;
+let level4;
+let level5;
+let level6;
+let main_image;
+
 
 function preload() {
   tile = loadImage('assets/Tiles/tile.png');
@@ -36,66 +48,60 @@ function preload() {
   yellowGhost = loadImage('assets/Enemies/yellow-ghost.png');
   pinkGhost = loadImage('assets/Enemies/pink-ghost.png');
   home = loadImage('assets/Screens/home.png');
-
+  main_image = loadImage('assets/Screens/home-screen.png');
+  main_image2 = loadImage('assets/Screens/home.png');
+  main_image3 = loadImage('assets/Screens/home-screen.gif');
+  level1 = loadImage('assets/Screens/level1.png');
+  level2 = loadImage('assets/Screens/level2.png');
+  level3 = loadImage('assets/Screens/level3.png');
+  level4 = loadImage('assets/Screens/level4.png');
+  level5 = loadImage('assets/Screens/level5.png');
+  level6 = loadImage('assets/Screens/level6.png');
 }
 
 function setup() {
 
   createCanvas(760,500);
+  gamestart = false;
+  load_level = false;
+  mylevel = 1;
+
   tileSize = 20;
   initializeLevel();
   resetLevel();
   tc = 0;
-  //declare a new player and a ghost
   player = new Player();
-
-  levelThree();
-
-  // enemy.push(new PinkGhost());
-  // enemy.push(new PinkGhost());
-  // enemy.push(new PinkGhost());
-  // console.log(enemy);
-
-  // p1ghost = new PinkGhost();
-  // p2ghost = new PinkGhost();
-  // bghost = new BlueGhost();
-  // yghost = new YellowGhost();
-
 }
 
 function draw(){
-
-
-  // image(home, 0, 0);
-
-  background(0);
-  drawLevel();
-  fill(255);
-  text("Lives: " + player.lives, 10, 15);
-
-  //player
-  player.display();
-  player.move();
-
-  //ghosts
-  for (let i = 0; i < enemy.length; i++){
-    enemy[i].display();
-    enemy[i].move();
+  if(gamestart == false){
+    if (load_level == false){
+      StartScreen();
+    }
+    else if(load_level == true){
+      LevelScreen();
+    }
   }
-  // p1ghost.display();
-  // p1ghost.bounce();
-  // bghost.display();
-  // bghost.follow();
-  // yghost.display();
-  // yghost.follow();
+  else {
+    background(0);
+    drawLevel();
+    fill(255);
+    text("Lives: " + player.lives, 10, 15);
 
+    //player
+    player.display();
+    player.move();
 
-  text("Progress: " + completeLevel() + "%", width-300, 15);
+    //ghosts
+    for (let i = 0; i < enemy.length; i++){
+      enemy[i].display();
+      enemy[i].move();
+    }
 
-  // allLevels();
+    text("Progress: " + completeLevel() + "%", width-300, 15);
 
-  nextLevel();
-  text("Level: " + levels, width-60, 15);
-
+    nextLevel();
+    text("Level: " + levels, width-60, 15);
+  }
 
 }
