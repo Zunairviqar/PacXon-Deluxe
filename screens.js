@@ -6,11 +6,22 @@ function StartScreen(){
     }
     if(mouseX>285 && mouseX <475 && mouseY>285&& mouseY<330){
       console.log("HOW TO PLAY")
+      loadhowtoplay = true;
     }
     if(mouseX>285 && mouseX <475 && mouseY>340&& mouseY<385){
       console.log("MORE GAMES")
     }
   }
+}
+
+function HowToPlayScreen(){
+  image(howtoplay, 0, 0);
+  if(mouseIsPressed){
+    if(mouseX>270 && mouseX <460 && mouseY>408&& mouseY<453){
+      loadhowtoplay = false;
+    }
+  }
+
 }
 
 function LevelScreen(){

@@ -34,7 +34,8 @@ let level4;
 let level5;
 let level6;
 let main_image;
-
+let howtoplay;
+let loadhowtoplay;
 
 function preload() {
   tile = loadImage('assets/Tiles/tile.png');
@@ -57,6 +58,7 @@ function preload() {
   level4 = loadImage('assets/Screens/level4.png');
   level5 = loadImage('assets/Screens/level5.png');
   level6 = loadImage('assets/Screens/level6.png');
+  howtoplay = loadImage('assets/Screens/howtoplay.png');
 }
 
 function setup() {
@@ -64,6 +66,7 @@ function setup() {
   createCanvas(760,500);
   gamestart = false;
   load_level = false;
+  loadhowtoplay = false;
   mylevel = 1;
 
   tileSize = 20;
@@ -76,7 +79,13 @@ function setup() {
 function draw(){
   if(gamestart == false){
     if (load_level == false){
-      StartScreen();
+      if (loadhowtoplay == false){
+        StartScreen();
+      }
+      else{
+        HowToPlayScreen();
+      }
+
     }
     else if(load_level == true){
       LevelScreen();
