@@ -4,7 +4,12 @@ class Ghost {
     this.y = random(80, height-80);
     this.speedX = random(1, 3);
     this.speedY = random(1, 3);
+    this.speed = 0.005;
     this.graphic = blueGhost;
+
+    this.pspeedX = this.speedX;
+    this.pspeedY = this.speedY;
+    this.pspeed = this.speed;
   }
 
   display(){
@@ -37,7 +42,7 @@ class Ghost {
     }
 
     this.enemyCollision(rid, lid, uid, bid);
-    if (this.type == "eat"){
+    if (this.type == "eat" || this.type == "duplicate"){
       this.eat(rid, lid, uid, bid)
     }
 
@@ -59,13 +64,25 @@ class Ghost {
     else if (uid == 1 && this.y > 30){
       // getTile(this.middleX, uid) = 0;
       deleteTile(this.middleX, this.sensorTop);
-      console.log("uppppp")
+      // console.log("uppppp")
     }
 
     else if (bid == 1 && this.y < height-tileSize-30){
       // getTile(this.middleX, bid) = 0;
       deleteTile(this.middleX, this.sensorBottom);
-      console.log("downnnn")
+      // console.log("downnnn")
+    }
+  }
+
+  duplicate() {
+    if (player.x >= this.x-40 && player.x <= this.x+60 && player.y >= this.y-40 && player.y <= this.y+60) {
+      if (this.dup == true){
+        enemy.push(new BlueGhost());
+        this.dup = false;
+      }
+    }
+    else {
+      this.dup = true
     }
   }
 
@@ -81,72 +98,24 @@ class Ghost {
       let distX = player.x - this.x;
       let distY = player.y - this.y;
 
-      this.x += 0.005 * distX;
-      this.y += 0.005 * distY;
+      this.x += this.speed * distX;
+      this.y += this.speed * distY;
     }
 
     else if (this.type == "eat"){
       this.x += this.speedX;
       this.y += this.speedY;
     }
-  }
 
-  follow2(){
+    else if (this.type == "duplicate"){
+      noFill();
+      stroke(0,255,255);
+      ellipse(this.x + 10,this.y + 10, 100);
+      this.duplicate();
+      this.x += this.speedX;
+      this.y += this.speedY;
 
-    // set up sensor positions
-    this.sensorLeft = this.x-20;
-    this.sensorRight = this.x+tileSize+20;
-    this.sensorTop = this.y-20;
-    this.sensorBottom = this.y+tileSize+20;
-    this.middleX = this.x+tileSize/2;
-    this.middleY = this.y+tileSize/2;
-
-    // check tile to the left
-    let id = getTile(this.middleX,this.middleY);
-    let lid = getTile(this.sensorLeft,this.middleY);
-    let rid = getTile(this.sensorRight,this.middleY);
-    let uid = getTile(this.middleX, this.sensorTop);
-    let bid = getTile(this.middleX, this.sensorBottom);
-
-    // if (lid == 1 && )
-    // if (player.moving != "moving"){
-    //   this.bounce();
-    // }
-
-    // else {
-
-    //   let distX = 0;
-    //   let distY = 0;
-
-    //   if ((lid != 1 || rid != 1) || (uid != 1 || bid != 1)){
-
-    //     // compute the distance between the ghost and the player
-    //     if (lid != 1 || rid != 1){
-    //       distX = player.x - this.x;
-    //     }
-
-    //     if (uid != 1 || bid != 1){
-    //       distY = player.y - this.y;
-    //     }
-
-    //     // move 1% of the way toward the desired position
-
-
-
-    //   }
-
-    //   else {
-    //     this.bounce();
-    //   }
-
-    // }
-
-    this.enemyCollision(rid, lid, uid, bid);
-
-    // // the player position is always the desired position
-    // let xDesired = player.x;
-    // let yDesired = player.y;
-
+    }
   }
 
   enemyCollision(rid, lid, uid, bid) {
@@ -166,6 +135,22 @@ class Ghost {
       if (bid == -1){
         this.y -= 5;
       }
+
+      if (dist(this.x, this.y, player.x, player.y) < 20) {
+        if (rid != 1 || rid != -1){
+          this.x += 5;
+        }
+        else if (lid != 1 || lid != -1){
+          this.x -= 5;
+        }
+        else if (uid != 1 || uid != -1){
+          this.y -= 5;
+        }
+        else if (bid != 1 || bid != -1){
+          this.y += 5;
+        }
+
+      }
       // this.x = random(20, width-20);
       // this.y = random(20, height-20);
       if (player.lives <= 0){
@@ -178,6 +163,10 @@ class Ghost {
       }
     }
   }
+
+  // powerupCollision() {
+
+  // }
 }
 
 class PinkGhost extends Ghost{
@@ -194,9 +183,12 @@ class BlueGhost extends Ghost{
   constructor(){
     super();
     this.graphic = blueGhost;
-    this.speedX = 0.5;
-    this.speedY = 0.5;
+    this.speedX = random(1.5, 3);
+    this.speedY = random(1.5, 3);
+    this.type = "duplicate";
   }
+
+
 }
 
 class RedGhost extends Ghost{

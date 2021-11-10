@@ -20,7 +20,7 @@ function completeLevel() {
 function nextLevel() {
 	// completeLevel();
 	// levelOne();
-	if (completeLevel() >= 15) {
+	if (completeLevel() >= 25) {
 		// console.log(completeLevel())
 		levels +=1;
 		console.log("level up")
@@ -68,13 +68,14 @@ function levelTwo() {
 
 	enemy.push(new PinkGhost());
 	enemy.push(new PinkGhost());
-	enemy.push(new YellowGhost());
+	enemy.push(new BlueGhost());
 }
 
 function levelThree() {
 	enemy = [];
 
 	enemy.push(new PinkGhost());
+	enemy.push(new RedGhost());
 	enemy.push(new RedGhost());
 	enemy.push(new YellowGhost());
 }
@@ -83,7 +84,8 @@ function levelFour() {
 	enemy = [];
 
 	enemy.push(new PinkGhost());
-	enemy.push(new PinkGhost());
+	enemy.push(new BlueGhost());
+	enemy.push(new RedGhost());
 	enemy.push(new YellowGhost());
 }
 
@@ -91,7 +93,9 @@ function levelFive() {
 	enemy = [];
 
 	enemy.push(new PinkGhost());
-	enemy.push(new PinkGhost());
+	enemy.push(new RedGhost());
+	enemy.push(new BlueGhost());
+	enemy.push(new YellowGhost());
 	enemy.push(new YellowGhost());
 }
 
@@ -99,7 +103,11 @@ function levelSix() {
 	enemy = [];
 
 	enemy.push(new PinkGhost());
-	enemy.push(new PinkGhost());
+	enemy.push(new RedGhost());
+	enemy.push(new BlueGhost());
+	enemy.push(new RedGhost());
 	enemy.push(new YellowGhost());
+	enemy.push(new YellowGhost());
+
 }
 

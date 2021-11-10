@@ -9,6 +9,8 @@ class Player {
     this.pKeyPress = 'None';
     this.moving = 'not moving';
     this.lives = 3;
+    this.speed = 3;
+    this.pspeed = this.speed;
     this.graphic = rightPacXon;
   }
 
@@ -74,19 +76,19 @@ class Player {
     }
 
     if (this.currKeyCode == 68 && this.x < width){
-      this.x  += 3;
+      this.x  += this.speed;
     }
 
     if (this.currKeyCode == 65 && this.x > 0){
-      this.x  -= 3;
+      this.x  -= this.speed;
     }
 
     if (this.currKeyCode == 87 && this.y > 0){
-      this.y  -= 3;
+      this.y  -= this.speed;
     }
 
     if (this.currKeyCode == 83 && this.y < height){
-      this.y += 3;
+      this.y += this.speed;
     }
 
     let id = getTile(this.middleX, this.middleY);
