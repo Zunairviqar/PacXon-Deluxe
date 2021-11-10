@@ -169,6 +169,7 @@ class Ghost {
       // this.x = random(20, width-20);
       // this.y = random(20, height-20);
       if (player.lives <= 0){
+          endscreen = true;
           resetLevel();
           player.lives = 3;
       }

@@ -23,6 +23,7 @@ function nextLevel() {
 	if (completeLevel() >= 15) {
 		// console.log(completeLevel())
 		levels +=1;
+		mylevel +=1;
 		console.log("level up")
 		resetLevel();
 		player.x = 0;

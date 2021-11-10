@@ -31,6 +31,10 @@ let gamebegin;
 let checkforStart;
 let checkfornextLevel;
 let levelupscreen;
+let endscreen;
+let checkforretry;
+let gamecomplete;
+let checkforfinish;
 let mylevel;
 
 let level1;
@@ -43,6 +47,8 @@ let main_image;
 let howtoplay;
 let clicktostart;
 let levelup;
+let endimg;
+let finish;
 
 
 function preload() {
@@ -69,6 +75,9 @@ function preload() {
   howtoplay = loadImage('assets/Screens/howtoplay.png');
   clicktostart = loadImage('assets/Screens/clicktostart.png');
   levelup = loadImage('assets/Screens/levelcompleted.png');
+  endimg = loadImage('assets/Screens/gameover.png');
+  finish = loadImage('assets/Screens/congrats.png');
+
 }
 
 function setup() {
@@ -81,6 +90,10 @@ function setup() {
   checkforStart = false;
   levelupscreen = false;
   checkfornextLevel = false;
+  endscreen = false;
+  checkforretry = false;
+  gamecomplete = false;
+  checkforfinish = false;
   mylevel = 1;
 
   tileSize = 20;
@@ -107,45 +120,68 @@ function draw(){
   else {
     background(0);
     drawLevel();
-    if(gamebegin==false){
-      image(clicktostart, 0, 0);
-      checkforStart = true;
+
+    if(endscreen == true){
+      image(endimg, 0, 0);
+      checkforretry =  true;
     }
-    if(gamebegin == true){
+
+    else{
       if(levelupscreen==true){
         image(levelup, 0,0);
         checkfornextLevel = true;
       }
       else{
-        fill(255);
-        text("Lives: " + player.lives, 10, 15);
-
-        //player
-        player.display();
-        player.move();
-
-        //ghosts
-        for (let i = 0; i < enemy.length; i++){
-          enemy[i].display();
-          enemy[i].move();
+        if(gamebegin==false){
+          image(clicktostart, 0, 0);
+          checkforStart = true;
         }
 
-        text("Progress: " + completeLevel() + "%", width-300, 15);
+        if(gamebegin == true){
+            fill(255);
+            text("Lives: " + player.lives, 10, 15);
 
-        nextLevel();
-        text("Level: " + levels, width-60, 15);
+            //player
+            player.display();
+            player.move();
+
+            //ghosts
+            for (let i = 0; i < enemy.length; i++){
+              enemy[i].display();
+              enemy[i].move();
+            }
+
+            text("Progress: " + completeLevel() + "%", width-300, 15);
+
+            nextLevel();
+            text("Level: " + levels, width-60, 15);
+        }
       }
     }
+
   }
 }
 
 function mousePressed(){
   if(checkforStart == true){
     gamebegin =  true;
-    // levelupscreen = true;
-    // checkfornextLevel = false;
   }
   if(checkfornextLevel == true){
-    levelupscreen = false;
+    if(mouseX>400 && mouseX <495 && mouseY>325&& mouseY<363){
+      levelupscreen = false;
+    }
+    else if(mouseX>250 && mouseX <345 && mouseY>325&& mouseY<363){
+      gamestart = false;
+      levelupscreen = false;
+    }
+  }
+  if(checkforretry == true){
+    if(mouseX>400 && mouseX <495 && mouseY>325&& mouseY<363){
+      endscreen = false;
+    }
+    else if(mouseX>250 && mouseX <345 && mouseY>325&& mouseY<363){
+      gamestart = false;
+      endscreen = false;
+    }
   }
 }
