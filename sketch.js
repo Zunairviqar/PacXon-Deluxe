@@ -95,7 +95,14 @@ function preload() {
 
 function setup() {
 
-  createCanvas(760,500);
+  var canvasMain = createCanvas(760,500);
+    // set the ID on the canvas element
+  canvasMain.id("p5_mainCanvas");
+
+  // set the parent of the canvas element to the element in the DOM with
+  // an ID of "left"
+  canvasMain.parent("#center");
+
   gamestart = false;
   load_level = false;
   loadhowtoplay = false;
@@ -169,7 +176,9 @@ function draw(){
           if(gamebegin == true){
             stroke(0);
             fill(255);
-            text("Lives: " + player.lives, 10, 15);
+            // text("Lives: " + player.lives, 10, 15);
+            let window_score = document.getElementById('current_lives')
+            window_score.innerHTML = player.lives;
 
             //player
             player.display();
@@ -188,16 +197,20 @@ function draw(){
 
             stroke(0);
             fill(255);
-            text("Progress: " + completeLevel() + "%", width-300, 15);
+            // text("Progress: " + completeLevel() + "%", width-300, 15);
+            let window_progress = document.getElementById('current_progress')
+            window_progress.innerHTML = completeLevel() + "%";
 
             nextLevel();
-            text("Level: " + levels, width-60, 15);
+            // text("Level: " + levels, width-60, 15);
+            let window_level = document.getElementById('current_level')
+            window_level.innerHTML = levels;
 
 
 
             if (frameCount % 120 == 0 && powerups.length == 0) {
               powerups.push(new Powerup())
-            } 
+            }
 
           }
         }
