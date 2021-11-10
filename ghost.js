@@ -124,16 +124,16 @@ class Ghost {
       player.y = 0;
       player.lives -= 1;
       if (lid == -1){
-        this.x += 5;
+        this.x += 10;
       }
       if (rid == -1){
-        this.x -= 5;
+        this.x -= 10;
       }
       if (uid == -1){
-        this.y += 5;
+        this.y += 10;
       }
       if (bid == -1){
-        this.y -= 5;
+        this.y -= 10;
       }
 
       if (dist(this.x, this.y, player.x, player.y) < 20) {

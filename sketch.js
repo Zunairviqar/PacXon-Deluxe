@@ -20,7 +20,7 @@ let tc;
 let pVals = [];
 let areas = [];
 
-let timer = 90;
+let timer = 5;
 
 let levels = 1;
 
@@ -175,8 +175,8 @@ function draw(){
           }
 
           if(gamebegin == true){
-            stroke(0);
-            fill(255);
+            // stroke(0);
+            // fill(255);
             // text("Lives: " + player.lives, 10, 15);
             let window_score = document.getElementById('current_lives')
             window_score.innerHTML = player.lives;
@@ -196,9 +196,6 @@ function draw(){
               enemy[i].move();
             }
 
-            stroke(0);
-            fill(255);
-            // text("Progress: " + completeLevel() + "%", width-300, 15);
             let window_progress = document.getElementById('current_progress')
             window_progress.innerHTML = completeLevel() + "%";
 
@@ -211,6 +208,24 @@ function draw(){
 
             if (frameCount % 120 == 0 && powerups.length == 0) {
               powerups.push(new Powerup())
+            }
+
+            stroke(0);
+            fill(255);
+            text("Timer: " + timer + 's', width-300, 15);
+            // console.log("timer");
+
+            if (frameCount % 60 == 0 && timer > 0) { 
+              timer --;
+            }
+
+            if (timer == 0) {
+              text("GAME OVER", width/2, height*0.7);
+              endscreen = true;
+              resetLevel();
+              player.lives = 3;
+              timer = 5;
+
             }
 
           }
