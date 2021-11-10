@@ -121,44 +121,49 @@ function draw(){
     background(0);
     drawLevel();
 
-    if(endscreen == true){
-      image(endimg, 0, 0);
-      checkforretry =  true;
+    if(gamecomplete == true){
+      image(finish, 0, 0);
+      checkforfinish = true;
     }
-
     else{
-      if(levelupscreen==true){
-        image(levelup, 0,0);
-        checkfornextLevel = true;
+      if(endscreen == true){
+        image(endimg, 0, 0);
+        checkforretry =  true;
       }
       else{
-        if(gamebegin==false){
-          image(clicktostart, 0, 0);
-          checkforStart = true;
+        if(levelupscreen==true){
+          image(levelup, 0,0);
+          checkfornextLevel = true;
         }
+        else{
+          if(gamebegin==false){
+            image(clicktostart, 0, 0);
+            checkforStart = true;
+          }
 
-        if(gamebegin == true){
-            fill(255);
-            text("Lives: " + player.lives, 10, 15);
+          if(gamebegin == true){
+              fill(255);
+              text("Lives: " + player.lives, 10, 15);
 
-            //player
-            player.display();
-            player.move();
+              //player
+              player.display();
+              player.move();
 
-            //ghosts
-            for (let i = 0; i < enemy.length; i++){
-              enemy[i].display();
-              enemy[i].move();
-            }
+              //ghosts
+              for (let i = 0; i < enemy.length; i++){
+                enemy[i].display();
+                enemy[i].move();
+              }
 
-            text("Progress: " + completeLevel() + "%", width-300, 15);
+              text("Progress: " + completeLevel() + "%", width-300, 15);
 
-            nextLevel();
-            text("Level: " + levels, width-60, 15);
+              nextLevel();
+              text("Level: " + levels, width-60, 15);
+          }
         }
       }
-    }
 
+    }
   }
 }
 
@@ -182,6 +187,13 @@ function mousePressed(){
     else if(mouseX>250 && mouseX <345 && mouseY>325&& mouseY<363){
       gamestart = false;
       endscreen = false;
+    }
+  }
+  if(checkforfinish == true){
+    // rect(279, 318, 190, 45);
+    if(mouseX>279 && mouseX <469 && mouseY>318&& mouseY<363){
+      gamestart = false;
+      gamecomplete = false;
     }
   }
 }
