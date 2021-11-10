@@ -96,6 +96,11 @@ function setup() {
   checkforfinish = false;
   mylevel = 1;
 
+  let user_levels = window.localStorage.getItem('levelsCompleted');
+  if (user_levels) {
+    mylevel = user_levels
+  }
+
   tileSize = 20;
   initializeLevel();
   resetLevel();
