@@ -20,9 +20,9 @@ let tc;
 let pVals = [];
 let areas = [];
 
-let timer = 90;
-
+let timer = 9;
 let levels = 1;
+
 
 let enemy = [];
 let ghostx, ghosty;
@@ -150,6 +150,7 @@ function setup() {
 }
 
 function draw(){
+
   if(gamestart == false){
     if (load_level == false){
       if (loadhowtoplay == false){
@@ -210,6 +211,8 @@ function draw(){
               enemy[i].move();
             }
 
+            // gameOver();
+
             let window_progress = document.getElementById('current_progress')
             window_progress.innerHTML = completeLevel() + "%";
 
@@ -221,27 +224,30 @@ function draw(){
 
 
             if (frameCount % 420 == 0 && powerups.length == 0) {
+              console.log("POWERUP APPEAR")
               powerups.push(new Powerup())
             }
 
             stroke(0);
             fill(255);
-            // text("Timer: " + timer + 's', width-300, 15);
-            let window_timer = document.getElementById('current_timer')
+//             text("Timer: " + timer + 's', width-300, 15);
+            let window_timer = document.getElementById('current_timer');
             window_timer.innerHTML = timer + 's';
             // console.log("timer");
 
-            if (frameCount % 60 == 0 && timer > 0) {
+            if (frameCount % 60 == 0 && timer > 0) { 
               timer --;
             }
 
-            if (timer == 0) {
-              text("GAME OVER", width/2, height*0.7);
+            if (timer == 0 || player.lives == 0){
               endscreen = true;
-              gameoversound.play();
+              player.graphic = rightPacXon;
+              player.currKeyCode = 0;
               resetLevel();
               player.lives = 3;
-              timer = 90;
+              timer = 9;
+              gameoversound.play();
+              allLevels();
             }
 
           }
@@ -251,6 +257,7 @@ function draw(){
     }
   }
 }
+
 
 function mousePressed(){
   if(checkforselectlevel == true){
@@ -290,3 +297,17 @@ function mousePressed(){
     }
   }
 }
+
+// function gameOver () {
+//   if (player.lives <= 0 || timer <= 0){
+//     endscreen = true;
+//     resetLevel();
+//     player.lives = 3;
+
+//     timer = 90;
+//   }
+
+//   else {
+//     resetDrawing();
+//   }
+// }
