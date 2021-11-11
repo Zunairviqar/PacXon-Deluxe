@@ -31,8 +31,8 @@ class Ghost {
     let rid = getTile(this.sensorRight,this.middleY);
     let uid = getTile(this.middleX, this.sensorTop);
     let bid = getTile(this.middleX, this.sensorBottom);
-    console.log(this.type);
-    console.log(uid, bid, lid, rid);
+    // console.log(this.type);
+    // console.log(uid, bid, lid, rid);
 
 
     if (uid == 1) {
