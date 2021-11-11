@@ -161,8 +161,8 @@ class Ghost {
         window_score.innerHTML = player.lives;
         endscreen = true;
         player.lives = 3;
-        timer = 20;
-
+        timer = 100;
+        powerups = [];
         resetLevel();
         allLevels();
         gameoversound.play();

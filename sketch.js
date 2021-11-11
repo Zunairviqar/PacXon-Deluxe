@@ -20,7 +20,7 @@ let tc;
 let pVals = [];
 let areas = [];
 
-let timer = 20;
+let timer = 100;
 let levels = 1;
 
 
@@ -249,9 +249,10 @@ function draw(){
               player.currKeyCode = 0;
               player.x = 0;
               player.y = 0;
+              powerups = [];
               resetLevel();
               player.lives = 3;
-              timer = 20;
+              timer = 100;
               gameoversound.play();
               allLevels();
             }

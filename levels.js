@@ -20,7 +20,7 @@ function completeLevel() {
 function nextLevel() {
 	// completeLevel();
 	// levelOne();
-	if (completeLevel() >= 25) {
+	if (completeLevel() >= 80) {
 		// console.log(completeLevel())
 		levelupsound.play();
 		levels +=1;
@@ -38,7 +38,7 @@ function nextLevel() {
 		player.lives = 3;
 		player.graphic = rightPacXon;
 		player.currKeyCode = 0;
-		timer = 20;
+		timer = 100;
 		allLevels();
 		checkfornextLevel = false;
 		levelupscreen = true;
@@ -57,17 +57,17 @@ function allLevels() {
 		levelThree();
 	}
 
-	// else if (levels == 4) {
-	// 	levelFour();
-	// }
+	else if (levels == 4) {
+		levelFour();
+	}
 
-	// else if (levels == 5) {
-	// 	levelFive();
-	// }
+	else if (levels == 5) {
+		levelFive();
+	}
 
-	// else if (levels == 6) {
-	// 	levelSix();
-	// }
+	else if (levels == 6) {
+		levelSix();
+	}
 }
 
 function levelOne() {
@@ -83,7 +83,7 @@ function levelTwo() {
 
 	enemy.push(new PinkGhost());
 	enemy.push(new PinkGhost());
-	enemy.push(new BlueGhost());
+	enemy.push(new RedGhost());
 }
 
 function levelThree() {
@@ -101,6 +101,7 @@ function levelFour() {
 	enemy.push(new PinkGhost());
 	enemy.push(new BlueGhost());
 	enemy.push(new RedGhost());
+	enemy.push(new RedGhost());
 	enemy.push(new YellowGhost());
 }
 
@@ -108,6 +109,7 @@ function levelFive() {
 	enemy = [];
 
 	enemy.push(new PinkGhost());
+	enemy.push(new RedGhost());
 	enemy.push(new RedGhost());
 	enemy.push(new BlueGhost());
 	enemy.push(new YellowGhost());
@@ -118,9 +120,11 @@ function levelSix() {
 	enemy = [];
 
 	enemy.push(new PinkGhost());
+	enemy.push(new PinkGhost());
+	enemy.push(new RedGhost());
 	enemy.push(new RedGhost());
 	enemy.push(new BlueGhost());
-	enemy.push(new RedGhost());
+	enemy.push(new BlueGhost());
 	enemy.push(new YellowGhost());
 	enemy.push(new YellowGhost());
 
