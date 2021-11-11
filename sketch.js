@@ -20,7 +20,13 @@ let tc;
 let pVals = [];
 let areas = [];
 
+<<<<<<< Updated upstream
 let levels = 2;
+=======
+let timer = 9;
+
+let levels = 1;
+>>>>>>> Stashed changes
 
 let enemy = [];
 let ghostx, ghosty;
@@ -79,6 +85,113 @@ function setup() {
 }
 
 function draw(){
+<<<<<<< Updated upstream
+=======
+  if(gamestart == false){
+    if (load_level == false){
+      if (loadhowtoplay == false){
+        StartScreen();
+      }
+      else{
+        HowToPlayScreen();
+      }
+    }
+    else if(load_level == true){
+      LevelScreen();
+      checkforselectlevel = true;
+    }
+  }
+  else {
+    background(0);
+    drawLevel();
+
+    if(gamecomplete == true){
+      image(finish, 0, 0);
+      checkforfinish = true;
+    }
+    else{
+      if(endscreen == true){
+        image(endimg, 0, 0);
+        checkforretry =  true;
+      }
+      else{
+        if(levelupscreen==true){
+          image(levelup, 0,0);
+          checkfornextLevel = true;
+        }
+        else{
+          if(gamebegin==false){
+            image(clicktostart, 0, 0);
+            checkforStart = true;
+          }
+
+          if(gamebegin == true){
+            // stroke(0);
+            // fill(255);
+            // text("Lives: " + player.lives, 10, 15);
+            let window_score = document.getElementById('current_lives')
+            window_score.innerHTML = player.lives;
+
+            //player
+            player.display();
+            player.move();
+
+            if (powerups.length > 0) {
+              powerups[0].display();
+              powerups[0].effect();
+            }
+
+            //ghosts
+            for (let i = 0; i < enemy.length; i++){
+              enemy[i].display();
+              enemy[i].move();
+            }
+
+            // gameOver();
+
+            let window_progress = document.getElementById('current_progress')
+            window_progress.innerHTML = completeLevel() + "%";
+
+            nextLevel();
+            // text("Level: " + levels, width-60, 15);
+            let window_level = document.getElementById('current_level')
+            window_level.innerHTML = levels;
+
+
+
+            if (frameCount % 420 == 0 && powerups.length == 0) {
+              console.log("POWERUP APPEAR")
+              powerups.push(new Powerup())
+            }
+
+            stroke(0);
+            fill(255);
+            text("Timer: " + timer + 's', width-300, 15);
+            // console.log("timer");
+
+            if (frameCount % 60 == 0 && timer > 0) { 
+              timer --;
+            }
+
+            if (timer == 0 || player.lives == 0){
+              endscreen = true;
+              player.graphic = rightPacXon;
+              player.currKeyCode = 0;
+              resetLevel();
+              player.lives = 3;
+              timer = 9;
+              
+              allLevels();
+            }
+
+          }
+        }
+      }
+
+    }
+  }
+}
+>>>>>>> Stashed changes
 
 
   // image(home, 0, 0);
@@ -127,3 +240,17 @@ function draw(){
 
 
 }
+
+// function gameOver () {
+//   if (player.lives <= 0 || timer <= 0){
+//     endscreen = true;
+//     resetLevel();
+//     player.lives = 3;
+
+//     timer = 90;
+//   }
+
+//   else {
+//     resetDrawing();
+//   }
+// }

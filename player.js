@@ -28,6 +28,7 @@ class Player {
         this.pKeyPress = keyCode;
       }
       else {
+        console.log("hereee")
         this.moving = 'moving';
         if (this.pKeyPress != this.currKeyCode){
           this.pKeyPress = this.currKeyCode;

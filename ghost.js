@@ -154,8 +154,16 @@ class Ghost {
       // this.x = random(20, width-20);
       // this.y = random(20, height-20);
       if (player.lives <= 0){
+<<<<<<< Updated upstream
+=======
+          endscreen = true;
+          player.graphic = rightPacXon;
+          player.currKeyCode = 0;
+>>>>>>> Stashed changes
           resetLevel();
           player.lives = 3;
+          allLevels();
+          timer = 9;
       }
 
       else {
