@@ -56,12 +56,7 @@ let levelup;
 let endimg;
 let finish;
 
-let gameoversound;
-let movingsound;
-let clickedsound;
-let collectionsound;
-let collisionsound;
-let levelupsound;
+let gameoversound, movingsound, clickedsound, collectionsound, collisionsound, levelupsound, movement;
 
 
 function preload() {
@@ -105,6 +100,7 @@ function preload() {
   collectionsound = loadSound('assets/Sounds/collection.wav');
   collisionsound = loadSound('assets/Sounds/collision.wav');
   levelupsound = loadSound('assets/Sounds/levelup.wav');
+  movement = loadSound('assets/Sounds/levelup.wav');
 
 }
 
@@ -190,6 +186,7 @@ function draw(){
           }
 
           if(gamebegin == true){
+            movement.play()
             // stroke(0);
             // fill(255);
             // text("Lives: " + player.lives, 10, 15);
