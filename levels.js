@@ -20,7 +20,7 @@ function completeLevel() {
 function nextLevel() {
 	// completeLevel();
 	// levelOne();
-	if (completeLevel() >= 80) {
+	if (completeLevel() >= 20) {
 		// console.log(completeLevel())
 		levelupsound.play();
 		levels +=1;

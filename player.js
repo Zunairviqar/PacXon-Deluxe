@@ -141,18 +141,22 @@ class Player {
 
         var xyz = makeDeepCopy(level);
         for (let i = 0; i < enemy.length; i++){
-          ghostx = int(enemy[i].x/tileSize);
-          ghosty = int(enemy[i].y/tileSize)
-          level[ghosty][ghostx] = 2;
+          if(enemy[i].type != "follow"){
+            ghostx = int(enemy[i].middleX/tileSize);
+            ghosty = int(enemy[i].middleY/tileSize)
+            level[ghosty][ghostx] = 2;
+          }
         }
 
         mArea, sVals = maxAreaOfIsland(xyz);
         let vals = smallerPair(sVals);
 
         for (let i = 0; i < enemy.length; i++){
-          ghostx = int(enemy[i].x/tileSize);
-          ghosty = int(enemy[i].y/tileSize)
-          level[ghosty][ghostx] = 0;
+          if(enemy[i].type != "follow"){
+            ghostx = int(enemy[i].middleX/tileSize);
+            ghosty = int(enemy[i].middleY/tileSize)
+            level[ghosty][ghostx] = 0;
+          }
         }
 
         for (let i = 0; i < vals.length; i++){
