@@ -154,7 +154,8 @@ class Ghost {
       // this.x = random(20, width-20);
       // this.y = random(20, height-20);
       if (player.lives <= 0){
-
+        let window_score = document.getElementById('current_lives')
+        window_score.innerHTML = player.lives;
         player.graphic = rightPacXon;
         player.currKeyCode = 0;
         player.x = 0;
@@ -162,14 +163,12 @@ class Ghost {
         endscreen = true;
         player.lives = 3;
         timer = 9;
-        
+
         resetLevel();
         allLevels();
-        let window_score = document.getElementById('current_lives')
-        window_score.innerHTML = player.lives;
         gameoversound.play();
-        
-        
+
+
       }
 
       else {

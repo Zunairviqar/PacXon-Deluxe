@@ -61,6 +61,7 @@ function LevelScreenClick(){
         clickedsound.play();
         gamestart = true;
         load_level =  false;
+        levels = 1;
         levelOne();
       }
     }

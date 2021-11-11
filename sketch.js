@@ -235,11 +235,15 @@ function draw(){
             window_timer.innerHTML = timer + 's';
             // console.log("timer");
 
-            if (frameCount % 60 == 0 && timer > 0) { 
+            if (frameCount % 60 == 0 && timer > 0) {
               timer --;
             }
 
             if (timer == 0 || player.lives == 0){
+              let window_score = document.getElementById('current_lives')
+              window_score.innerHTML = player.lives;
+              let window_timer = document.getElementById('current_timer');
+              window_timer.innerHTML = timer + 's';
               endscreen = true;
               player.graphic = rightPacXon;
               player.currKeyCode = 0;
