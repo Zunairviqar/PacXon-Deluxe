@@ -31,13 +31,24 @@ class Ghost {
     let rid = getTile(this.sensorRight,this.middleY);
     let uid = getTile(this.middleX, this.sensorTop);
     let bid = getTile(this.middleX, this.sensorBottom);
+    console.log(this.type);
+    console.log(uid, bid, lid, rid);
 
-    if (uid == 1
-      || bid == 1) {
+
+    if (uid == 1) {
+      this.y += 3;
       this.speedY *= -1;
     }
-    else if (lid == 1
-            || rid == 1 ) {
+    if (bid == 1) {
+      this.y -= 3;
+      this.speedY *= -1;
+    }
+    if (lid == 1) {
+      this.x += 3;
+      this.speedX *= -1;
+    }
+    if (rid == 1) {
+      this.x -= 3;
       this.speedX *= -1;
     }
 
@@ -144,13 +155,13 @@ class Ghost {
           this.x += 10;
         }
         else if (lid != 1 || lid != -1){
-          this.x -= 5;
+          this.x -= 10;
         }
         else if (uid != 1 || uid != -1){
-          this.y -= 5;
+          this.y -= 10;
         }
         else if (bid != 1 || bid != -1){
-          this.y += 5;
+          this.y += 10;
         }
 
       }
