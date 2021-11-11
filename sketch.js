@@ -243,6 +243,8 @@ function draw(){
               endscreen = true;
               player.graphic = rightPacXon;
               player.currKeyCode = 0;
+              player.x = 0;
+              player.y = 0;
               resetLevel();
               player.lives = 3;
               timer = 9;

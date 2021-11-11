@@ -157,6 +157,8 @@ class Ghost {
 
         player.graphic = rightPacXon;
         player.currKeyCode = 0;
+        player.x = 0;
+        player.y = 0;
         endscreen = true;
         player.lives = 3;
         timer = 9;
