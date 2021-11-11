@@ -62,49 +62,51 @@ let clickedsound;
 let collectionsound;
 let collisionsound;
 let levelupsound;
+let counter = 1;;
+let maxCounter = 33;
 
 
 function preload() {
-  tile = loadImage('assets/Tiles/tile.png');
-  movingTile = loadImage('assets/Tiles/movingTile.png');
+  tile = loadImage('assets/Tiles/tile.png', updateCounter);
+  movingTile = loadImage('assets/Tiles/movingTile.png', updateCounter);
 
-  rightPacXon = loadImage('assets/Paxon/right_paXon.gif');
-  leftPacXon = loadImage('assets/Paxon/left_paXon.gif');
-  upPacXon = loadImage('assets/Paxon/up_paXon.gif');
-  downPacXon = loadImage('assets/Paxon/down_paXon.gif');
+  rightPacXon = loadImage('assets/Paxon/right_paXon.gif', updateCounter);
+  leftPacXon = loadImage('assets/Paxon/left_paXon.gif', updateCounter);
+  upPacXon = loadImage('assets/Paxon/up_paXon.gif', updateCounter);
+  downPacXon = loadImage('assets/Paxon/down_paXon.gif', updateCounter);
 
-  redGhost = loadImage('assets/Enemies/red-ghost.png');
-  blueGhost = loadImage('assets/Enemies/blue-ghost.png');
-  yellowGhost = loadImage('assets/Enemies/yellow-ghost.png');
-  pinkGhost = loadImage('assets/Enemies/pink-ghost.png');
+  redGhost = loadImage('assets/Enemies/red-ghost.png', updateCounter);
+  blueGhost = loadImage('assets/Enemies/blue-ghost.png', updateCounter);
+  yellowGhost = loadImage('assets/Enemies/yellow-ghost.png', updateCounter);
+  pinkGhost = loadImage('assets/Enemies/pink-ghost.png', updateCounter);
 
   // home = loadImage('assets/Screens/home.gif');
-  main_image = loadImage('assets/Screens/home.gif');
+  main_image = loadImage('assets/Screens/home.gif', updateCounter);
   // main_image2 = loadImage('assets/Screens/home.png');
   // main_image3 = loadImage('assets/Screens/home-screen.gif');
-  level1 = loadImage('assets/Screens/level1.png');
-  level2 = loadImage('assets/Screens/level2.png');
-  level3 = loadImage('assets/Screens/level3.png');
-  level4 = loadImage('assets/Screens/level4.png');
-  level5 = loadImage('assets/Screens/level5.png');
-  level6 = loadImage('assets/Screens/level6.png');
-  howtoplay = loadImage('assets/Screens/howtoplay.png');
-  clicktostart = loadImage('assets/Screens/clicktostart.png');
-  levelup = loadImage('assets/Screens/levelcompleted.png');
-  endimg = loadImage('assets/Screens/gameover.png');
-  finish = loadImage('assets/Screens/congrats.png');
+  level1 = loadImage('assets/Screens/level1.png', updateCounter);
+  level2 = loadImage('assets/Screens/level2.png', updateCounter);
+  level3 = loadImage('assets/Screens/level3.png', updateCounter);
+  level4 = loadImage('assets/Screens/level4.png', updateCounter);
+  level5 = loadImage('assets/Screens/level5.png', updateCounter);
+  level6 = loadImage('assets/Screens/level6.png', updateCounter);
+  howtoplay = loadImage('assets/Screens/howtoplay.png', updateCounter);
+  clicktostart = loadImage('assets/Screens/clicktostart.png', updateCounter);
+  levelup = loadImage('assets/Screens/levelcompleted.png', updateCounter);
+  endimg = loadImage('assets/Screens/gameover.png', updateCounter);
+  finish = loadImage('assets/Screens/congrats.png', updateCounter);
 
-  bomb = loadImage('assets/Extras/redbomb.png');
-  ice = loadImage('assets/Extras/ice.png');
-  bolt = loadImage('assets/Extras/lightning-bolt.png');
-  slow = loadImage('assets/Extras/snail.png');
+  bomb = loadImage('assets/Extras/redbomb.png', updateCounter);
+  ice = loadImage('assets/Extras/ice.png', updateCounter);
+  bolt = loadImage('assets/Extras/lightning-bolt.png', updateCounter);
+  slow = loadImage('assets/Extras/snail.png', updateCounter);
 
-  gameoversound = loadSound('assets/Sounds/gameover.mp3');
-  movingsound = loadSound('assets/Sounds/movingsound.wav');
-  clickedsound = loadSound('assets/Sounds/clicked.wav');
-  collectionsound = loadSound('assets/Sounds/collection.wav');
-  collisionsound = loadSound('assets/Sounds/collision.wav');
-  levelupsound = loadSound('assets/Sounds/levelup.wav');
+  gameoversound = loadSound('assets/Sounds/gameover.mp3', updateCounter);
+  movingsound = loadSound('assets/Sounds/movingsound.wav', updateCounter);
+  clickedsound = loadSound('assets/Sounds/clicked.wav', updateCounter);
+  collectionsound = loadSound('assets/Sounds/collection.wav', updateCounter);
+  collisionsound = loadSound('assets/Sounds/collision.wav', updateCounter);
+  levelupsound = loadSound('assets/Sounds/levelup.wav', updateCounter);
 
 }
 
@@ -113,7 +115,6 @@ function setup() {
   var canvasMain = createCanvas(760,500);
     // set the ID on the canvas element
   canvasMain.id("p5_mainCanvas");
-
   // set the parent of the canvas element to the element in the DOM with
   // an ID of "left"
   canvasMain.parent("#center");
@@ -309,4 +310,12 @@ function mousePressed(){
       clickedsound.play();
     }
   }
+}
+function updateCounter() {
+  // increase our counter
+  counter++;
+
+  // use the counter to set the style on the '#progress_bar' div
+  let progress_bar = document.querySelector('#progress_bar');
+  progress_bar.style.width = int(counter/maxCounter*100) + "%";
 }
