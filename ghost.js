@@ -122,6 +122,8 @@ class Ghost {
     if(lid == -1 || rid == -1 || uid == -1 || bid == -1 || dist(this.x, this.y, player.x, player.y) < 20){
       player.x = 0;
       player.y = 0;
+      player.graphic = rightPacXon;
+      player.currKeyCode = 0;
       player.lives -= 1;
       if (lid == -1){
         this.x += 10;
@@ -156,10 +158,6 @@ class Ghost {
       if (player.lives <= 0){
         let window_score = document.getElementById('current_lives')
         window_score.innerHTML = player.lives;
-        player.graphic = rightPacXon;
-        player.currKeyCode = 0;
-        player.x = 0;
-        player.y = 0;
         endscreen = true;
         player.lives = 3;
         timer = 9;
