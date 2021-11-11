@@ -15,6 +15,7 @@ function StartScreen(){
     }
     if(mouseX>285 && mouseX <475 && mouseY>340&& mouseY<385){
       console.log("MORE GAMES")
+      window.open("more-games.html");
       clickedsound.play();
     }
   }
