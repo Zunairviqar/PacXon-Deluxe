@@ -1,7 +1,7 @@
 class Powerup {
 	constructor(){
 
-		this.graphic = random([bomb, bolt, slow, ice]);
+		this.graphic = random([bomb]);
 
 		if (this.graphic == bomb) {
 			let coord = placeBomb();
@@ -45,7 +45,7 @@ class Powerup {
   	effect() {
   		if (this.graphic == slow || this.graphic == ice) {
   		// console.log("helo")
-  			
+
 	  		if (dist(this.x, this.y, player.x, player.y) < 20) {
 	  			console.log("player touched ice")
 	  			// collectionsound.play();
@@ -76,7 +76,7 @@ class Powerup {
 	  			}
 	  			powerups.splice(0, 1);
   			}
-  			
+
   		}
 
   		if (this.graphic == bolt) {
@@ -101,7 +101,7 @@ class Powerup {
   		}
 
   		else if (this.graphic == bomb) {
-  			
+
   			if (dist(this.x, this.y, player.x, player.y) < 20) {
   				console.log("player touched bomb");
   				powerups.splice(0, 1);
@@ -113,7 +113,7 @@ class Powerup {
 				deleteTiles(this.x, this.y);
 				powerups.splice(0, 1);
 
-			} 
+			}
 
 
   		}
@@ -147,4 +147,3 @@ function placeBomb() {
 
 
 }
-

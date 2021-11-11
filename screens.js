@@ -61,6 +61,7 @@ function LevelScreenClick(){
         clickedsound.play();
         gamestart = true;
         load_level =  false;
+        checkforselectlevel = false;
         levels = 1;
         levelOne();
       }
@@ -71,9 +72,9 @@ function LevelScreenClick(){
         clickedsound.play();
         gamestart = true;
         load_level =  false;
+        checkforselectlevel = false;
         levels = 2;
         levelTwo();
-
       }
     }
     if (mylevel >2){
@@ -82,6 +83,7 @@ function LevelScreenClick(){
         clickedsound.play();
         gamestart = true;
         load_level =  false;
+        checkforselectlevel = false;
         levels = 3;
         levelThree();
       }
@@ -92,6 +94,7 @@ function LevelScreenClick(){
         clickedsound.play();
         gamestart = true;
         load_level =  false;
+        checkforselectlevel = false;
         levels = 4;
         levelFour();
       }
@@ -102,6 +105,7 @@ function LevelScreenClick(){
         clickedsound.play();
         gamestart = true;
         load_level =  false;
+        checkforselectlevel = false;
         levels = 5;
         levelFive();
       }
@@ -112,6 +116,7 @@ function LevelScreenClick(){
         clickedsound.play();
         gamestart = true;
         load_level =  false;
+        checkforselectlevel = false;
         levels = 6;
         levelSix();
       }

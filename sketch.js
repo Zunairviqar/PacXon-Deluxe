@@ -290,8 +290,11 @@ function mousePressed(){
       clickedsound.play();
     }
     else if(mouseX>250 && mouseX <345 && mouseY>325&& mouseY<363){
+      // endscreen = false;
       gamestart = false;
-      endscreen = false;
+      load_level = false;
+      checkforselectlevel = false;
+      checkforretry =  false;
       clickedsound.play();
     }
   }
@@ -300,23 +303,9 @@ function mousePressed(){
     if(mouseX>279 && mouseX <469 && mouseY>318&& mouseY<363){
       gamestart = false;
       gamecomplete = false;
-      load_level = true;
+      load_level = false;
       checkforselectlevel = false;
       clickedsound.play();
     }
   }
 }
-
-// function gameOver () {
-//   if (player.lives <= 0 || timer <= 0){
-//     endscreen = true;
-//     resetLevel();
-//     player.lives = 3;
-
-//     timer = 90;
-//   }
-
-//   else {
-//     resetDrawing();
-//   }
-// }
