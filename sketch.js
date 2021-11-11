@@ -236,6 +236,7 @@ function draw(){
             if (timer == 0) {
               text("GAME OVER", width/2, height*0.7);
               endscreen = true;
+              gameoversound.play();
               resetLevel();
               player.lives = 3;
               timer = 90;

@@ -22,6 +22,7 @@ function nextLevel() {
 	// levelOne();
 	if (completeLevel() >= 25) {
 		// console.log(completeLevel())
+		levelupsound.play();
 		levels +=1;
 		if(levels>6){
 			gamecomplete = true;

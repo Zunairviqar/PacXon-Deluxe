@@ -155,6 +155,7 @@ class Ghost {
       // this.y = random(20, height-20);
       if (player.lives <= 0){
           endscreen = true;
+          gameoversound.play();
           resetLevel();
           player.lives = 3;
       }
