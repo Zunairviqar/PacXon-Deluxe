@@ -18,6 +18,10 @@
 
     <!-- custom CSS -->
     <style type="text/css">
+      @font-face {
+        font-family: PacFont;
+        src: url(assets/Fonts/PacFontRegular.ttf);
+      }
       body {
         background-color: rgb(0,0,0, 0.9);
       }
@@ -25,24 +29,25 @@
         width: 760;
         height: 500;
         text-align: center;
-        padding-top: 30px;
       }
       #Heading{
         text-align: center;
         color: white;
-        font-size: 15px;
+        font-size: 20px;
+        font-family: PacFont;
+        font-weight: 100;
       }
       #scoreboard{
         width: 100%;
         text-align: center;
       }
-      #items {
+        #items {
         max-width: 760px;
         margin: auto;
         display: inline-flex;
         text-align: center;
         width: 100%;
-        padding-left: 25px;
+        /* padding-left: 25px; */
       }
       #items div{
         font-size: 20px;
@@ -60,29 +65,41 @@
       #content h2,p{
         text-align: center;
       }
+      #score_text{
+        font-family: PacFont;
+      }
 
     </style>
   </head>
   <body>
     <div id = "Heading">
-      <h1>Pac-Xon Premium</h1>
+      <h1>PAC-XON PREMIUM</h1>
     </div>
 
     <div id="scoreboard">
       <div id="items" class="flex-container">
 
-        <div style = "width: 40%;display:flex;">
+        <div style = "width: 25%;display:flex;">
           <div id = "score_text">
-            Lives:
+            LIVES:
           </div>
           <div id="current_lives">
             0
           </div>
         </div>
 
-        <div style = "width: 40%;display:flex;">
+        <div style = "width: 25%;display:flex;">
           <div id = "score_text">
-            Progress:
+            TIME:
+          </div>
+          <div id="current_timer">
+            0
+          </div>
+        </div>
+
+        <div style = "width: 30%;display:flex;">
+          <div id = "score_text">
+            PROGRESS:
           </div>
           <div id="current_progress">
             0
@@ -91,7 +108,7 @@
 
         <div style = "display:flex;">
           <div id = "score_text">
-            Level:
+            LEVEL:
           </div>
           <div id="current_level">
               0

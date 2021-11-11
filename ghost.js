@@ -154,10 +154,13 @@ class Ghost {
       // this.x = random(20, width-20);
       // this.y = random(20, height-20);
       if (player.lives <= 0){
-          endscreen = true;
-          gameoversound.play();
-          resetLevel();
-          player.lives = 3;
+        console.log(player.lives);
+        let window_score = document.getElementById('current_lives')
+        window_score.innerHTML = player.lives;
+        endscreen = true;
+        gameoversound.play();
+        resetLevel();
+        player.lives = 3;
       }
 
       else {

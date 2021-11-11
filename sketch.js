@@ -226,7 +226,9 @@ function draw(){
 
             stroke(0);
             fill(255);
-            text("Timer: " + timer + 's', width-300, 15);
+            // text("Timer: " + timer + 's', width-300, 15);
+            let window_timer = document.getElementById('current_timer')
+            window_timer.innerHTML = timer + 's';
             // console.log("timer");
 
             if (frameCount % 60 == 0 && timer > 0) {
@@ -240,7 +242,6 @@ function draw(){
               resetLevel();
               player.lives = 3;
               timer = 90;
-
             }
 
           }
