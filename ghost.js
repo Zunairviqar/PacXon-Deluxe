@@ -210,7 +210,6 @@ class Ghost {
         powerups[0].y=-100;
         collectionsound.play();
       }
-      console.log(this.pframe, frameCount);
 
       if (frameCount - this.pframe == 180){
 

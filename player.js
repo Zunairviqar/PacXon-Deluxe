@@ -28,9 +28,7 @@ class Player {
         this.pKeyPress = keyCode;
       }
       else {
-        console.log("hereee")
         this.moving = 'moving';
-        console.log("PLAYING SOUND")
         if (this.pKeyPress != this.currKeyCode){
           this.pKeyPress = this.currKeyCode;
           let roundx = this.x%20
