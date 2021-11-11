@@ -1,6 +1,6 @@
 function StartScreen(){
   image(main_image, 0, 0);
-  if (frameCount == 180){
+  if (frameCount % 180 == 0){
     main_image.pause();
   }
   if(mouseIsPressed){
