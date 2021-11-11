@@ -58,23 +58,26 @@ let finish;
 
 let gameoversound, movingsound, clickedsound, collectionsound, collisionsound, levelupsound, movement;
 
+let counter = 1;;
+let maxCounter = 33;
+
 
 function preload() {
-  tile = loadImage('assets/Tiles/tile.png');
-  movingTile = loadImage('assets/Tiles/movingTile.png');
+  tile = loadImage('assets/Tiles/tile.png', updateCounter);
+  movingTile = loadImage('assets/Tiles/movingTile.png', updateCounter);
 
-  rightPacXon = loadImage('assets/Paxon/right_paXon.gif');
-  leftPacXon = loadImage('assets/Paxon/left_paXon.gif');
-  upPacXon = loadImage('assets/Paxon/up_paXon.gif');
-  downPacXon = loadImage('assets/Paxon/down_paXon.gif');
+  rightPacXon = loadImage('assets/Paxon/right_paXon.gif', updateCounter);
+  leftPacXon = loadImage('assets/Paxon/left_paXon.gif', updateCounter);
+  upPacXon = loadImage('assets/Paxon/up_paXon.gif', updateCounter);
+  downPacXon = loadImage('assets/Paxon/down_paXon.gif', updateCounter);
 
-  redGhost = loadImage('assets/Enemies/red-ghost.png');
-  blueGhost = loadImage('assets/Enemies/blue-ghost.png');
-  yellowGhost = loadImage('assets/Enemies/yellow-ghost.png');
-  pinkGhost = loadImage('assets/Enemies/pink-ghost.png');
+  redGhost = loadImage('assets/Enemies/red-ghost.png', updateCounter);
+  blueGhost = loadImage('assets/Enemies/blue-ghost.png', updateCounter);
+  yellowGhost = loadImage('assets/Enemies/yellow-ghost.png', updateCounter);
+  pinkGhost = loadImage('assets/Enemies/pink-ghost.png', updateCounter);
 
   // home = loadImage('assets/Screens/home.gif');
-  main_image = loadImage('assets/Screens/home.gif');
+  main_image = loadImage('assets/Screens/home.gif', updateCounter);
   // main_image2 = loadImage('assets/Screens/home.png');
   // main_image3 = loadImage('assets/Screens/home-screen.gif');
   level1 = loadImage('assets/Screens/level1.png');
@@ -102,6 +105,7 @@ function preload() {
   levelupsound = loadSound('assets/Sounds/levelup.wav');
   movement = loadSound('assets/Sounds/levelup.wav');
 
+
 }
 
 function setup() {
@@ -109,7 +113,6 @@ function setup() {
   var canvasMain = createCanvas(760,500);
     // set the ID on the canvas element
   canvasMain.id("p5_mainCanvas");
-
   // set the parent of the canvas element to the element in the DOM with
   // an ID of "left"
   canvasMain.parent("#center");
@@ -306,4 +309,12 @@ function mousePressed(){
       clickedsound.play();
     }
   }
+}
+function updateCounter() {
+  // increase our counter
+  counter++;
+
+  // use the counter to set the style on the '#progress_bar' div
+  let progress_bar = document.querySelector('#progress_bar');
+  progress_bar.style.width = int(counter/maxCounter*100) + "%";
 }
