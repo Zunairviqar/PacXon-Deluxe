@@ -125,22 +125,22 @@ class Ghost {
       player.graphic = rightPacXon;
       player.currKeyCode = 0;
       player.lives -= 1;
-      if (lid == -1){
+      if (lid == -1 && rid != 1){
         this.x += 10;
       }
-      if (rid == -1){
+      else if (rid == -1 && lid != 1){
         this.x -= 10;
       }
-      if (uid == -1){
+      else if (uid == -1 && bid != 1){
         this.y += 10;
       }
-      if (bid == -1){
+      else if (bid == -1 && uid != 1){
         this.y -= 10;
       }
 
       if (dist(this.x, this.y, player.x, player.y) < 20) {
         if (rid != 1 || rid != -1){
-          this.x += 5;
+          this.x += 10;
         }
         else if (lid != 1 || lid != -1){
           this.x -= 5;

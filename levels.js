@@ -38,6 +38,7 @@ function nextLevel() {
 		player.lives = 3;
 		player.graphic = rightPacXon;
 		player.currKeyCode = 0;
+		timer = 9;
 		allLevels();
 		checkfornextLevel = false;
 		levelupscreen = true;
