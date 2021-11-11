@@ -1,7 +1,7 @@
 class Powerup {
 	constructor(){
 
-		this.graphic = random([bomb]);
+		this.graphic = random([bomb, bolt, slow, ice]);
 
 		if (this.graphic == bomb) {
 			let coord = placeBomb();
