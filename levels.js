@@ -43,6 +43,8 @@ function nextLevel() {
 		checkfornextLevel = false;
 		levelupscreen = true;
 		gamebegin=false;
+		load_level = true;
+		checkforselectlevel = false;
 		checkforStart = false;
 	}
 }
