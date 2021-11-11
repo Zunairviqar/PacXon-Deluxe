@@ -177,8 +177,7 @@ class Ghost {
         resetLevel();
         allLevels();
         gameoversound.play();
-
-
+        levels = 1;
       }
 
       else {

@@ -249,6 +249,7 @@ function draw(){
               player.currKeyCode = 0;
               player.x = 0;
               player.y = 0;
+              levels = 1;
               powerups = [];
               resetLevel();
               player.lives = 3;
