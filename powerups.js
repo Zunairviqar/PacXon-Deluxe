@@ -68,7 +68,7 @@ class Powerup {
 	  			collectionsound.play();
 	  		}
 
-  			if (frameCount - this.pframe == 180 || frameCount - this.p2frame == 360){
+  			if (frameCount - this.pframe == 300 || frameCount - this.p2frame == 360){
   				for (let i = 0; i < enemy.length; i++) {
 	  				enemy[i].speedX = enemy[i].pspeedX;
 	  				enemy[i].speedY = enemy[i].pspeedY;
@@ -91,10 +91,35 @@ class Powerup {
 	  			this.x=-100;
 	  			this.y=-100;
 	  			collectionsound.play();
+
   			}
-			if (frameCount - this.pframe == 180 || frameCount - this.p2frame == 360){
+  			for (let i = 0; i < enemy.length; i++) {
+				if (dist(this.x, this.y, enemy[i].x, enemy[i].y) < 20) {
+					console.log("enemy touched bolt")
+		  			this.pframe = frameCount;
+		  			this.disp = false;
+		  			this.x=-100;
+		  			this.y=-100;
+		  			collectionsound.play();
+		  			for (let i = 0; i < enemy.length; i++) {
+		  				console.log("speed increase")
+						enemy[i].speedX = 4;
+						enemy[i].speedY = 4;
+						enemy[i].speed = 0.01;
+					}
+					break;
+				}
+  			}
+
+			if (frameCount - this.pframe == 300 || frameCount - this.p2frame == 360){
 				// console.log("SLOOWWWWWW DOWNNN")
 				player.speed = player.pspeed;
+				 for (let i = 0; i < enemy.length; i++) {
+				 	console.log("speed slow")
+					enemy[i].speedX = enemy[i].pspeedX;
+					enemy[i].speedY = enemy[i].pspeedY;
+					enemy[i].speed = enemy[i].pspeedY;
+				}
 				powerups.splice(0, 1);
 			}
 

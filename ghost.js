@@ -38,21 +38,26 @@ class Ghost {
     if (uid == 1) {
       this.y += 3;
       this.speedY *= -1;
+      this.pspeedY *= -1;
     }
     if (bid == 1) {
       this.y -= 3;
       this.speedY *= -1;
+      this.pspeedY *= -1;
     }
     if (lid == 1) {
       this.x += 3;
       this.speedX *= -1;
+      this.pspeedX *= -1;
     }
     if (rid == 1) {
       this.x -= 3;
       this.speedX *= -1;
+      this.pspeedX *= -1;
     }
 
     this.enemyCollision(rid, lid, uid, bid);
+    this.powerupCollision();
     if (this.type == "eat" || this.type == "duplicate"){
       this.eat(rid, lid, uid, bid)
     }
@@ -186,9 +191,63 @@ class Ghost {
     }
   }
 
-  // powerupCollision() {
+  powerupCollision() {
+    if (powerups.length != 0 && (powerups[0].graphic == slow || powerups[0].graphic == ice)) {
+    // console.log("helo")
 
-  // }
+      if (dist(this.x, this.y, powerups[0].x, powerups[0].y) < 20) {
+        console.log("enemy touched ice/slow")
+        // collectionsound.play();
+        this.pframe = frameCount;
+        if (powerups[0].graphic == slow) {
+          player.speed = 1;
+        }
+        else if (powerups[0].graphic == ice){
+          player.speed = 0;
+        }
+        powerups[0].disp = false;
+        powerups[0].x=-100;
+        powerups[0].y=-100;
+        collectionsound.play();
+      }
+      console.log(this.pframe, frameCount);
+
+      if (frameCount - this.pframe == 180){
+
+        console.log("return to normal")
+        player.speed = player.pspeed;
+        powerups.splice(0, 1);
+      }
+
+    }
+
+    // if (powerups.length != 0 && powerups[0].graphic == bolt) {
+    // // console.log("helo")
+    //     // this.pframe = 0;
+    //   if (dist(this.x, this.y, powerups[0].x, powerups[0].y) < 20) {
+    //     console.log("enemy touched bolt")
+    //     // collectionsound.play();
+    //     this.pframe = frameCount;
+    //     this.speedX = this.speedX + 0.75;
+    //     this.speedY = this.speedX + 0.75;
+    //     this.speed = 0.02;
+    //     powerups[0].disp = false;
+    //     powerups[0].x=-100;
+    //     powerups[0].y=-100;
+    //     collectionsound.play();
+    //   }
+    // if (frameCount - this.pframe == 240){
+    //   // console.log("SLOOWWWWWW DOWNNN")
+    //   this.speedX = this.pspeedX;
+    //   this.speedY = this.pspeedY;
+    //   this.speed = this.pspeed;
+    //   powerups.splice(0, 1);
+    // }
+
+    // }
+
+
+  }
 }
 
 class PinkGhost extends Ghost{
