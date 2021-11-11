@@ -299,6 +299,7 @@ function mousePressed(){
     if(mouseX>279 && mouseX <469 && mouseY>318&& mouseY<363){
       gamestart = false;
       gamecomplete = false;
+      load_level = false;
       clickedsound.play();
     }
   }

@@ -60,12 +60,15 @@
       }
       #content{
         color:white;
-        position: absolute;
-        top: 700px;
         width: 100%;
       }
+      #content-text{
+        max-width: 760px;
+        margin: auto;
+        text-align: left!important;
+      }
       #content h2,p{
-        text-align: center;
+        /* text-align: center; */
       }
       #score_text{
         font-family: PacFont;
@@ -126,15 +129,28 @@
     </div>
 
     <div id = "content">
-      <h2>Instructions</h2>
-      <p> Use the W,S,A,D keys to move the rocket Up, Down, Left, or Right respectively. </p>
-      <p> The longer your rocket survives in space, the higher the score you get.</p>
-      <p> The fuel of the rocket is running out so make sure to collect the Cans.</p>
-      <p> If you hit any of the asteroids, the rocket will crash.</p>
-      <br>
-      <br>
-      <h2>Inspiration</h2>
-      <p style = "padding-left: 20px;padding-right: 20px;"> When I used to play the battleship games in middle school, they seemed pretty straightforward to control.Since I learned about how to implement acceleration in games in my 'Interactive Computing' course, I knew I had to simply had to use it in my game coupled with the battleship features. I also decided to increase the difficulty of the game slightly by requiring the player to collect fuel cans on the way in order to survive, instead of simply having to dodge the asteroids. I believe this has added a unique touch to my game. I hope you have a fun trip to Mars!
+      <div id= "content-text">
+        <h2>Instructions</h2>
+        <p> - Use the W,S,A,D keys to move the Player Up, Down, Left, or Right respectively. </p>
+        <p> - The objective is to cover at least 80% of the empty area.</p>
+        <p> - Connecting a line between two solid tiles covers the area given that an enemy is not present within any enclosed box.</p>
+        <p> - If an enemy intercepts the line while its building, or if the player does, the player loses one life.</p>
+        <p> - The game ends when the time runs out, or all the lives are lost.</p>
+        <p> - There are four types of ghosts:</p>
+        <ul>
+          <li>   Pink Ghost: Only bounces off the solid tiles </p>
+          <li>   Red Ghost: Bounces off and removes the solid tile it rebounds from.</p>
+          <li>   Yellow Ghost: Follows the Player </p>
+          <li>   Blue Ghost: Replicates itself if the player comes within its the radius. </p>
+        </ul>
+
+
+        <br>
+        <br>
+        <h2>Inspiration</h2>
+        <p> When I used to play the battleship games in middle school, they seemed pretty straightforward to control.Since I learned about how to implement acceleration in games in my 'Interactive Computing' course, I knew I had to simply had to use it in my game coupled with the battleship features. I also decided to increase the difficulty of the game slightly by requiring the player to collect fuel cans on the way in order to survive, instead of simply having to dodge the asteroids. I believe this has added a unique touch to my game. I hope you have a fun trip to Mars!
+
+      </div>
     </div>
 
   </body>
