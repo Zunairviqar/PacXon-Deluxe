@@ -223,7 +223,7 @@ function draw(){
 
 
 
-            if (frameCount % 420 == 0 && powerups.length == 0) {
+            if (frameCount % 600 == 0 && powerups.length == 0) {
               console.log("POWERUP APPEAR")
               powerups.push(new Powerup())
             }
@@ -301,7 +301,7 @@ function mousePressed(){
       gamestart = false;
       gamecomplete = false;
       load_level = false;
-      
+
       clickedsound.play();
     }
   }
