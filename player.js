@@ -63,21 +63,44 @@ class Player {
             }
           }
         }
-        if (keyCode ==68) {
-          this.currKeyCode = 68;
-          this.graphic = rightPacXon;
+
+        let pos = getTile(this.middleX, this.middleY);
+
+        if(pos == 1){
+          if (keyCode ==68) {
+            this.currKeyCode = 68;
+            this.graphic = rightPacXon;
+          }
+          if (keyCode ==65) {
+            this.currKeyCode = 65;
+            this.graphic = leftPacXon;
+          }
+          if (keyCode ==87) {
+            this.currKeyCode = 87;
+            this.graphic = upPacXon;
+          }
+          if (keyCode ==83) {
+            this.currKeyCode = 83;
+            this.graphic = downPacXon;
+          }
         }
-        if (keyCode ==65) {
-          this.currKeyCode = 65;
-          this.graphic = leftPacXon;
-        }
-        if (keyCode ==87) {
-          this.currKeyCode = 87;
-          this.graphic = upPacXon;
-        }
-        if (keyCode ==83) {
-          this.currKeyCode = 83;
-          this.graphic = downPacXon;
+        else{
+          if (keyCode ==68 && this.currKeyCode!=65) {
+            this.currKeyCode = 68;
+            this.graphic = rightPacXon;
+          }
+          if (keyCode ==65 && this.currKeyCode!=68) {
+            this.currKeyCode = 65;
+            this.graphic = leftPacXon;
+          }
+          if (keyCode ==87 && this.currKeyCode!=83) {
+            this.currKeyCode = 87;
+            this.graphic = upPacXon;
+          }
+          if (keyCode ==83 && this.currKeyCode!=87) {
+            this.currKeyCode = 83;
+            this.graphic = downPacXon;
+          }
         }
       }
 
