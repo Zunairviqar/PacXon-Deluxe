@@ -55,6 +55,7 @@ let clicktostart;
 let levelup;
 let endimg;
 let finish;
+let returnto;
 
 let gameoversound, movingsound, clickedsound, collectionsound, collisionsound, levelupsound, movement;
 
@@ -91,6 +92,7 @@ function preload() {
   levelup = loadImage('assets/Screens/levelcompleted.png');
   endimg = loadImage('assets/Screens/gameover.png');
   finish = loadImage('assets/Screens/congrats.png');
+  returnto = loadImage('assets/Screens/returnmenu.png');
 
   bomb = loadImage('assets/Extras/redbomb.png');
   ice = loadImage('assets/Extras/ice.png');
@@ -103,7 +105,7 @@ function preload() {
   collectionsound = loadSound('assets/Sounds/collection.wav');
   collisionsound = loadSound('assets/Sounds/collision.wav');
   levelupsound = loadSound('assets/Sounds/levelup.wav');
-  movement = loadSound('assets/Sounds/levelup.wav');
+  // movement = loadSound('assets/Sounds/levelup.wav');
 
 
 }
