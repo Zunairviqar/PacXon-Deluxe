@@ -128,6 +128,7 @@ class Player {
       player.graphic = rightPacXon;
       player.currKeyCode = 0;
       player.lives -= 1;
+      collisionsound.play();
       resetDrawing();
     }
     else if (id == 0){

@@ -48,6 +48,7 @@ class Powerup {
   			
 	  		if (dist(this.x, this.y, player.x, player.y) < 20) {
 	  			console.log("player touched ice")
+	  			// collectionsound.play();
 	  			this.pframe = frameCount;
 	  			for (let i = 0; i < enemy.length; i++) {
   					if (this.graphic == slow) {
@@ -62,7 +63,9 @@ class Powerup {
   					}
 	  			}
 	  			this.disp = false;
-
+	  			this.x=-100;
+	  			this.y=-100;
+	  			collectionsound.play();
 	  		}
 
   			if (frameCount - this.pframe == 180 || frameCount - this.p2frame == 360){
@@ -81,12 +84,16 @@ class Powerup {
   		  	// this.pframe = 0;
 	  		if (dist(this.x, this.y, player.x, player.y) < 20) {
 	  			console.log("player touched bolt")
+	  			// collectionsound.play();
 	  			this.pframe = frameCount;
 	  			player.speed = 6;
 	  			this.disp = false;
+	  			this.x=-100;
+	  			this.y=-100;
+	  			collectionsound.play();
   			}
 			if (frameCount - this.pframe == 180 || frameCount - this.p2frame == 360){
-				console.log("SLOOWWWWWW DOWNNN")
+				// console.log("SLOOWWWWWW DOWNNN")
 				player.speed = player.pspeed;
 				powerups.splice(0, 1);
 			}
@@ -96,12 +103,13 @@ class Powerup {
   		else if (this.graphic == bomb) {
   			
   			if (dist(this.x, this.y, player.x, player.y) < 20) {
-  				console.log("player touched bomb")
+  				console.log("player touched bomb");
   				powerups.splice(0, 1);
+  				collectionsound.play();
   			}
 
 			else if (frameCount - this.pframe == 180){
-				console.log("phattt jaaa")
+				// console.log("phattt jaaa")
 				deleteTiles(this.x, this.y);
 				powerups.splice(0, 1);
 

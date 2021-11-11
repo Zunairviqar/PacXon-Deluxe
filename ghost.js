@@ -120,6 +120,7 @@ class Ghost {
 
   enemyCollision(rid, lid, uid, bid) {
     if(lid == -1 || rid == -1 || uid == -1 || bid == -1 || dist(this.x, this.y, player.x, player.y) < 20){
+      collisionsound.play();
       player.x = 0;
       player.y = 0;
       player.graphic = rightPacXon;
@@ -160,7 +161,7 @@ class Ghost {
         window_score.innerHTML = player.lives;
         endscreen = true;
         player.lives = 3;
-        timer = 9;
+        timer = 20;
 
         resetLevel();
         allLevels();
