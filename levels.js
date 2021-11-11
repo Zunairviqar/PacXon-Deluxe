@@ -22,7 +22,15 @@ function nextLevel() {
 	// levelOne();
 	if (completeLevel() >= 25) {
 		// console.log(completeLevel())
+		levelupsound.play();
 		levels +=1;
+		if(levels>6){
+			gamecomplete = true;
+		}
+		else{
+			mylevel +=1;
+			window.localStorage.setItem('levelsCompleted', levels);
+		}
 		console.log("level up")
 		resetLevel();
 		player.x = 0;
@@ -31,6 +39,10 @@ function nextLevel() {
 		player.graphic = rightPacXon;
 		player.currKeyCode = 0;
 		allLevels();
+		checkfornextLevel = false;
+		levelupscreen = true;
+		gamebegin=false;
+		checkforStart = false;
 	}
 }
 
@@ -112,4 +124,3 @@ function levelSix() {
 	enemy.push(new YellowGhost());
 
 }
-

@@ -124,16 +124,16 @@ class Ghost {
       player.y = 0;
       player.lives -= 1;
       if (lid == -1){
-        this.x += 5;
+        this.x += 10;
       }
       if (rid == -1){
-        this.x -= 5;
+        this.x -= 10;
       }
       if (uid == -1){
-        this.y += 5;
+        this.y += 10;
       }
       if (bid == -1){
-        this.y -= 5;
+        this.y -= 10;
       }
 
       if (dist(this.x, this.y, player.x, player.y) < 20) {
@@ -154,16 +154,20 @@ class Ghost {
       // this.x = random(20, width-20);
       // this.y = random(20, height-20);
       if (player.lives <= 0){
-<<<<<<< Updated upstream
-=======
-          endscreen = true;
-          player.graphic = rightPacXon;
-          player.currKeyCode = 0;
->>>>>>> Stashed changes
-          resetLevel();
-          player.lives = 3;
-          allLevels();
-          timer = 9;
+
+        player.graphic = rightPacXon;
+        player.currKeyCode = 0;
+        endscreen = true;
+        player.lives = 3;
+        timer = 9;
+        
+        resetLevel();
+        allLevels();
+        let window_score = document.getElementById('current_lives')
+        window_score.innerHTML = player.lives;
+        gameoversound.play();
+        
+        
       }
 
       else {
