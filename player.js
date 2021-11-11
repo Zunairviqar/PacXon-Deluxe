@@ -125,9 +125,12 @@ class Player {
       console.log("LAG GAYE");
       player.x = 0;
       player.y = 0;
-      resetLevel();
+      player.graphic = rightPacXon;
+      player.currKeyCode = 0;
+      player.lives -= 1;
+      resetDrawing();
     }
-    if (id == 0){
+    else if (id == 0){
       modifyTile(this.middleX, this.middleY)
     }
     else if (id == 1) {
