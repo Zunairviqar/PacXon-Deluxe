@@ -23,13 +23,6 @@ class Player {
     this.middleX = this.x+tileSize/2;
     this.middleY = this.y+tileSize/2;
 
-    // if(this.moving == 'moving'){
-    //   console.log("HELLOOO");
-    //   if(frameCount%60==0){
-    //     movingsound.play();
-    //   }
-    // }
-
     if (keyIsPressed==true){
       if (this.pKeyPress == 'None'){
         this.pKeyPress = keyCode;
@@ -37,6 +30,7 @@ class Player {
       else {
         console.log("hereee")
         this.moving = 'moving';
+        console.log("PLAYING SOUND")
         if (this.pKeyPress != this.currKeyCode){
           this.pKeyPress = this.currKeyCode;
           let roundx = this.x%20

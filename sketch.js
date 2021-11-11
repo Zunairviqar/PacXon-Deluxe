@@ -108,6 +108,7 @@ function preload() {
   // movement = loadSound('assets/Sounds/levelup.wav');
 
 
+
 }
 
 function setup() {
@@ -191,7 +192,6 @@ function draw(){
           }
 
           if(gamebegin == true){
-            movement.play()
             // stroke(0);
             // fill(255);
             // text("Lives: " + player.lives, 10, 15);
