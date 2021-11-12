@@ -5,7 +5,7 @@ let tile, movingTile, rightPacXon, leftPacXon, upPacXon, downPacXon;
 let redGhost, blueGhost, yellowGhost, pinkGhost;
 let home;
 let bomb, ice, bolt, slow;
-
+// powerups
 let powerups = [];
 
 let tileSize;

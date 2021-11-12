@@ -73,53 +73,49 @@ class Ghost {
     }
 
   }
-  // wall wating effect function for blue and red enemies
+  // wall eating effect function for blue and red enemies
   eat(rid, lid, uid, bid) {
+    // if right tile is a wall but not a border, delete tile
     if (rid == 1 && this.x < width-tileSize-30){
       deleteTile(this.sensorRight, this.middleY);
-      // getTile(rid, this.middleY) = 0;
-      // console.log(getTile(rid, this.middleY))
     }
-
+    // if left tile is a wall but not a border, delete tile
     else if (lid == 1 && this.x > 30){
-      // getTile(lid, this.middleY) = 0;
       deleteTile(this.sensorLeft, this.middleY);
-      // console.log(getTile(lid, this.middleY))
     }
-
+    // if top tile is a wall but not a border, delete tile
     else if (uid == 1 && this.y > 30){
-      // getTile(this.middleX, uid) = 0;
       deleteTile(this.middleX, this.sensorTop);
-      // console.log("uppppp")
     }
-
+    // if bottom tile is a wall but not a border, delete tile
     else if (bid == 1 && this.y < height-tileSize-30){
-      // getTile(this.middleX, bid) = 0;
       deleteTile(this.middleX, this.sensorBottom);
-      // console.log("downnnn")
     }
   }
-
+  // if enemy is blue, duplicate enemy when player comes in its radius
   duplicate() {
+    // if player is within the radius of the enemy
     if (player.x >= this.x-40 && player.x <= this.x+60 && player.y >= this.y-40 && player.y <= this.y+60) {
+      // this if condition is to ensure enemy only duplicates once even if the player stays in the radius
       if (this.dup == true){
         enemy.push(new BlueGhost());
         this.dup = false;
       }
     }
+    // if player is out of the radius, and comes within it again, enemy can duplicate again
     else {
       this.dup = true
     }
   }
-
+  // move the enemy by determining all collisions
   move() {
     this.collision();
-
-    if (this.type == "bounce"){
+    // pink enemy or red enemy bounces off walls
+    if (this.type == "bounce" || this.type == "eat"){
       this.x += this.speedX;
       this.y += this.speedY;
     }
-
+    // yellow enemy follows player
     else if (this.type == "follow"){
       let distX = player.x - this.x;
       let distY = player.y - this.y;
@@ -127,12 +123,7 @@ class Ghost {
       this.x += this.speed * distX;
       this.y += this.speed * distY;
     }
-
-    else if (this.type == "eat"){
-      this.x += this.speedX;
-      this.y += this.speedY;
-    }
-
+    // blue enemy has a ring around it and it bounces
     else if (this.type == "duplicate"){
       noFill();
       stroke(0,255,255);
@@ -143,28 +134,36 @@ class Ghost {
 
     }
   }
-
+  // if enemy collides with player
   playerCollision(rid, lid, uid, bid) {
+    // if enemy comes in contact with "moving blue" tiles or the player itself
     if(lid == -1 || rid == -1 || uid == -1 || bid == -1 || dist(this.x, this.y, player.x, player.y) < 20){
+      // play sound
       collisionsound.play();
+      // reset player position, graphic, speed, lives
       player.x = 0;
       player.y = 0;
       player.graphic = rightPacXon;
       player.currKeyCode = 0;
       player.lives -= 1;
+      // if it bounces off the left moving blue tiles and right tile is not equal to wall jump off 10 pixels to the right
       if (lid == -1 && rid != 1){
         this.x += 10;
       }
+      // if it bounces off the right moving blue tiles and left tile is not equal to wall jump off 10 pixels to the left
       else if (rid == -1 && lid != 1){
         this.x -= 10;
       }
+      // if it bounces off the top moving blue tiles and bottom tile is not equal to wall jump off 10 pixels to the bottom
       else if (uid == -1 && bid != 1){
         this.y += 10;
       }
+      // if it bounces off the bottom moving blue tiles and top tile is not equal to wall jump off 10 pixels to the top
       else if (bid == -1 && uid != 1){
         this.y -= 10;
       }
 
+      // if comes in contact with player, bounce in opposit direction if possible
       if (dist(this.x, this.y, player.x, player.y) < 20) {
         if (rid != 1 || rid != -1){
           this.x += 10;
@@ -180,85 +179,71 @@ class Ghost {
         }
 
       }
-      // this.x = random(20, width-20);
-      // this.y = random(20, height-20);
+      // if the lives of player are less than or equal to zero
       if (player.lives <= 0){
+        // display lives in html 
         let window_score = document.getElementById('current_lives')
         window_score.innerHTML = player.lives;
+        // display game over screen
         endscreen = true;
+        // reset player lives
         player.lives = 3;
+        // reset timer
         timer = 100;
+        // reset powerups
         powerups = [];
+        // remove the blue moving tiles
         resetLevel();
+        // reset enemy array
         allLevels();
+        // play sound
         gameoversound.play();
-        levels = 1;
       }
-
+      // else if player lives are not yet zero but collision with enemy occurs then just remove the blue moving tiles
       else {
           resetDrawing();
       }
     }
   }
 
+  // detect enemy collsions with powerups
   powerupCollision() {
+    // if powerup array is not empty
+    // and the powerup is snail or ice
     if (powerups.length != 0 && (powerups[0].graphic == slow || powerups[0].graphic == ice)) {
-    // console.log("helo")
-
+      // if powerup collision with enemy
       if (dist(this.x, this.y, powerups[0].x, powerups[0].y) < 20) {
-        console.log("enemy touched ice/slow")
-        // collectionsound.play();
+        // console.log("enemy touched ice/slow")
+        // set previous frame
         this.pframe = frameCount;
+        // if the power up is snail, decrease player's speed
         if (powerups[0].graphic == slow) {
           player.speed = 1;
         }
+        // if power up is ice, freeze player
         else if (powerups[0].graphic == ice){
           player.speed = 0;
         }
+        // stop displaying powerup and change its location to outside canvas
         powerups[0].disp = false;
         powerups[0].x=-100;
         powerups[0].y=-100;
+        // play sound
         collectionsound.play();
       }
-
+      // if current frame count - frame count when powerup was picked is 180 (3 sec)
       if (frameCount - this.pframe == 180){
-
+        // return palyer's speed to normal and remove powerup from array
         console.log("return to normal")
         player.speed = player.pspeed;
         powerups.splice(0, 1);
       }
 
     }
-
-    // if (powerups.length != 0 && powerups[0].graphic == bolt) {
-    // // console.log("helo")
-    //     // this.pframe = 0;
-    //   if (dist(this.x, this.y, powerups[0].x, powerups[0].y) < 20) {
-    //     console.log("enemy touched bolt")
-    //     // collectionsound.play();
-    //     this.pframe = frameCount;
-    //     this.speedX = this.speedX + 0.75;
-    //     this.speedY = this.speedX + 0.75;
-    //     this.speed = 0.02;
-    //     powerups[0].disp = false;
-    //     powerups[0].x=-100;
-    //     powerups[0].y=-100;
-    //     collectionsound.play();
-    //   }
-    // if (frameCount - this.pframe == 240){
-    //   // console.log("SLOOWWWWWW DOWNNN")
-    //   this.speedX = this.pspeedX;
-    //   this.speedY = this.pspeedY;
-    //   this.speed = this.pspeed;
-    //   powerups.splice(0, 1);
-    // }
-
-    // }
-
-
   }
 }
 
+// pink ghost class, inherits ghost class
 class PinkGhost extends Ghost{
   constructor(){
     super();
@@ -268,7 +253,7 @@ class PinkGhost extends Ghost{
     this.type = "bounce";
   }
 }
-
+// blue ghost class, inherits ghost class
 class BlueGhost extends Ghost{
   constructor(){
     super();
@@ -280,7 +265,7 @@ class BlueGhost extends Ghost{
 
 
 }
-
+// red ghost class, inherits ghost class
 class RedGhost extends Ghost{
   constructor(){
     super();
@@ -288,7 +273,7 @@ class RedGhost extends Ghost{
     this.type = "eat";
   }
 }
-
+// yellow ghost class, inherits ghost class
 class YellowGhost extends Ghost{
   constructor(){
     super();
@@ -296,19 +281,3 @@ class YellowGhost extends Ghost{
     this.type = "follow";
   }
 }
-
-
-    // if (id == 1) {
-    //   if (rid == 1) {
-    //     player.x -= 20;
-    //   }
-    //   if (lid == 1) {
-    //     player.x += 20;
-    //   }
-    //   if (uid == 1) {
-    //     player.y += 20;
-    //   }
-    //   if (bid == 1) {
-    //     player.y -= 20;
-    //   }
-    // }
