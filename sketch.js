@@ -61,7 +61,6 @@ let levelup;
 let endimg;
 let finish;
 let returnto;
-let pmylevel;
 // Variables to store all the sounds
 let gameoversound, movingsound, clickedsound, collectionsound, collisionsound, levelupsound, movement, bg;
 // Declaring and initializingthe counter and max counter to calculate the percentage and keep track for the preloader
@@ -146,7 +145,7 @@ function setup() {
   // Checking if there was any data stored,
   if (user_levels) {
     // If so, the data from the local storage is used, otherwised the above initalized value is used instead.
-    mylevel = user_levels
+    mylevel = int(user_levels)
   }
   // Declaring the tilesize
   tileSize = 20;
@@ -345,6 +344,7 @@ function mousePressed(){
       levelupscreen = false;
       clickedsound.play();
       checkfornextLevel == false;
+      checkMenuclick = false;
     }
     // If the menu is clicked, the menu screen appears
     else if(mouseX>250 && mouseX <345 && mouseY>325&& mouseY<363){
@@ -353,6 +353,7 @@ function mousePressed(){
       load_level = false;
       checkforselectlevel = false;
       checkfornextLevel == false;
+      checkMenuclick = false;
       clickedsound.play();
     }
   }
@@ -362,6 +363,7 @@ function mousePressed(){
     if(mouseX>400 && mouseX <495 && mouseY>325&& mouseY<363){
       endscreen = false;
       checkforretry =  false;
+      checkMenuclick = false;
       clickedsound.play();
     }
     // Or if the menu option is pressed
@@ -372,6 +374,7 @@ function mousePressed(){
       load_level = false;
       checkforselectlevel = false;
       checkforretry =  false;
+      checkMenuclick = false;
       clickedsound.play();
     }
   }

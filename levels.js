@@ -17,11 +17,13 @@ function completeLevel() {
 function nextLevel() {
 	// completeLevel();
 	// levelOne();
-	if (completeLevel() >= 80) {
+	if (completeLevel() >= 3) {
 		// console.log(completeLevel())
 		levelupsound.play();
 		// increment level
 		levels +=1;
+		console.log(levels);
+		console.log(mylevel);
 		// if all 6 levels completed,
 		if(levels>6){
 			// game has been completed
@@ -29,21 +31,16 @@ function nextLevel() {
 		}
 		// else increment the number of levels unlocked
 		else{
-			console.log("UPDATINFFGFF")
-			console.log(mylevel)
-			// mylevel +=1;
-			if(mylevel >= level){
-				console.log('')
-			}
-			else{
+			if(mylevel < levels){
+				console.log("UPDATING")
 				mylevel +=1;
-				pmylevel = mylevel;
-			}
-			if(mylevel <7){
-				window.localStorage.setItem('levelsCompleted', mylevel);
+				if(mylevel <7){
+					window.localStorage.setItem('levelsCompleted', mylevel);
+				}
 			}
 		}
 		console.log("level up")
+		console.log(mylevel)
 		// resetLevel();
 		player.x = 0;
 		player.y = 0;
