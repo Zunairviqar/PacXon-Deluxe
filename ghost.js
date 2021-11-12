@@ -1,4 +1,6 @@
+// The Ghosts class
 class Ghost {
+  // constructor to declare ghost x,y,graphic,speed
   constructor(){
     this.x = random(80, width-100);
     this.y = random(80, height-80);
@@ -6,16 +8,18 @@ class Ghost {
     this.speedY = random(1, 3);
     this.speed = 0.005;
     this.graphic = blueGhost;
-
+    // previous speed so enemies can return to their original speed after being affected by powerups
     this.pspeedX = this.speedX;
     this.pspeedY = this.speedY;
     this.pspeed = this.speed;
   }
 
+  // displays the enemy
   display(){
     image(this.graphic, this.x, this.y, 20,20);
   }
 
+  // detects players collisions with walls, player and powerups
   collision () {
     // set up sensor positions
     this.sensorLeft = this.x-3;
@@ -25,45 +29,51 @@ class Ghost {
     this.middleX = this.x+tileSize/2;
     this.middleY = this.y+tileSize/2;
 
-    // check tile to the left
+    // check the id of tiles in the 2d array at the sensor positions
     let id = getTile(this.middleX,this.middleY);
     let lid = getTile(this.sensorLeft,this.middleY);
     let rid = getTile(this.sensorRight,this.middleY);
     let uid = getTile(this.middleX, this.sensorTop);
     let bid = getTile(this.middleX, this.sensorBottom);
-    // console.log(this.type);
-    // console.log(uid, bid, lid, rid);
 
-
+    // if enemies touch the walls (blue tiles), they bounce off
+    // top sensor 
     if (uid == 1) {
       this.y += 3;
       this.speedY *= -1;
       this.pspeedY *= -1;
     }
+    // bottom sensor
     if (bid == 1) {
       this.y -= 3;
       this.speedY *= -1;
       this.pspeedY *= -1;
     }
+    // left sensor
     if (lid == 1) {
       this.x += 3;
       this.speedX *= -1;
       this.pspeedX *= -1;
     }
+    // right sensor
     if (rid == 1) {
       this.x -= 3;
       this.speedX *= -1;
       this.pspeedX *= -1;
     }
-
-    this.enemyCollision(rid, lid, uid, bid);
+    // detects collision with the player
+    this.playerCollision(rid, lid, uid, bid);
+    // detects collision with the snail and ice powerups
     this.powerupCollision();
+
+    // add special wall eating effect of wall collision 
+    // if enemy type is blue or red
     if (this.type == "eat" || this.type == "duplicate"){
       this.eat(rid, lid, uid, bid)
     }
 
   }
-
+  // wall wating effect function for blue and red enemies
   eat(rid, lid, uid, bid) {
     if (rid == 1 && this.x < width-tileSize-30){
       deleteTile(this.sensorRight, this.middleY);
@@ -134,7 +144,7 @@ class Ghost {
     }
   }
 
-  enemyCollision(rid, lid, uid, bid) {
+  playerCollision(rid, lid, uid, bid) {
     if(lid == -1 || rid == -1 || uid == -1 || bid == -1 || dist(this.x, this.y, player.x, player.y) < 20){
       collisionsound.play();
       player.x = 0;
