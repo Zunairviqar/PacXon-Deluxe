@@ -1,29 +1,37 @@
 <!doctype html>
 <html>
   <head>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"
-               integrity="sha512-N4kV7GkNv7QR7RX9YF/olywyIgIwNvfEe2nZtfyj73HdjCUkAfOBDbcuJ/cTaN04JKRnw1YG1wnUyNKMsNgg3g=="
-               crossorigin="anonymous"
-               referrerpolicy="no-referrer"></script> -->
-    <!-- scripts -->
+    <!-- Importing the locally stored p5 JS file -->
     <script src="p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js" integrity="sha512-WzkwpdWEMAY/W8WvP9KS2/VI6zkgejR4/KTxTl4qHx0utqeyVE0JY+S1DlMuxDChC7x0oXtk/ESji6a0lP/Tdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Importing the locally stored p5 SOUND file -->
     <script src="path/to/p5.sound.js"></script>
+    <!-- Importing the file containing the supporting code for changing the screens -->
     <script src="screens.js"></script>
+    <!-- Importing the file containing the supporting code for changing the screens -->
     <script src="level.js"></script>
+    <!-- Importing the file containing the supporting code for modifying the level array -->
     <script src="levels.js"></script>
+    <!-- Importing the file containing the supporting code for modifying the different levels -->
     <script src="fillblock.js"></script>
+    <!-- Importing the file containing the supporting code for filling an enclosed box -->
     <script src="player.js"></script>
+    <!-- Importing the file containing the code for the Player class -->
     <script src="powerups.js"></script>
+    <!-- Importing the file containing the code for the Powerups class -->
     <script src="ghost.js"></script>
+    <!-- Importing the file containing the code for the Ghost class -->
     <script src="sketch.js"></script>
+    <!-- Importing the file containing the main code for the canvas -->
 
     <!-- custom CSS -->
     <style type="text/css">
+    /* Importing a local font */
       @font-face {
         font-family: PacFont;
         src: url(assets/Fonts/PacFontRegular.ttf);
       }
+      /* Customizing the p5 JS Loading Screen */
       #p5_loading {
         color: #f4cb2a;
         width: 760px;
@@ -33,12 +41,9 @@
         text-align: center;
         margin: auto;
         align-items: center;
-        /* mark this div as relatively positioned - this won't move it, but
-           it will cause the div to 'remember' its position on the page -
-           this is important since any child divs will need this information
-           in order to position themselves correctly */
         position: relative;
       }
+      /* Modifying the progress bar in the loading screen */
       #progress_bar {
         background-color: blue;
         height: 25px;
