@@ -22,8 +22,6 @@ function nextLevel() {
 		levelupsound.play();
 		// increment level
 		levels +=1;
-		console.log(levels);
-		console.log(mylevel);
 		// if all 6 levels completed,
 		if(levels>6){
 			// game has been completed
@@ -31,16 +29,15 @@ function nextLevel() {
 		}
 		// else increment the number of levels unlocked
 		else{
+			// Checks if the current reached level has become greater than the user stored level
 			if(mylevel < levels){
-				console.log("UPDATING")
 				mylevel +=1;
+				// It then updates the local storage as well
 				if(mylevel <7){
 					window.localStorage.setItem('levelsCompleted', mylevel);
 				}
 			}
 		}
-		console.log("level up")
-		console.log(mylevel)
 		// resetLevel();
 		player.x = 0;
 		player.y = 0;
