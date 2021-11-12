@@ -84,6 +84,7 @@ class Powerup {
 	  			}
 	  			// remove powerup from array
 	  			powerups.splice(0, 1);
+	  			// this.pframe = 0;
   			}
 
   		}
@@ -133,6 +134,7 @@ class Powerup {
 				}
 				// remove powerup from array
 				powerups.splice(0, 1);
+				// this.pframe = 0;
 			}
 
   		}
@@ -148,6 +150,7 @@ class Powerup {
 			else if (frameCount - this.pframe == 180){
 				deleteTiles(this.x, this.y);
 				powerups.splice(0, 1);
+				// this.pframe = 0;
 			}
   		}
   	}

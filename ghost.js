@@ -237,6 +237,7 @@ class Ghost {
         console.log("return to normal")
         player.speed = player.pspeed;
         powerups.splice(0, 1);
+        // this.pframe = 0;
       }
 
     }
