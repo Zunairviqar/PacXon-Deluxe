@@ -30,6 +30,7 @@ let ghostx, ghosty;
 let level_up = false;
 
 let gamestart;
+let checkMenuclick;
 let load_level;
 let loadhowtoplay;
 let gamebegin;
@@ -119,7 +120,8 @@ function setup() {
   canvasMain.parent("#center");
 
   gamestart = false;
-  load_level = false;
+  checkMenuclick = false;
+  load_level = true;
   loadhowtoplay = false;
   gamebegin = false;
   checkforselectlevel =  false;
@@ -158,6 +160,7 @@ function draw(){
     if (load_level == false){
       if (loadhowtoplay == false){
         StartScreen();
+        checkMenuclick = true;
       }
       else{
         HowToPlayScreen();
@@ -272,6 +275,9 @@ function draw(){
 
 
 function mousePressed(){
+  if(checkMenuclick == true){
+    StartScreenClick();
+  }
   if(checkforselectlevel == true){
     LevelScreenClick();
   }
