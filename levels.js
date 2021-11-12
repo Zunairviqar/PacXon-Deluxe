@@ -17,7 +17,7 @@ function completeLevel() {
 function nextLevel() {
 	// completeLevel();
 	// levelOne();
-	if (completeLevel() >= 8) {
+	if (completeLevel() >= 80) {
 		// console.log(completeLevel())
 		levelupsound.play();
 		// increment level
