@@ -57,7 +57,7 @@ let endimg;
 let finish;
 let returnto;
 
-let gameoversound, movingsound, clickedsound, collectionsound, collisionsound, levelupsound, movement;
+let gameoversound, movingsound, clickedsound, collectionsound, collisionsound, levelupsound, movement, bg;
 
 let counter = 1;;
 let maxCounter = 33;
@@ -105,9 +105,7 @@ function preload() {
   collectionsound = loadSound('assets/Sounds/collection.wav');
   collisionsound = loadSound('assets/Sounds/collision.wav');
   levelupsound = loadSound('assets/Sounds/levelup.wav');
-  // movement = loadSound('assets/Sounds/levelup.wav');
-
-
+  bg = loadSound('assets/Sounds/bg.mp3');
 
 }
 
@@ -148,6 +146,9 @@ function setup() {
   // powerup = new Powerup();
 
   noiseDetail(24);
+  bg.loop();
+  bg.setVolume(0.3);
+
 
 }
 
@@ -195,6 +196,7 @@ function draw(){
             // stroke(0);
             // fill(255);
             // text("Lives: " + player.lives, 10, 15);
+
             let window_score = document.getElementById('current_lives')
             window_score.innerHTML = player.lives;
 
