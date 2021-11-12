@@ -39,25 +39,33 @@ class Ghost {
     // if enemies touch the walls (blue tiles), they bounce off
     // top sensor 
     if (uid == 1) {
-      this.y += 3;
+      if(this.type != "follow"){
+        this.y += 3;
+      }
       this.speedY *= -1;
       this.pspeedY *= -1;
     }
     // bottom sensor
     if (bid == 1) {
-      this.y -= 3;
+      if(this.type != "follow"){
+        this.y -= 3;
+      }
       this.speedY *= -1;
       this.pspeedY *= -1;
     }
     // left sensor
     if (lid == 1) {
-      this.x += 3;
+      if(this.type != "follow"){
+        this.x += 3;
+      }
       this.speedX *= -1;
       this.pspeedX *= -1;
     }
     // right sensor
     if (rid == 1) {
-      this.x -= 3;
+      if(this.type != "follow"){
+        this.x -= 3;
+      }
       this.speedX *= -1;
       this.pspeedX *= -1;
     }
@@ -184,6 +192,9 @@ class Ghost {
         // display lives in html 
         let window_score = document.getElementById('current_lives')
         window_score.innerHTML = player.lives;
+        // display lives in html 
+        let window_timer = document.getElementById('current_timer');
+        window_timer.innerHTML = timer + 's';
         // display game over screen
         endscreen = true;
         // reset player lives

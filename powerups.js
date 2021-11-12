@@ -74,8 +74,7 @@ class Powerup {
 	  			collectionsound.play();
 	  		}
 	  		// if 5 sec have passed since powerup came in contact with player
-	  		//  or if powerup has been displayed for 6 seconds
-  			if (frameCount - this.pframe == 300 || frameCount - this.p2frame == 360){
+  			if (frameCount - this.pframe >= 300){
   				// return enemies' speeds to normal
   				for (let i = 0; i < enemy.length; i++) {
 	  				enemy[i].speedX = enemy[i].pspeedX;
@@ -85,8 +84,13 @@ class Powerup {
 	  			// remove powerup from array
 	  			powerups.splice(0, 1);
 	  			// this.pframe = 0;
-  			}
-
+  			} 
+  			// if powerup has been displayed for 6 seconds
+  			if (this.disp == true && frameCount - this.p2frame >= 360){
+	  			// remove powerup from array
+	  			powerups.splice(0, 1);
+	  			// this.pframe = 0;
+  			} 
   		}
   		// if graphic is a bolt
   		if (this.graphic == bolt) {
@@ -102,6 +106,7 @@ class Powerup {
 	  			collectionsound.play();
 
   			}
+
   			// power up comes in contact with any of the enemies
   			for (let i = 0; i < enemy.length; i++) {
 				if (dist(this.x, this.y, enemy[i].x, enemy[i].y) < 20) {
@@ -122,8 +127,8 @@ class Powerup {
 					break;
 				}
   			}
-  			// if bolt effect has lasted for 5 sec or if it has not been collected
-			if (frameCount - this.pframe == 300 || frameCount - this.p2frame == 360){
+  			// if bolt effect has lasted for 5 sec
+			if (frameCount - this.pframe >= 300){
 				// reset player's speed to normal
 				player.speed = player.pspeed;
 				// reset all enemies' speed to normal
@@ -136,6 +141,12 @@ class Powerup {
 				powerups.splice(0, 1);
 				// this.pframe = 0;
 			}
+			 // if bolt has not been collected
+			if (this.disp == true && frameCount - this.p2frame >= 360){
+	  			// remove powerup from array
+	  			powerups.splice(0, 1);
+	  			// this.pframe = 0;
+	  		}
 
   		}
   		// if graphic is bomb
@@ -147,7 +158,7 @@ class Powerup {
   				collectionsound.play();
   			}
   			// if bomb has not been collected delete tiles
-			else if (frameCount - this.pframe == 180){
+			else if (frameCount - this.pframe >= 180){
 				deleteTiles(this.x, this.y);
 				powerups.splice(0, 1);
 				// this.pframe = 0;

@@ -261,8 +261,7 @@ function draw(){
             let window_progress = document.getElementById('current_progress')
             window_progress.innerHTML = completeLevel() + "%";
 
-            // Calls the next level function to check if the level is complete, and if so, it increases the level
-            nextLevel();
+
             // Shows the updated Levels on the HTML Page
             let window_level = document.getElementById('current_level')
             window_level.innerHTML = levels;
@@ -281,7 +280,8 @@ function draw(){
             if (frameCount % 60 == 0 && timer > 0) {
               timer --;
             }
-
+            // Calls the next level function to check if the level is complete, and if so, it increases the level
+            nextLevel();
             // If the timer or the player lives become 0, the game ends!
             if (timer == 0 || player.lives == 0){
               // The timer and the lives are updated on the HTML Page

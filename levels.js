@@ -17,7 +17,7 @@ function completeLevel() {
 function nextLevel() {
 	// completeLevel();
 	// levelOne();
-	if (completeLevel() >= 80) {
+	if (completeLevel() >= 8) {
 		// console.log(completeLevel())
 		levelupsound.play();
 		// increment level
@@ -38,6 +38,12 @@ function nextLevel() {
 				}
 			}
 		}
+		// display lives in html 
+        let window_score = document.getElementById('current_lives')
+        window_score.innerHTML = player.lives;
+        // display lives in html 
+        let window_timer = document.getElementById('current_timer');
+        window_timer.innerHTML = timer + 's';
 		// resetLevel();
 		player.x = 0;
 		player.y = 0;
