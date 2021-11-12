@@ -1,5 +1,5 @@
+// set all the blue moving tiles when the player loses a life to black tiles when the game restarts
 function resetDrawing() {
-  // The following block populates the fixed borders of the board
   for (let i=0; i < height/20; i++){
     for (let j=0; j < width/20; j++){
       if (level[i][j] == -1){
@@ -8,25 +8,20 @@ function resetDrawing() {
     }
   }
 }
-
+// The following for loops populate the 2D list, level, dynamically and leaves it blank
 function initializeLevel() {
   let rows = []
-
-  // The following for loops populate the 2D list, level, dynamically and leaves it blank
   for (let i = 0; i < height/20; i++){
     rows = []
     for (let j =0; j < width/20; j++){
       rows.push(0);
     }
-    // console.log("row len" + rows.length)
-
     level.push(rows)
   }
-  // console.log("col len" + level.length)
 }
 
+// The following block populates the fixed borders of the board
 function resetLevel() {
-  // The following block populates the fixed borders of the board
   for (let i=0; i < height/20; i++){
     for (let j=0; j < width/20; j++){
       level[i][j] = 0;
@@ -51,6 +46,7 @@ function drawLevel() {
   }
 }
 
+// returns the id of the tile in the array
 function getTile(x,y) {
   x = int(x/tileSize);
   y = int(y/tileSize);
@@ -62,18 +58,19 @@ function getCoord(x,y) {
   return x,y;
 }
 
+// modifies the tile to a blue moving tile
 function modifyTile(x,y) {
   x = int(x/tileSize);
   y = int(y/tileSize);
   level[y][x] = -1;
 }
-
+// deletes a tile
 function deleteTile(x,y) {
   x = int(x/tileSize);
   y = int(y/tileSize);
   level[y][x] = 0;
 }
-
+// deletes multiple tiles when a bomb goes off
 function deleteTiles(x,y){
   deleteTile(x,y);
   deleteTile(x-20,y);
@@ -85,7 +82,7 @@ function deleteTiles(x,y){
   deleteTile(x,y+40);
 
 }
-
+// when the player reaches the border, tranform moving tiles to solid wall tiles
 function solidTiles(){
   let maxRow = 0, maxCol=0;
   for (let r = 0; r < level.length; r++) {
