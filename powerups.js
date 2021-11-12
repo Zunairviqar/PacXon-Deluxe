@@ -130,7 +130,7 @@ class Powerup {
 				 for (let i = 0; i < enemy.length; i++) {
 					enemy[i].speedX = enemy[i].pspeedX;
 					enemy[i].speedY = enemy[i].pspeedY;
-					enemy[i].speed = enemy[i].pspeedY;
+					enemy[i].speed = enemy[i].pspeed;
 				}
 				// remove powerup from array
 				powerups.splice(0, 1);
