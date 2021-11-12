@@ -55,8 +55,8 @@ class Powerup {
 	  			for (let i = 0; i < enemy.length; i++) {
 	  				// if snail. slow them down
   					if (this.graphic == slow) {
-  						enemy[i].speedX = 1;
-  						enemy[i].speedY = 1;
+  						enemy[i].speedX = enemy[i].speedX/2;
+  						enemy[i].speedY = enemy[i].speedY/2;
   						enemy[i].speed = 0.001;
   					}
   					// if ice speed them up
