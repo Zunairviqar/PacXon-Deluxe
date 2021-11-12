@@ -32,14 +32,16 @@ function nextLevel() {
 			console.log("UPDATINFFGFF")
 			console.log(mylevel)
 			// mylevel +=1;
-			if(mylevel > level){
+			if(mylevel >= level){
 				console.log('')
 			}
 			else{
 				mylevel +=1;
 				pmylevel = mylevel;
 			}
-			window.localStorage.setItem('levelsCompleted', mylevel);
+			if(mylevel <7){
+				window.localStorage.setItem('levelsCompleted', mylevel);
+			}
 		}
 		console.log("level up")
 		// resetLevel();
