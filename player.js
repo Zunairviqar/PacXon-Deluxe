@@ -90,19 +90,24 @@ class Player {
             this.graphic = downPacXon;
           }
         }
+        // If the playeer is moving and creating blocks in the empty space, basically 'drawing the line'
         else{
+          // If the player is going left, it cannot move left
           if (keyCode ==68 && this.currKeyCode!=65) {
             this.currKeyCode = 68;
             this.graphic = rightPacXon;
           }
+          // If the player is going right, it cannot move right
           if (keyCode ==65 && this.currKeyCode!=68) {
             this.currKeyCode = 65;
             this.graphic = leftPacXon;
           }
+          // If the player is going down, it cannot move down
           if (keyCode ==87 && this.currKeyCode!=83) {
             this.currKeyCode = 87;
             this.graphic = upPacXon;
           }
+          // If the player is going up, it cannot move up
           if (keyCode ==83 && this.currKeyCode!=87) {
             this.currKeyCode = 83;
             this.graphic = downPacXon;
@@ -133,35 +138,50 @@ class Player {
     // declare next tile
     let nt;
 
+    // Checks if the player is withing the empty space or is not in the border region
     if((this.middleX>20 && this.middleY>20 && this.middleX<width-20 && this.middleY<height-20)){
+      // A few pixels to the right, left, up, and down are detected from the player
       this.sensorLeft = this.x-10;
       this.sensorRight = this.x+tileSize+10;
       this.sensorTop = this.y-10;
       this.sensorBottom = this.y+tileSize+5;
 
+      // If the player is moving right, the next tile to the right of it is checked
       if(this.currKeyCode==68){
         nt = getTile(this.sensorRight,this.middleY);
       }
+      // If the player is moving left, the next tile to the left of it is checked
       else if(this.currKeyCode==65){
         nt = getTile(this.sensorLeft,this.middleY);
       }
+      // If the player is moving up, the next tile above of it is checked
       else if(this.currKeyCode==87){
         nt = getTile(this.middleX,this.sensorTop);
       }
+      // If the player is moving down, the next tile below of it is checked
       else if(this.currKeyCode==83){
         nt = getTile(this.middleX,this.sensorBottom);
       }
     }
+    // If the player comes into contact with the line that it is drawing itself
     if(nt == -1){
+      // The position is reset
       player.x = 0;
       player.y = 0;
+      // The graphic is reset
       player.graphic = rightPacXon;
+      // The speed is reset
       player.currKeyCode = 0;
+      // A life is lost
       player.lives -= 1;
+      // Collision sound is played
       collisionsound.play();
+      // The canvas is reset to borders only
       resetDrawing();
     }
+    // If there is no tile at it's middle position
     else if (id == 0){
+      // A blue tile for drawing the line is drawn
       modifyTile(this.middleX, this.middleY)
     }
     // If a  solid tile is encounter
