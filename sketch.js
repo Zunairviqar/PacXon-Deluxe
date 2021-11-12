@@ -66,7 +66,7 @@ let pmylevel;
 let gameoversound, movingsound, clickedsound, collectionsound, collisionsound, levelupsound, movement, bg;
 // Declaring and initializingthe counter and max counter to calculate the percentage and keep track for the preloader
 let counter = 1;;
-let maxCounter = 33;
+let maxCounter = 34;
 
 // Pre Loading all the assets
 // The updateCounter parameter is passed in each loadXYZ() function to call the updateCounter function for progressing the pre-loader
