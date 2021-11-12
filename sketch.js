@@ -66,7 +66,7 @@ let pmylevel;
 let gameoversound, movingsound, clickedsound, collectionsound, collisionsound, levelupsound, movement, bg;
 // Declaring and initializingthe counter and max counter to calculate the percentage and keep track for the preloader
 let counter = 1;;
-let maxCounter = 33;
+let maxCounter = 34;
 
 // Pre Loading all the assets
 // The updateCounter parameter is passed in each loadXYZ() function to call the updateCounter function for progressing the pre-loader
@@ -86,31 +86,31 @@ function preload() {
   pinkGhost = loadImage('assets/Enemies/pink-ghost.png', updateCounter);
   // Loading all the screens
   main_image = loadImage('assets/Screens/home.gif', updateCounter);
-  level1 = loadImage('assets/Screens/level1.png');
-  level2 = loadImage('assets/Screens/level2.png');
-  level3 = loadImage('assets/Screens/level3.png');
-  level4 = loadImage('assets/Screens/level4.png');
-  level5 = loadImage('assets/Screens/level5.png');
-  level6 = loadImage('assets/Screens/level6.png');
-  howtoplay = loadImage('assets/Screens/howtoplay.png');
-  clicktostart = loadImage('assets/Screens/clicktostart.png');
-  levelup = loadImage('assets/Screens/levelcompleted.png');
-  endimg = loadImage('assets/Screens/gameover.png');
-  finish = loadImage('assets/Screens/congrats.png');
-  returnto = loadImage('assets/Screens/returnmenu.png');
+  level1 = loadImage('assets/Screens/level1.png', updateCounter);
+  level2 = loadImage('assets/Screens/level2.png', updateCounter);
+  level3 = loadImage('assets/Screens/level3.png', updateCounter);
+  level4 = loadImage('assets/Screens/level4.png', updateCounter);
+  level5 = loadImage('assets/Screens/level5.png', updateCounter);
+  level6 = loadImage('assets/Screens/level6.png', updateCounter);
+  howtoplay = loadImage('assets/Screens/howtoplay.png', updateCounter);
+  clicktostart = loadImage('assets/Screens/clicktostart.png', updateCounter);
+  levelup = loadImage('assets/Screens/levelcompleted.png', updateCounter);
+  endimg = loadImage('assets/Screens/gameover.png', updateCounter);
+  finish = loadImage('assets/Screens/congrats.png', updateCounter);
+  returnto = loadImage('assets/Screens/returnmenu.png', updateCounter);
   // Loading all the powerups
-  bomb = loadImage('assets/Extras/redbomb.png');
-  ice = loadImage('assets/Extras/ice.png');
-  bolt = loadImage('assets/Extras/lightning-bolt.png');
-  slow = loadImage('assets/Extras/snail.png');
+  bomb = loadImage('assets/Extras/redbomb.png', updateCounter);
+  ice = loadImage('assets/Extras/ice.png', updateCounter);
+  bolt = loadImage('assets/Extras/lightning-bolt.png', updateCounter);
+  slow = loadImage('assets/Extras/snail.png', updateCounter);
   // Loading all the sounds
-  gameoversound = loadSound('assets/Sounds/gameover.mp3');
-  movingsound = loadSound('assets/Sounds/movingsound.wav');
-  clickedsound = loadSound('assets/Sounds/clicked.wav');
-  collectionsound = loadSound('assets/Sounds/collection.wav');
-  collisionsound = loadSound('assets/Sounds/collision.wav');
-  levelupsound = loadSound('assets/Sounds/levelup.wav');
-  bg = loadSound('assets/Sounds/bg.mp3');
+  gameoversound = loadSound('assets/Sounds/gameover.mp3', updateCounter);
+  movingsound = loadSound('assets/Sounds/movingsound.wav', updateCounter);
+  clickedsound = loadSound('assets/Sounds/clicked.wav', updateCounter);
+  collectionsound = loadSound('assets/Sounds/collection.wav', updateCounter);
+  collisionsound = loadSound('assets/Sounds/collision.wav', updateCounter);
+  levelupsound = loadSound('assets/Sounds/levelup.wav', updateCounter);
+  bg = loadSound('assets/Sounds/bg.mp3', updateCounter);
 
 }
 
