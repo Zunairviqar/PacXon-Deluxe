@@ -1,9 +1,9 @@
 //class to draw player
 class Player {
   constructor(){
+    // set player's position, lives, speed, graphic
     this.x = 0;
     this.y = 0;
-    this.angle = 0;
     this.startMovingRight = false;
     this.startMovingDown = false;
     this.pKeyPress = 'None';
@@ -13,28 +13,35 @@ class Player {
     this.pspeed = this.speed;
     this.graphic = rightPacXon;
   }
-
+  // display player
   display(){
     image(this.graphic, this.x, this.y, 20,20)
   }
 
+  // move player
   move(){
-    // set up sensor positions
+    // set up middle of player positions
     this.middleX = this.x+tileSize/2;
     this.middleY = this.y+tileSize/2;
 
+    // if a key is pressed
     if (keyIsPressed==true){
+      // when the first key of teh game is pressed, set previous key code
       if (this.pKeyPress == 'None'){
         this.pKeyPress = keyCode;
       }
+      // if not first key press
       else {
+        // set player to moving state
         this.moving = 'moving';
+        // if the previous key press is not equal to the current keycode
         if (this.pKeyPress != this.currKeyCode){
+          // prev key code = current
           this.pKeyPress = this.currKeyCode;
+          // round the player's movement so it moves box to box only
+          // round x position
           let roundx = this.x%20
-
           if (roundx !=0){
-
             if (roundx >= 10){
               this.x = this.x + (20 - roundx);
             }
@@ -42,11 +49,9 @@ class Player {
               this.x = this.x - roundx;
             }
           }
-
+          // round y position
           let roundy = this.y%20
-
           if (roundy !=0){
-
             if (roundy >= 10){
               this.y = this.y + (20 - roundy);
             }
@@ -55,23 +60,32 @@ class Player {
             }
           }
         }
-
+        // get the id of the tile where the middle if the player lies
         let pos = getTile(this.middleX, this.middleY);
 
+        // if it is a solid tile
         if(pos == 1){
+          // if keycode is right key (D)
           if (keyCode ==68) {
+            // set update keycode and change paxon graphic
             this.currKeyCode = 68;
             this.graphic = rightPacXon;
           }
+          // if keycode is left key (A)
           if (keyCode ==65) {
+            // set update keycode and change paxon graphic
             this.currKeyCode = 65;
             this.graphic = leftPacXon;
           }
+          // if keycode is up key (W)
           if (keyCode ==87) {
+            // / set update keycode and change paxon graphic
             this.currKeyCode = 87;
             this.graphic = upPacXon;
           }
+          // if keycode is down key (S)
           if (keyCode ==83) {
+            // / set update keycode and change paxon graphic
             this.currKeyCode = 83;
             this.graphic = downPacXon;
           }
@@ -97,24 +111,26 @@ class Player {
       }
 
     }
-
+    // if current key code is 68 and x is less than the width, move right
     if (this.currKeyCode == 68 && this.x < width){
       this.x  += this.speed;
     }
-
+    // if current key code is 65 and x is greater than 0, move left
     if (this.currKeyCode == 65 && this.x > 0){
       this.x  -= this.speed;
     }
-
+    // if current key code is 87 and y is greater than 0, move up
     if (this.currKeyCode == 87 && this.y > 0){
       this.y  -= this.speed;
     }
-
+    // if current key code is 83 and y is less than height, move down
     if (this.currKeyCode == 83 && this.y < height){
       this.y += this.speed;
     }
 
+    // get id middle of tile
     let id = getTile(this.middleX, this.middleY);
+    // declare next tile
     let nt;
 
     if((this.middleX>20 && this.middleY>20 && this.middleX<width-20 && this.middleY<height-20)){
