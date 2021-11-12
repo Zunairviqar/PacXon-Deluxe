@@ -91,6 +91,7 @@ function solidTiles(){
   for (let r = 0; r < level.length; r++) {
     for (let c = 0; c < level[r].length; c++) {
       if(level[r][c] == -1){
+        // When a tile is changed from -1 to 1, it means the player created a line so the moving variable of the player is set to stopped
         player.moving = 'stopped'
         maxRow = max(maxRow, r);
         maxCol = max(maxCol, c);

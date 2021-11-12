@@ -122,7 +122,7 @@ function setup() {
 
   gamestart = false;
   checkMenuclick = false;
-  load_level = true;
+  load_level = false;
   loadhowtoplay = false;
   checkhowtoplay =  false;
   gamebegin = false;
