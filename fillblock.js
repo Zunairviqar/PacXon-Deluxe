@@ -1,4 +1,4 @@
-s// A recursive function with inspiration from https://learnersbucket.com/examples/algorithms/flood-fill-algorithm-in-javascript/
+// A recursive function with inspiration from https://learnersbucket.com/examples/algorithms/flood-fill-algorithm-in-javascript/
 // The following function fills an enclosed region, basically some values bordered on all four sides by certain other value,
 // with the new values that are provided.
 // It basically replicates how the paint bucket system works in photoshop.
