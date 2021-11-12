@@ -33,6 +33,7 @@ let gamestart;
 let checkMenuclick;
 let load_level;
 let loadhowtoplay;
+let checkhowtoplay;
 let gamebegin;
 let checkforselectlevel;
 let checkforStart;
@@ -121,8 +122,9 @@ function setup() {
 
   gamestart = false;
   checkMenuclick = false;
-  load_level = true;
+  load_level = false;
   loadhowtoplay = false;
+  checkhowtoplay =  false;
   gamebegin = false;
   checkforselectlevel =  false;
   checkforStart = false;
@@ -159,14 +161,16 @@ function draw(){
   if(gamestart == false){
     if (load_level == false){
       if (loadhowtoplay == false){
-        StartScreen();
         checkMenuclick = true;
+        StartScreen();
       }
       else{
         HowToPlayScreen();
+        checkhowtoplay = true;
       }
     }
     else if(load_level == true){
+      checkMenuclick = false;
       LevelScreen();
       checkforselectlevel = true;
     }
@@ -277,6 +281,9 @@ function draw(){
 function mousePressed(){
   if(checkMenuclick == true){
     StartScreenClick();
+  }
+  if(checkhowtoplay == true){
+    HowToPlayClick();
   }
   if(checkforselectlevel == true){
     LevelScreenClick();

@@ -137,7 +137,6 @@ class Player {
       }
     }
     if(nt == -1){
-      console.log("LAG GAYE");
       player.x = 0;
       player.y = 0;
       player.graphic = rightPacXon;
@@ -149,23 +148,33 @@ class Player {
     else if (id == 0){
       modifyTile(this.middleX, this.middleY)
     }
+    // If a  solid tile is encounter
     else if (id == 1) {
       solidTiles();
+      // Checks if a line is created and gets completed.
+      // It does this by checking if the player just got stopped
       if (this.moving == 'stopped'){
+        // Then it changes the state of moving to be 'not moving' which means it hasnt started creating any lines
         this.moving = 'not moving';
-
+        // Makes a deep copy of the level array
         var xyz = makeDeepCopy(level);
+        // Gets all the positions of the enemies and then sets the
+        // corresponding id in the Level array to be 2 to ensure that
+         // the enemies are not being taken into account
         for (let i = 0; i < enemy.length; i++){
+          // Makes sure that the yellow enemy is not taken into account
           if(enemy[i].type != "follow"){
             ghostx = int(enemy[i].middleX/tileSize);
             ghosty = int(enemy[i].middleY/tileSize)
             level[ghosty][ghostx] = 2;
           }
         }
-
+        // Gets one coordinate from all the enclosed regions
         mArea, sVals = maxAreaOfIsland(xyz);
+        // Gets a list of all the smaller regions' coordinates/ the ones to be removed
         let vals = smallerPair(sVals);
 
+        // Resets the position where the enemies' corresponding positions were set to 2
         for (let i = 0; i < enemy.length; i++){
           if(enemy[i].type != "follow"){
             ghostx = int(enemy[i].middleX/tileSize);
@@ -174,12 +183,13 @@ class Player {
           }
         }
 
+        // Fills the level array, basically floods the enclosed region that meets the criteria
         for (let i = 0; i < vals.length; i++){
           fill_array(level, vals[i][0], vals[i][1], 1, 0);
         }
       }
     }
-
+    // Contrains the x and y positions of the enemy to remain within the canvas width and onto the border tiles.
     this.x = constrain(this.x, 0, width-20);
     this.y = constrain(this.y, 0, height-20);
     }
