@@ -3,14 +3,19 @@ function StartScreen(){
   if (frameCount % 180 == 0){
     main_image.pause();
   }
+  // StartScreenClick();
+}
+function StartScreenClick(){
   if(mouseIsPressed){
     if(mouseX>285 && mouseX <475 && mouseY>230&& mouseY<275){
       load_level = true;
+      checkMenuclick == false;
       clickedsound.play();
     }
     if(mouseX>285 && mouseX <475 && mouseY>285&& mouseY<330){
       console.log("HOW TO PLAY")
       loadhowtoplay = true;
+      checkMenuclick == false;
       clickedsound.play();
     }
     if(mouseX>285 && mouseX <475 && mouseY>340&& mouseY<385){
@@ -26,6 +31,7 @@ function HowToPlayScreen(){
   if(mouseIsPressed){
     if(mouseX>270 && mouseX <460 && mouseY>408&& mouseY<453){
       loadhowtoplay = false;
+      checkMenuclick == true;
       clickedsound.play();
     }
   }
@@ -51,11 +57,15 @@ function LevelScreen(){
   else if (mylevel == 6){
     image(level6, 0 ,0);
   }
-  // LevelScreenClick();
+  image(returnto, 0, 0);
 }
 
 function LevelScreenClick(){
   if(mouseIsPressed){
+    if(mouseX>267 && mouseX <457 && mouseY>311&& mouseY<356){
+      load_level = false;
+      checkforselectlevel == false;
+    }
     if(mylevel >0){
       if(mouseX>118 && mouseX <193 && mouseY>215&& mouseY<293){
         console.log("LEVEL 1");
