@@ -61,6 +61,7 @@ let levelup;
 let endimg;
 let finish;
 let returnto;
+let pmylevel;
 // Variables to store all the sounds
 let gameoversound, movingsound, clickedsound, collectionsound, collisionsound, levelupsound, movement, bg;
 // Declaring and initializingthe counter and max counter to calculate the percentage and keep track for the preloader
@@ -261,7 +262,7 @@ function draw(){
             let window_progress = document.getElementById('current_progress')
             window_progress.innerHTML = completeLevel() + "%";
 
-            // Calls the next level function to check if the level is complete, and if so, it increases the level 
+            // Calls the next level function to check if the level is complete, and if so, it increases the level
             nextLevel();
             // Shows the updated Levels on the HTML Page
             let window_level = document.getElementById('current_level')
@@ -343,11 +344,15 @@ function mousePressed(){
     if(mouseX>400 && mouseX <495 && mouseY>325&& mouseY<363){
       levelupscreen = false;
       clickedsound.play();
+      checkfornextLevel == false;
     }
     // If the menu is clicked, the menu screen appears
     else if(mouseX>250 && mouseX <345 && mouseY>325&& mouseY<363){
-      gamestart = false;
       levelupscreen = false;
+      gamestart = false;
+      load_level = false;
+      checkforselectlevel = false;
+      checkfornextLevel == false;
       clickedsound.play();
     }
   }
@@ -356,11 +361,13 @@ function mousePressed(){
     // If the retry option is pressed
     if(mouseX>400 && mouseX <495 && mouseY>325&& mouseY<363){
       endscreen = false;
+      checkforretry =  false;
       clickedsound.play();
     }
     // Or if the menu option is pressed
     else if(mouseX>250 && mouseX <345 && mouseY>325&& mouseY<363){
       // endscreen = false;
+      endscreen = false;
       gamestart = false;
       load_level = false;
       checkforselectlevel = false;

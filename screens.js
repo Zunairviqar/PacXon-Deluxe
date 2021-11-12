@@ -54,6 +54,8 @@ function HowToPlayClick(){
 // Shows the appropriateimage according to the number of levels that are completed by a user.
 function LevelScreen(){
   // Loads up the level one image if the user is on the first level
+  console.log(mylevel);
+  pmylevel = mylevel;
   if (mylevel == 1){
     image(level1, 0 ,0);
   }

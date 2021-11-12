@@ -15,9 +15,16 @@ function completeLevel() {
 
 // promotes player to next level
 function nextLevel() {
+<<<<<<< Updated upstream
 	// if 80% of level is completed
 	if (completeLevel() >= 80) {
 		// play level up sound
+=======
+	// completeLevel();
+	// levelOne();
+	if (completeLevel() >= 5) {
+		// console.log(completeLevel())
+>>>>>>> Stashed changes
 		levelupsound.play();
 		// increment level
 		levels +=1;
@@ -28,6 +35,7 @@ function nextLevel() {
 		}
 		// else increment the number of levels unlocked
 		else{
+<<<<<<< Updated upstream
 			mylevel +=1;
 			// set the number of levels unlocked in local storage
 			window.localStorage.setItem('levelsCompleted', levels);
@@ -36,12 +44,38 @@ function nextLevel() {
 		// reset level, remove all walls except borders
 		resetLevel();
 		// reset player position, lives, graphics, timer
+=======
+			console.log("UPDATINFFGFF")
+			console.log(mylevel)
+			// mylevel +=1;
+			if(mylevel > level){
+				console.log('')
+			}
+			else{
+				mylevel +=1;
+				pmylevel = mylevel;
+			}
+			window.localStorage.setItem('levelsCompleted', mylevel);
+		}
+		console.log("level up")
+		// resetLevel();
+>>>>>>> Stashed changes
 		player.x = 0;
 		player.y = 0;
-		player.lives = 3;
+		// player.lives = 3;
 		player.graphic = rightPacXon;
 		player.currKeyCode = 0;
+		// timer = 100;
+		// allLevels();
+		// levelupscreen = true;
+
+		// display game over screen
+		levelupscreen = true;
+		// reset player lives
+		player.lives = 3;
+		// reset timer
 		timer = 100;
+<<<<<<< Updated upstream
 		// call the next level
 		allLevels();
 		// display the screens accordingly
@@ -51,6 +85,16 @@ function nextLevel() {
 		load_level = true;
 		checkforselectlevel = false;
 		checkforStart = false;
+=======
+		// reset powerups
+		powerups = [];
+		// remove the blue moving tiles
+		resetLevel();
+		// reset enemy array
+		allLevels();
+		// play sound
+		gameoversound.play();
+>>>>>>> Stashed changes
 	}
 }
 // function which contains all levels
