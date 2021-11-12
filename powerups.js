@@ -117,7 +117,7 @@ class Powerup {
 		  				console.log("speed increase")
 						enemy[i].speedX = 4;
 						enemy[i].speedY = 4;
-						enemy[i].speed = 0.01;
+						enemy[i].speed = 0.009;
 					}
 					break;
 				}
