@@ -324,6 +324,7 @@ function draw(){
 
 
 function mousePressed(){
+  // Checks for clicks on the Various screens
   if(checkMenuclick == true){
     StartScreenClick();
   }
@@ -336,22 +337,28 @@ function mousePressed(){
   if(checkforStart == true){
     gamebegin =  true;
   }
+  // Checks for clicks on the level up screens
   if(checkfornextLevel == true){
+    // If the next option is clicked, the screen disappears
     if(mouseX>400 && mouseX <495 && mouseY>325&& mouseY<363){
       levelupscreen = false;
       clickedsound.play();
     }
+    // If the menu is clicked, the menu screen appears
     else if(mouseX>250 && mouseX <345 && mouseY>325&& mouseY<363){
       gamestart = false;
       levelupscreen = false;
       clickedsound.play();
     }
   }
+  // Almost the same thing happens for the Game over screen
   if(checkforretry == true){
+    // If the retry option is pressed
     if(mouseX>400 && mouseX <495 && mouseY>325&& mouseY<363){
       endscreen = false;
       clickedsound.play();
     }
+    // Or if the menu option is pressed
     else if(mouseX>250 && mouseX <345 && mouseY>325&& mouseY<363){
       // endscreen = false;
       gamestart = false;
@@ -361,6 +368,7 @@ function mousePressed(){
       clickedsound.play();
     }
   }
+  // Checks for clicks on the 'Return to Menu' button on the screen that shows up when the game is completed
   if(checkforfinish == true){
     // rect(279, 318, 190, 45);
     if(mouseX>279 && mouseX <469 && mouseY>318&& mouseY<363){
@@ -372,11 +380,13 @@ function mousePressed(){
     }
   }
 }
+// Update counter function used within preload
 function updateCounter() {
   // increase our counter
   counter++;
 
   // use the counter to set the style on the '#progress_bar' div
   let progress_bar = document.querySelector('#progress_bar');
+  // The percentage is calculated
   progress_bar.style.width = int(counter/maxCounter*100) + "%";
 }
