@@ -6,7 +6,7 @@ function StartScreen(){
   // StartScreenClick();
 }
 function StartScreenClick(){
-  if(mouseIsPressed){
+  // if(mouseIsPressed){
     if(mouseX>285 && mouseX <475 && mouseY>230&& mouseY<275){
       load_level = true;
       checkMenuclick == false;
@@ -23,19 +23,20 @@ function StartScreenClick(){
       window.open("more-games.html");
       clickedsound.play();
     }
-  }
+  // }
 }
 
 function HowToPlayScreen(){
   image(howtoplay, 0, 0);
-  if(mouseIsPressed){
+}
+function HowToPlayClick(){
+  // if(mouseIsPressed){
     if(mouseX>270 && mouseX <460 && mouseY>408&& mouseY<453){
       loadhowtoplay = false;
-      checkMenuclick == true;
+      checkhowtoplay = false;
       clickedsound.play();
     }
-  }
-
+  // }
 }
 
 function LevelScreen(){
@@ -58,13 +59,19 @@ function LevelScreen(){
     image(level6, 0 ,0);
   }
   image(returnto, 0, 0);
+  // rect(267,31,190,45);
 }
 
 function LevelScreenClick(){
-  if(mouseIsPressed){
+  // if(mouseIsPressed){
     if(mouseX>267 && mouseX <457 && mouseY>311&& mouseY<356){
       load_level = false;
       checkforselectlevel == false;
+      clickedsound.play();
+      checkhowtoplay = false;
+      loadhowtoplay = false;
+      mouseX = 0;
+      mouseY = 0;
     }
     if(mylevel >0){
       if(mouseX>118 && mouseX <193 && mouseY>215&& mouseY<293){
@@ -132,5 +139,5 @@ function LevelScreenClick(){
         levelSix();
       }
     }
-  }
+  // }
 }
