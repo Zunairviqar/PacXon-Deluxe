@@ -245,12 +245,13 @@ function draw(){
             player.display();
             player.move();
 
+            // If there is an existing powerup, it draws it in every frame and ensures the effect() function runs
             if (powerups.length > 0) {
               powerups[0].display();
               powerups[0].effect();
             }
 
-            //ghosts
+            //Iterates through all the enemies and then displays and moves them
             for (let i = 0; i < enemy.length; i++){
               enemy[i].display();
               enemy[i].move();
@@ -260,20 +261,19 @@ function draw(){
             let window_progress = document.getElementById('current_progress')
             window_progress.innerHTML = completeLevel() + "%";
 
+            // Calls the next level function to check if the level is complete, and if so, it increases the level 
             nextLevel();
             // Shows the updated Levels on the HTML Page
             let window_level = document.getElementById('current_level')
             window_level.innerHTML = levels;
 
 
-
+            // Makes the powerups appear after a certain time period and ensures only one powerup can appear at a time
             if (frameCount % 600 == 0 && powerups.length == 0) {
-              console.log("POWERUP APPEAR")
+              // Adds a powerup to the list for powerups
               powerups.push(new Powerup())
             }
 
-            stroke(0);
-            fill(255);
             // Shows the updated Timer on the HTML Page
             let window_timer = document.getElementById('current_timer');
             window_timer.innerHTML = timer + 's';
