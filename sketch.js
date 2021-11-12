@@ -298,6 +298,8 @@ function draw(){
               // The pacXon is repositioned at the first index of the array
               player.x = 0;
               player.y = 0;
+              // reset player speed
+              player.speed = player.pspeed;
               // The levels are reset
               // levels = 1;
               // powerups are emptied

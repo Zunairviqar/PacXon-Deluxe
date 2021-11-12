@@ -199,6 +199,8 @@ class Ghost {
         endscreen = true;
         // reset player lives
         player.lives = 3;
+        // reset player speed
+        player.speed = player.pspeed;
         // reset timer
         timer = 100;
         // reset powerups

@@ -60,7 +60,8 @@ function nextLevel() {
 		player.lives = 3;
 		// reset timer
 		timer = 100;
-
+        // reset player speed
+        player.speed = player.pspeed;
 		// reset powerups
 		powerups = [];
 		// remove the blue moving tiles
