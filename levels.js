@@ -68,7 +68,6 @@ function nextLevel() {
 		resetLevel();
 		// reset enemy array
 		allLevels();
-		// play sound
 	}
 }
 // function which contains all levels
