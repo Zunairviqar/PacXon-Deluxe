@@ -38,10 +38,10 @@ function nextLevel() {
 				}
 			}
 		}
-		// display lives in html 
+		// display lives in html
         let window_score = document.getElementById('current_lives')
         window_score.innerHTML = player.lives;
-        // display lives in html 
+        // display lives in html
         let window_timer = document.getElementById('current_timer');
         window_timer.innerHTML = timer + 's';
 		// resetLevel();
@@ -69,7 +69,6 @@ function nextLevel() {
 		// reset enemy array
 		allLevels();
 		// play sound
-		gameoversound.play();
 	}
 }
 // function which contains all levels
